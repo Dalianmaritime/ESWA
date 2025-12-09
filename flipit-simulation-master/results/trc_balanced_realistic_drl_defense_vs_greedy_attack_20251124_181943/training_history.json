@@ -1,0 +1,4502 @@
+[
+  {
+    "episode": 0,
+    "defender_reward": -128.5,
+    "attacker_reward": 128.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 1,
+    "defender_reward": -152.5,
+    "attacker_reward": 152.5,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 2,
+    "defender_reward": -152.5,
+    "attacker_reward": 152.5,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 3,
+    "defender_reward": -152.5,
+    "attacker_reward": 152.5,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 4,
+    "defender_reward": -152.5,
+    "attacker_reward": 152.5,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 5,
+    "defender_reward": -166.0,
+    "attacker_reward": 166.0,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 6,
+    "defender_reward": -148.5,
+    "attacker_reward": 148.5,
+    "defender_occupation_reward": 0,
+    "attacker_occupation_reward": 60.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 7,
+    "defender_reward": -168.5,
+    "attacker_reward": 168.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 8,
+    "defender_reward": -150.0,
+    "attacker_reward": 150.0,
+    "defender_occupation_reward": 0,
+    "attacker_occupation_reward": 60.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 9,
+    "defender_reward": -149.0,
+    "attacker_reward": 149.0,
+    "defender_occupation_reward": 0,
+    "attacker_occupation_reward": 60.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 10,
+    "defender_reward": -152.5,
+    "attacker_reward": 152.5,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 11,
+    "defender_reward": -160.5,
+    "attacker_reward": 160.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 12,
+    "defender_reward": -156.5,
+    "attacker_reward": 156.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 13,
+    "defender_reward": -148.5,
+    "attacker_reward": 148.5,
+    "defender_occupation_reward": 0,
+    "attacker_occupation_reward": 60.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 14,
+    "defender_reward": -152.5,
+    "attacker_reward": 152.5,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 15,
+    "defender_reward": -153.0,
+    "attacker_reward": 153.0,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 16,
+    "defender_reward": -156.5,
+    "attacker_reward": 156.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 17,
+    "defender_reward": -150.0,
+    "attacker_reward": 150.0,
+    "defender_occupation_reward": 0,
+    "attacker_occupation_reward": 60.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 18,
+    "defender_reward": -153.0,
+    "attacker_reward": 153.0,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 19,
+    "defender_reward": -152.5,
+    "attacker_reward": 152.5,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 20,
+    "defender_reward": -148.5,
+    "attacker_reward": 148.5,
+    "defender_occupation_reward": 0,
+    "attacker_occupation_reward": 60.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 21,
+    "defender_reward": -150.0,
+    "attacker_reward": 150.0,
+    "defender_occupation_reward": 0,
+    "attacker_occupation_reward": 60.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 22,
+    "defender_reward": -164.5,
+    "attacker_reward": 164.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 23,
+    "defender_reward": -156.5,
+    "attacker_reward": 156.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 24,
+    "defender_reward": -152.5,
+    "attacker_reward": 152.5,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 25,
+    "defender_reward": -154.0,
+    "attacker_reward": 154.0,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 26,
+    "defender_reward": -152.5,
+    "attacker_reward": 152.5,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 27,
+    "defender_reward": -148.5,
+    "attacker_reward": 148.5,
+    "defender_occupation_reward": 0,
+    "attacker_occupation_reward": 60.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 28,
+    "defender_reward": -156.5,
+    "attacker_reward": 156.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 29,
+    "defender_reward": -156.5,
+    "attacker_reward": 156.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 30,
+    "defender_reward": -152.5,
+    "attacker_reward": 152.5,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 31,
+    "defender_reward": -156.5,
+    "attacker_reward": 156.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 32,
+    "defender_reward": -152.5,
+    "attacker_reward": 152.5,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 33,
+    "defender_reward": -154.0,
+    "attacker_reward": 154.0,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 34,
+    "defender_reward": -148.5,
+    "attacker_reward": 148.5,
+    "defender_occupation_reward": 0,
+    "attacker_occupation_reward": 60.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 35,
+    "defender_reward": -157.0,
+    "attacker_reward": 157.0,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 36,
+    "defender_reward": -154.0,
+    "attacker_reward": 154.0,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 37,
+    "defender_reward": -160.5,
+    "attacker_reward": 160.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 38,
+    "defender_reward": -154.0,
+    "attacker_reward": 154.0,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 39,
+    "defender_reward": -156.5,
+    "attacker_reward": 156.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 40,
+    "defender_reward": -156.5,
+    "attacker_reward": 156.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 41,
+    "defender_reward": -152.5,
+    "attacker_reward": 152.5,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 42,
+    "defender_reward": -150.0,
+    "attacker_reward": 150.0,
+    "defender_occupation_reward": 0,
+    "attacker_occupation_reward": 60.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 43,
+    "defender_reward": -160.5,
+    "attacker_reward": 160.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 44,
+    "defender_reward": -154.0,
+    "attacker_reward": 154.0,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 45,
+    "defender_reward": -148.5,
+    "attacker_reward": 148.5,
+    "defender_occupation_reward": 0,
+    "attacker_occupation_reward": 60.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 46,
+    "defender_reward": -156.5,
+    "attacker_reward": 156.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 47,
+    "defender_reward": -160.5,
+    "attacker_reward": 160.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 48,
+    "defender_reward": -158.0,
+    "attacker_reward": 158.0,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 49,
+    "defender_reward": -148.5,
+    "attacker_reward": 148.5,
+    "defender_occupation_reward": 0,
+    "attacker_occupation_reward": 60.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 50,
+    "defender_reward": -230.0,
+    "attacker_reward": 230.0,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 51,
+    "defender_reward": -268.0,
+    "attacker_reward": 268.0,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 52,
+    "defender_reward": -229.5,
+    "attacker_reward": 229.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 53,
+    "defender_reward": -161.0,
+    "attacker_reward": 161.0,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 54,
+    "defender_reward": -100.0,
+    "attacker_reward": 100.0,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 55,
+    "defender_reward": -110.0,
+    "attacker_reward": 110.0,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 56,
+    "defender_reward": -24.5,
+    "attacker_reward": 24.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 57,
+    "defender_reward": -26.5,
+    "attacker_reward": 26.5,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 58,
+    "defender_reward": 3.0,
+    "attacker_reward": -3.0,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 59,
+    "defender_reward": -10.0,
+    "attacker_reward": 10.0,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 60,
+    "defender_reward": 12.5,
+    "attacker_reward": -12.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 61,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 62,
+    "defender_reward": -14.0,
+    "attacker_reward": 14.0,
+    "defender_occupation_reward": 22.0,
+    "attacker_occupation_reward": 38.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 63,
+    "defender_reward": 3.0,
+    "attacker_reward": -3.0,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 64,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 65,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 66,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 67,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 68,
+    "defender_reward": 11.0,
+    "attacker_reward": -11.0,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 69,
+    "defender_reward": 23.5,
+    "attacker_reward": -23.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 70,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 71,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 72,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 73,
+    "defender_reward": 10.0,
+    "attacker_reward": -10.0,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 74,
+    "defender_reward": 23.5,
+    "attacker_reward": -23.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 75,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 76,
+    "defender_reward": 6.0,
+    "attacker_reward": -6.0,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 77,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 78,
+    "defender_reward": -4.5,
+    "attacker_reward": 4.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 79,
+    "defender_reward": 27.5,
+    "attacker_reward": -27.5,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 80,
+    "defender_reward": 18.0,
+    "attacker_reward": -18.0,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 81,
+    "defender_reward": 15.0,
+    "attacker_reward": -15.0,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 82,
+    "defender_reward": 19.0,
+    "attacker_reward": -19.0,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 83,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 84,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 85,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 86,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 87,
+    "defender_reward": -2.0,
+    "attacker_reward": 2.0,
+    "defender_occupation_reward": 16.0,
+    "attacker_occupation_reward": 44.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 88,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 89,
+    "defender_reward": -0.5,
+    "attacker_reward": 0.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 90,
+    "defender_reward": 3.0,
+    "attacker_reward": -3.0,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 91,
+    "defender_reward": 3.5,
+    "attacker_reward": -3.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 92,
+    "defender_reward": 14.0,
+    "attacker_reward": -14.0,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 93,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 94,
+    "defender_reward": -14.0,
+    "attacker_reward": 14.0,
+    "defender_occupation_reward": 22.0,
+    "attacker_occupation_reward": 38.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 95,
+    "defender_reward": -3.0,
+    "attacker_reward": 3.0,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 96,
+    "defender_reward": -32.0,
+    "attacker_reward": 32.0,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 97,
+    "defender_reward": -4.5,
+    "attacker_reward": 4.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 98,
+    "defender_reward": -24.0,
+    "attacker_reward": 24.0,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 99,
+    "defender_reward": -10.5,
+    "attacker_reward": 10.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 100,
+    "defender_reward": 15.0,
+    "attacker_reward": -15.0,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 101,
+    "defender_reward": 4.0,
+    "attacker_reward": -4.0,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 102,
+    "defender_reward": -20.5,
+    "attacker_reward": 20.5,
+    "defender_occupation_reward": 16.0,
+    "attacker_occupation_reward": 44.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 103,
+    "defender_reward": -14.5,
+    "attacker_reward": 14.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 104,
+    "defender_reward": -12.5,
+    "attacker_reward": 12.5,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 105,
+    "defender_reward": -11.5,
+    "attacker_reward": 11.5,
+    "defender_occupation_reward": 16.0,
+    "attacker_occupation_reward": 44.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 106,
+    "defender_reward": -12.5,
+    "attacker_reward": 12.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 107,
+    "defender_reward": -7.0,
+    "attacker_reward": 7.0,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 108,
+    "defender_reward": 7.0,
+    "attacker_reward": -7.0,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 109,
+    "defender_reward": -11.0,
+    "attacker_reward": 11.0,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 110,
+    "defender_reward": 8.0,
+    "attacker_reward": -8.0,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 111,
+    "defender_reward": -1.5,
+    "attacker_reward": 1.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 112,
+    "defender_reward": 8.5,
+    "attacker_reward": -8.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 113,
+    "defender_reward": 10.0,
+    "attacker_reward": -10.0,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 114,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 115,
+    "defender_reward": -12.5,
+    "attacker_reward": 12.5,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 116,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 117,
+    "defender_reward": 11.0,
+    "attacker_reward": -11.0,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 118,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 119,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 120,
+    "defender_reward": -24.0,
+    "attacker_reward": 24.0,
+    "defender_occupation_reward": 18.0,
+    "attacker_occupation_reward": 42.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 121,
+    "defender_reward": 23.5,
+    "attacker_reward": -23.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 122,
+    "defender_reward": 1.5,
+    "attacker_reward": -1.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 123,
+    "defender_reward": -6.5,
+    "attacker_reward": 6.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 124,
+    "defender_reward": -8.5,
+    "attacker_reward": 8.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 125,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 126,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 127,
+    "defender_reward": -3.0,
+    "attacker_reward": 3.0,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 128,
+    "defender_reward": -8.5,
+    "attacker_reward": 8.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 129,
+    "defender_reward": 22.0,
+    "attacker_reward": -22.0,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 130,
+    "defender_reward": -12.5,
+    "attacker_reward": 12.5,
+    "defender_occupation_reward": 22.0,
+    "attacker_occupation_reward": 38.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 131,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 132,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 133,
+    "defender_reward": -4.5,
+    "attacker_reward": 4.5,
+    "defender_occupation_reward": 16.0,
+    "attacker_occupation_reward": 44.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 134,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 135,
+    "defender_reward": 1.5,
+    "attacker_reward": -1.5,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 136,
+    "defender_reward": 18.0,
+    "attacker_reward": -18.0,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 137,
+    "defender_reward": -20.0,
+    "attacker_reward": 20.0,
+    "defender_occupation_reward": 16.0,
+    "attacker_occupation_reward": 44.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 138,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 139,
+    "defender_reward": 3.5,
+    "attacker_reward": -3.5,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 140,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 141,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 142,
+    "defender_reward": -8.5,
+    "attacker_reward": 8.5,
+    "defender_occupation_reward": 20.0,
+    "attacker_occupation_reward": 40.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 143,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 144,
+    "defender_reward": 3.5,
+    "attacker_reward": -3.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 145,
+    "defender_reward": 23.5,
+    "attacker_reward": -23.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 146,
+    "defender_reward": 18.0,
+    "attacker_reward": -18.0,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 147,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 148,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 149,
+    "defender_reward": 3.5,
+    "attacker_reward": -3.5,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 150,
+    "defender_reward": -0.5,
+    "attacker_reward": 0.5,
+    "defender_occupation_reward": 16.0,
+    "attacker_occupation_reward": 44.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 151,
+    "defender_reward": 10.0,
+    "attacker_reward": -10.0,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 152,
+    "defender_reward": -8.5,
+    "attacker_reward": 8.5,
+    "defender_occupation_reward": 20.0,
+    "attacker_occupation_reward": 40.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 153,
+    "defender_reward": -2.0,
+    "attacker_reward": 2.0,
+    "defender_occupation_reward": 16.0,
+    "attacker_occupation_reward": 44.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 154,
+    "defender_reward": 6.0,
+    "attacker_reward": -6.0,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 155,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 156,
+    "defender_reward": -7.0,
+    "attacker_reward": 7.0,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 157,
+    "defender_reward": 9.5,
+    "attacker_reward": -9.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 158,
+    "defender_reward": 3.5,
+    "attacker_reward": -3.5,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 159,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 160,
+    "defender_reward": -8.5,
+    "attacker_reward": 8.5,
+    "defender_occupation_reward": 20.0,
+    "attacker_occupation_reward": 40.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 161,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 162,
+    "defender_reward": 6.0,
+    "attacker_reward": -6.0,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 163,
+    "defender_reward": 14.0,
+    "attacker_reward": -14.0,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 164,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 165,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 166,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 167,
+    "defender_reward": -4.0,
+    "attacker_reward": 4.0,
+    "defender_occupation_reward": 16.0,
+    "attacker_occupation_reward": 44.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 168,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 169,
+    "defender_reward": 26.0,
+    "attacker_reward": -26.0,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 170,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 171,
+    "defender_reward": 3.5,
+    "attacker_reward": -3.5,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 172,
+    "defender_reward": -0.5,
+    "attacker_reward": 0.5,
+    "defender_occupation_reward": 16.0,
+    "attacker_occupation_reward": 44.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 173,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 174,
+    "defender_reward": 14.0,
+    "attacker_reward": -14.0,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 175,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 176,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 177,
+    "defender_reward": -5.0,
+    "attacker_reward": 5.0,
+    "defender_occupation_reward": 18.0,
+    "attacker_occupation_reward": 42.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 178,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 179,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 180,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 181,
+    "defender_reward": -4.5,
+    "attacker_reward": 4.5,
+    "defender_occupation_reward": 18.0,
+    "attacker_occupation_reward": 42.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 182,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 183,
+    "defender_reward": 3.5,
+    "attacker_reward": -3.5,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 184,
+    "defender_reward": -2.0,
+    "attacker_reward": 2.0,
+    "defender_occupation_reward": 16.0,
+    "attacker_occupation_reward": 44.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 185,
+    "defender_reward": 27.5,
+    "attacker_reward": -27.5,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 186,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 187,
+    "defender_reward": 3.5,
+    "attacker_reward": -3.5,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 188,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 189,
+    "defender_reward": 14.0,
+    "attacker_reward": -14.0,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 190,
+    "defender_reward": 6.0,
+    "attacker_reward": -6.0,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 191,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 192,
+    "defender_reward": 18.0,
+    "attacker_reward": -18.0,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 193,
+    "defender_reward": 7.0,
+    "attacker_reward": -7.0,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 194,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 195,
+    "defender_reward": 3.5,
+    "attacker_reward": -3.5,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 196,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 197,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 198,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 199,
+    "defender_reward": -2.0,
+    "attacker_reward": 2.0,
+    "defender_occupation_reward": 16.0,
+    "attacker_occupation_reward": 44.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 200,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 201,
+    "defender_reward": 10.0,
+    "attacker_reward": -10.0,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 202,
+    "defender_reward": 6.0,
+    "attacker_reward": -6.0,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 203,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 204,
+    "defender_reward": -4.5,
+    "attacker_reward": 4.5,
+    "defender_occupation_reward": 18.0,
+    "attacker_occupation_reward": 42.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 205,
+    "defender_reward": 2.0,
+    "attacker_reward": -2.0,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 206,
+    "defender_reward": 11.0,
+    "attacker_reward": -11.0,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 207,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 208,
+    "defender_reward": 19.0,
+    "attacker_reward": -19.0,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 209,
+    "defender_reward": 18.0,
+    "attacker_reward": -18.0,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 210,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 211,
+    "defender_reward": 3.5,
+    "attacker_reward": -3.5,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 212,
+    "defender_reward": 23.5,
+    "attacker_reward": -23.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 213,
+    "defender_reward": -0.5,
+    "attacker_reward": 0.5,
+    "defender_occupation_reward": 16.0,
+    "attacker_occupation_reward": 44.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 214,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 215,
+    "defender_reward": -2.0,
+    "attacker_reward": 2.0,
+    "defender_occupation_reward": 16.0,
+    "attacker_occupation_reward": 44.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 216,
+    "defender_reward": 15.0,
+    "attacker_reward": -15.0,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 217,
+    "defender_reward": 14.0,
+    "attacker_reward": -14.0,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 218,
+    "defender_reward": 23.5,
+    "attacker_reward": -23.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 219,
+    "defender_reward": 23.5,
+    "attacker_reward": -23.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 220,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 221,
+    "defender_reward": -2.0,
+    "attacker_reward": 2.0,
+    "defender_occupation_reward": 16.0,
+    "attacker_occupation_reward": 44.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 222,
+    "defender_reward": 23.5,
+    "attacker_reward": -23.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 223,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 224,
+    "defender_reward": 14.0,
+    "attacker_reward": -14.0,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 225,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 226,
+    "defender_reward": -0.5,
+    "attacker_reward": 0.5,
+    "defender_occupation_reward": 16.0,
+    "attacker_occupation_reward": 44.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 227,
+    "defender_reward": -8.5,
+    "attacker_reward": 8.5,
+    "defender_occupation_reward": 20.0,
+    "attacker_occupation_reward": 40.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 228,
+    "defender_reward": 26.0,
+    "attacker_reward": -26.0,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 229,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 230,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 231,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 232,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 233,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 234,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 235,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 236,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 237,
+    "defender_reward": -0.5,
+    "attacker_reward": 0.5,
+    "defender_occupation_reward": 16.0,
+    "attacker_occupation_reward": 44.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 238,
+    "defender_reward": 14.0,
+    "attacker_reward": -14.0,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 239,
+    "defender_reward": 3.5,
+    "attacker_reward": -3.5,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 240,
+    "defender_reward": -12.5,
+    "attacker_reward": 12.5,
+    "defender_occupation_reward": 22.0,
+    "attacker_occupation_reward": 38.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 241,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 242,
+    "defender_reward": 22.0,
+    "attacker_reward": -22.0,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 243,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 244,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 245,
+    "defender_reward": 3.0,
+    "attacker_reward": -3.0,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 246,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 247,
+    "defender_reward": -8.5,
+    "attacker_reward": 8.5,
+    "defender_occupation_reward": 20.0,
+    "attacker_occupation_reward": 40.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 248,
+    "defender_reward": 3.0,
+    "attacker_reward": -3.0,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 249,
+    "defender_reward": 2.0,
+    "attacker_reward": -2.0,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 250,
+    "defender_reward": 3.5,
+    "attacker_reward": -3.5,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 251,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 252,
+    "defender_reward": 12.0,
+    "attacker_reward": -12.0,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 253,
+    "defender_reward": -4.5,
+    "attacker_reward": 4.5,
+    "defender_occupation_reward": 18.0,
+    "attacker_occupation_reward": 42.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 254,
+    "defender_reward": 27.5,
+    "attacker_reward": -27.5,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 255,
+    "defender_reward": 10.0,
+    "attacker_reward": -10.0,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 256,
+    "defender_reward": 27.5,
+    "attacker_reward": -27.5,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 257,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 258,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 259,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 260,
+    "defender_reward": -0.5,
+    "attacker_reward": 0.5,
+    "defender_occupation_reward": 16.0,
+    "attacker_occupation_reward": 44.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 261,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 262,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 263,
+    "defender_reward": 3.5,
+    "attacker_reward": -3.5,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 264,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 265,
+    "defender_reward": 14.0,
+    "attacker_reward": -14.0,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 266,
+    "defender_reward": 23.5,
+    "attacker_reward": -23.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 267,
+    "defender_reward": 6.0,
+    "attacker_reward": -6.0,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 268,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 269,
+    "defender_reward": 6.0,
+    "attacker_reward": -6.0,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 270,
+    "defender_reward": 23.5,
+    "attacker_reward": -23.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 271,
+    "defender_reward": -8.5,
+    "attacker_reward": 8.5,
+    "defender_occupation_reward": 20.0,
+    "attacker_occupation_reward": 40.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 272,
+    "defender_reward": 14.0,
+    "attacker_reward": -14.0,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 273,
+    "defender_reward": 3.5,
+    "attacker_reward": -3.5,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 274,
+    "defender_reward": 3.0,
+    "attacker_reward": -3.0,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 275,
+    "defender_reward": 10.0,
+    "attacker_reward": -10.0,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 276,
+    "defender_reward": 1.5,
+    "attacker_reward": -1.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 277,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 278,
+    "defender_reward": 23.5,
+    "attacker_reward": -23.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 279,
+    "defender_reward": 23.5,
+    "attacker_reward": -23.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 280,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 281,
+    "defender_reward": 19.0,
+    "attacker_reward": -19.0,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 282,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 283,
+    "defender_reward": 23.5,
+    "attacker_reward": -23.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 284,
+    "defender_reward": 18.0,
+    "attacker_reward": -18.0,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 285,
+    "defender_reward": 18.0,
+    "attacker_reward": -18.0,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 286,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 287,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 288,
+    "defender_reward": 22.0,
+    "attacker_reward": -22.0,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 289,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 290,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 291,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 292,
+    "defender_reward": 3.5,
+    "attacker_reward": -3.5,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 293,
+    "defender_reward": 2.0,
+    "attacker_reward": -2.0,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 294,
+    "defender_reward": 30.0,
+    "attacker_reward": -30.0,
+    "defender_occupation_reward": 0,
+    "attacker_occupation_reward": 60.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 295,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 296,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 297,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 298,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 299,
+    "defender_reward": 2.0,
+    "attacker_reward": -2.0,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 300,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 301,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 302,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 303,
+    "defender_reward": -5.0,
+    "attacker_reward": 5.0,
+    "defender_occupation_reward": 18.0,
+    "attacker_occupation_reward": 42.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 304,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 305,
+    "defender_reward": 23.5,
+    "attacker_reward": -23.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 306,
+    "defender_reward": -0.5,
+    "attacker_reward": 0.5,
+    "defender_occupation_reward": 16.0,
+    "attacker_occupation_reward": 44.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 307,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 308,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 309,
+    "defender_reward": -0.5,
+    "attacker_reward": 0.5,
+    "defender_occupation_reward": 16.0,
+    "attacker_occupation_reward": 44.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 310,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 311,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 312,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 313,
+    "defender_reward": -0.5,
+    "attacker_reward": 0.5,
+    "defender_occupation_reward": 16.0,
+    "attacker_occupation_reward": 44.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 314,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 315,
+    "defender_reward": 27.0,
+    "attacker_reward": -27.0,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 316,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 317,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 318,
+    "defender_reward": 7.0,
+    "attacker_reward": -7.0,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 319,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 320,
+    "defender_reward": 23.5,
+    "attacker_reward": -23.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 321,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 322,
+    "defender_reward": 23.5,
+    "attacker_reward": -23.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 323,
+    "defender_reward": 3.5,
+    "attacker_reward": -3.5,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 324,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 325,
+    "defender_reward": 10.0,
+    "attacker_reward": -10.0,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 326,
+    "defender_reward": 19.0,
+    "attacker_reward": -19.0,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 327,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 328,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 329,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 330,
+    "defender_reward": 23.5,
+    "attacker_reward": -23.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 331,
+    "defender_reward": 27.5,
+    "attacker_reward": -27.5,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 332,
+    "defender_reward": 18.0,
+    "attacker_reward": -18.0,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 333,
+    "defender_reward": 23.5,
+    "attacker_reward": -23.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 334,
+    "defender_reward": 6.0,
+    "attacker_reward": -6.0,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 335,
+    "defender_reward": 3.5,
+    "attacker_reward": -3.5,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 336,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 337,
+    "defender_reward": -0.5,
+    "attacker_reward": 0.5,
+    "defender_occupation_reward": 16.0,
+    "attacker_occupation_reward": 44.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 338,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 339,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 340,
+    "defender_reward": 3.5,
+    "attacker_reward": -3.5,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 341,
+    "defender_reward": 10.0,
+    "attacker_reward": -10.0,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 342,
+    "defender_reward": -0.5,
+    "attacker_reward": 0.5,
+    "defender_occupation_reward": 16.0,
+    "attacker_occupation_reward": 44.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 343,
+    "defender_reward": -0.5,
+    "attacker_reward": 0.5,
+    "defender_occupation_reward": 16.0,
+    "attacker_occupation_reward": 44.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 344,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 345,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 346,
+    "defender_reward": 10.0,
+    "attacker_reward": -10.0,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 347,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 348,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 349,
+    "defender_reward": 23.5,
+    "attacker_reward": -23.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 350,
+    "defender_reward": -0.5,
+    "attacker_reward": 0.5,
+    "defender_occupation_reward": 16.0,
+    "attacker_occupation_reward": 44.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 351,
+    "defender_reward": 11.0,
+    "attacker_reward": -11.0,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 352,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 353,
+    "defender_reward": 26.0,
+    "attacker_reward": -26.0,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 354,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 355,
+    "defender_reward": -0.5,
+    "attacker_reward": 0.5,
+    "defender_occupation_reward": 16.0,
+    "attacker_occupation_reward": 44.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 356,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 357,
+    "defender_reward": 3.5,
+    "attacker_reward": -3.5,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 358,
+    "defender_reward": -0.5,
+    "attacker_reward": 0.5,
+    "defender_occupation_reward": 16.0,
+    "attacker_occupation_reward": 44.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 359,
+    "defender_reward": 14.0,
+    "attacker_reward": -14.0,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 360,
+    "defender_reward": 7.0,
+    "attacker_reward": -7.0,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 361,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 362,
+    "defender_reward": 30.0,
+    "attacker_reward": -30.0,
+    "defender_occupation_reward": 0,
+    "attacker_occupation_reward": 60.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 363,
+    "defender_reward": 3.5,
+    "attacker_reward": -3.5,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 364,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 365,
+    "defender_reward": 23.5,
+    "attacker_reward": -23.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 366,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 367,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 368,
+    "defender_reward": 6.0,
+    "attacker_reward": -6.0,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 369,
+    "defender_reward": 14.0,
+    "attacker_reward": -14.0,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 370,
+    "defender_reward": 10.0,
+    "attacker_reward": -10.0,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 371,
+    "defender_reward": 22.0,
+    "attacker_reward": -22.0,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 372,
+    "defender_reward": 18.0,
+    "attacker_reward": -18.0,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 373,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 374,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 375,
+    "defender_reward": 27.5,
+    "attacker_reward": -27.5,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 376,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 377,
+    "defender_reward": 15.0,
+    "attacker_reward": -15.0,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 378,
+    "defender_reward": 18.0,
+    "attacker_reward": -18.0,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 379,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 380,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 381,
+    "defender_reward": -8.5,
+    "attacker_reward": 8.5,
+    "defender_occupation_reward": 20.0,
+    "attacker_occupation_reward": 40.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 382,
+    "defender_reward": 15.0,
+    "attacker_reward": -15.0,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 383,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 384,
+    "defender_reward": 18.0,
+    "attacker_reward": -18.0,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 385,
+    "defender_reward": 27.5,
+    "attacker_reward": -27.5,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 386,
+    "defender_reward": 23.5,
+    "attacker_reward": -23.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 387,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 388,
+    "defender_reward": 23.5,
+    "attacker_reward": -23.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 389,
+    "defender_reward": 18.0,
+    "attacker_reward": -18.0,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 390,
+    "defender_reward": 2.0,
+    "attacker_reward": -2.0,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 391,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 392,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 393,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 394,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 395,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 396,
+    "defender_reward": 23.5,
+    "attacker_reward": -23.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 397,
+    "defender_reward": 23.5,
+    "attacker_reward": -23.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 398,
+    "defender_reward": 18.0,
+    "attacker_reward": -18.0,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 399,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 400,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 401,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 402,
+    "defender_reward": 15.0,
+    "attacker_reward": -15.0,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 403,
+    "defender_reward": 6.0,
+    "attacker_reward": -6.0,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 404,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 405,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 406,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 407,
+    "defender_reward": 6.0,
+    "attacker_reward": -6.0,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 408,
+    "defender_reward": 18.0,
+    "attacker_reward": -18.0,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 409,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 410,
+    "defender_reward": -0.5,
+    "attacker_reward": 0.5,
+    "defender_occupation_reward": 16.0,
+    "attacker_occupation_reward": 44.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 411,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 412,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 413,
+    "defender_reward": 23.5,
+    "attacker_reward": -23.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 414,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 415,
+    "defender_reward": 19.0,
+    "attacker_reward": -19.0,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 416,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 417,
+    "defender_reward": 27.0,
+    "attacker_reward": -27.0,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 418,
+    "defender_reward": 6.0,
+    "attacker_reward": -6.0,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 419,
+    "defender_reward": 22.0,
+    "attacker_reward": -22.0,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 420,
+    "defender_reward": 3.5,
+    "attacker_reward": -3.5,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 421,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 422,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 423,
+    "defender_reward": -4.5,
+    "attacker_reward": 4.5,
+    "defender_occupation_reward": 18.0,
+    "attacker_occupation_reward": 42.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 424,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 425,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 426,
+    "defender_reward": 3.5,
+    "attacker_reward": -3.5,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 427,
+    "defender_reward": 31.5,
+    "attacker_reward": -31.5,
+    "defender_occupation_reward": 0,
+    "attacker_occupation_reward": 60.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 428,
+    "defender_reward": 23.5,
+    "attacker_reward": -23.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 429,
+    "defender_reward": 26.0,
+    "attacker_reward": -26.0,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 430,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 431,
+    "defender_reward": 22.0,
+    "attacker_reward": -22.0,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 432,
+    "defender_reward": 2.0,
+    "attacker_reward": -2.0,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 433,
+    "defender_reward": -0.5,
+    "attacker_reward": 0.5,
+    "defender_occupation_reward": 16.0,
+    "attacker_occupation_reward": 44.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 434,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 435,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 436,
+    "defender_reward": 14.0,
+    "attacker_reward": -14.0,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 437,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 438,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 439,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 440,
+    "defender_reward": 10.0,
+    "attacker_reward": -10.0,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 441,
+    "defender_reward": 3.5,
+    "attacker_reward": -3.5,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 442,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 443,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 444,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 445,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 446,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 447,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 448,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 449,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 450,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 451,
+    "defender_reward": -0.5,
+    "attacker_reward": 0.5,
+    "defender_occupation_reward": 16.0,
+    "attacker_occupation_reward": 44.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 452,
+    "defender_reward": 6.0,
+    "attacker_reward": -6.0,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 453,
+    "defender_reward": 18.0,
+    "attacker_reward": -18.0,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 454,
+    "defender_reward": 23.5,
+    "attacker_reward": -23.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 455,
+    "defender_reward": 3.5,
+    "attacker_reward": -3.5,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 456,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 457,
+    "defender_reward": 10.0,
+    "attacker_reward": -10.0,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 458,
+    "defender_reward": 22.0,
+    "attacker_reward": -22.0,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 459,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 460,
+    "defender_reward": 18.0,
+    "attacker_reward": -18.0,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 461,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 462,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 463,
+    "defender_reward": 23.5,
+    "attacker_reward": -23.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 464,
+    "defender_reward": 15.0,
+    "attacker_reward": -15.0,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 465,
+    "defender_reward": 2.0,
+    "attacker_reward": -2.0,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 466,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 467,
+    "defender_reward": 18.0,
+    "attacker_reward": -18.0,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 468,
+    "defender_reward": 18.0,
+    "attacker_reward": -18.0,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 469,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 470,
+    "defender_reward": -2.0,
+    "attacker_reward": 2.0,
+    "defender_occupation_reward": 16.0,
+    "attacker_occupation_reward": 44.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 471,
+    "defender_reward": -4.5,
+    "attacker_reward": 4.5,
+    "defender_occupation_reward": 18.0,
+    "attacker_occupation_reward": 42.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 472,
+    "defender_reward": 14.0,
+    "attacker_reward": -14.0,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 473,
+    "defender_reward": 3.5,
+    "attacker_reward": -3.5,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 474,
+    "defender_reward": 15.5,
+    "attacker_reward": -15.5,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 475,
+    "defender_reward": 6.0,
+    "attacker_reward": -6.0,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 476,
+    "defender_reward": 3.5,
+    "attacker_reward": -3.5,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 477,
+    "defender_reward": 3.5,
+    "attacker_reward": -3.5,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 478,
+    "defender_reward": 10.0,
+    "attacker_reward": -10.0,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 479,
+    "defender_reward": 2.0,
+    "attacker_reward": -2.0,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 480,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 481,
+    "defender_reward": 23.5,
+    "attacker_reward": -23.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 482,
+    "defender_reward": 22.0,
+    "attacker_reward": -22.0,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 483,
+    "defender_reward": -4.5,
+    "attacker_reward": 4.5,
+    "defender_occupation_reward": 18.0,
+    "attacker_occupation_reward": 42.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 484,
+    "defender_reward": 3.5,
+    "attacker_reward": -3.5,
+    "defender_occupation_reward": 14.0,
+    "attacker_occupation_reward": 46.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 485,
+    "defender_reward": 19.5,
+    "attacker_reward": -19.5,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 486,
+    "defender_reward": 14.0,
+    "attacker_reward": -14.0,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 487,
+    "defender_reward": 7.5,
+    "attacker_reward": -7.5,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 488,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 489,
+    "defender_reward": 10.0,
+    "attacker_reward": -10.0,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 490,
+    "defender_reward": 18.0,
+    "attacker_reward": -18.0,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 491,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 492,
+    "defender_reward": -4.5,
+    "attacker_reward": 4.5,
+    "defender_occupation_reward": 18.0,
+    "attacker_occupation_reward": 42.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 493,
+    "defender_reward": 18.0,
+    "attacker_reward": -18.0,
+    "defender_occupation_reward": 6.0,
+    "attacker_occupation_reward": 54.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 494,
+    "defender_reward": 15.0,
+    "attacker_reward": -15.0,
+    "defender_occupation_reward": 8.0,
+    "attacker_occupation_reward": 52.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 495,
+    "defender_reward": 6.0,
+    "attacker_reward": -6.0,
+    "defender_occupation_reward": 12.0,
+    "attacker_occupation_reward": 48.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 496,
+    "defender_reward": -0.5,
+    "attacker_reward": 0.5,
+    "defender_occupation_reward": 16.0,
+    "attacker_occupation_reward": 44.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 497,
+    "defender_reward": 23.5,
+    "attacker_reward": -23.5,
+    "defender_occupation_reward": 4.0,
+    "attacker_occupation_reward": 56.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 498,
+    "defender_reward": 11.5,
+    "attacker_reward": -11.5,
+    "defender_occupation_reward": 10.0,
+    "attacker_occupation_reward": 50.0,
+    "game_length": 30,
+    "attacker_success": true
+  },
+  {
+    "episode": 499,
+    "defender_reward": 27.5,
+    "attacker_reward": -27.5,
+    "defender_occupation_reward": 2.0,
+    "attacker_occupation_reward": 58.0,
+    "game_length": 30,
+    "attacker_success": true
+  }
+]

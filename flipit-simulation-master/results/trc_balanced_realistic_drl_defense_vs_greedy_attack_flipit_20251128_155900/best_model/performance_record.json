@@ -1,0 +1,6 @@
+{
+  "episode": 275,
+  "performance": 58.0,
+  "model_path": "results\\trc_balanced_realistic_drl_defense_vs_greedy_attack_flipit_20251128_155900\\best_model\\best_defender_episode_275.pth",
+  "timestamp": "2025-11-28T16:02:19.138146"
+}

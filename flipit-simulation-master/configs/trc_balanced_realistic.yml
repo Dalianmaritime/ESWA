@@ -1,0 +1,247 @@
+#
+# TRC论文平衡现实参数配置
+# 基于真实海事安全数据：IMB Piracy Report + Gulf of Guinea Security Statistics
+# 目标：攻击方20-35%胜率，体现真实威胁但防守方占优
+#
+
+debug: false
+outfile: "trc_balanced_realistic.csv"
+duration: 30  # 海盗攻击短期博弈：最多30回合
+
+random_seed: 42
+scenario: maritime_platform_defense_balanced
+target: offshore_oil_platform
+
+deception_mode: "cheat"
+num_experiments: 15
+save_summary: true
+
+# 基于Lanchester方程的真实协同效应
+nonlinear:
+  default_alpha_attacker: 0.75   # 海盗小群体协同效应中等
+  default_cap_attacker: 0.88     # 攻击方能力有上限
+  default_alpha_defender: 0.55   # 防守方协同稍复杂（多层级指挥）
+  default_cap_defender: 0.92     # 防守方能力上限高但非无敌
+  combine_rule: multiplicative_block
+  formula: "p_eff(n) = min(cap, 1 - (1 - p)^(n^alpha))"
+
+# 基于真实海盗攻击数据的攻击方动作
+attacker_actions:
+  - id: inflatable_fast_boat
+    name: 充气快艇袭击
+    unit_label: boat
+    description: 高速机动，海盗常用战术
+    base_success:
+      cheat: 0.45      # 降低欺骗模式优势：伪装渔船，GPS欺骗接近
+      flipit: 0.25     # 正常模式：大型平台防御较强
+    nonlinear:
+      alpha: 0.75
+      cap: 0.85
+    cost_per_unit: 2.0            # 合理成本
+    max_units: 4
+
+  - id: hard_hull_speedboat
+    name: 武装硬壳快艇
+    unit_label: boat
+    description: 重武器平台，高威胁但成本高
+    base_success:
+      cheat: 0.55      # 降低欺骗模式：虚假身份+重武器威胁
+      flipit: 0.35     # 正常模式：重武器威胁但平台防御系统发达
+    nonlinear:
+      alpha: 0.70
+      cap: 0.80
+    cost_per_unit: 4.0
+    max_units: 3
+
+  - id: boarding_assault
+    name: 武装登船
+    unit_label: team
+    description: 直接占领平台，高风险高回报
+    base_success:
+      cheat: 0.65      # 降低欺骗模式：内应配合+虚假身份，大幅提升成功率
+      flipit: 0.40     # 正常模式：大型平台人员多，登船很困难
+    nonlinear:
+      alpha: 0.80
+      cap: 0.85
+    cost_per_unit: 5.0
+    max_units: 2
+
+  - id: standoff_attack
+    name: 远程火力攻击
+    unit_label: team
+    description: RPG/重机枪远程压制
+    base_success:
+      cheat: 0.40      # 降低欺骗模式：虚假情报分散注意力，提升攻击效果
+      flipit: 0.25     # 正常模式：远程火力对大型平台效果有限
+    nonlinear:
+      alpha: 0.75
+      cap: 0.75
+    cost_per_unit: 3.0
+    max_units: 3
+
+# 基于大型油田平台真实防御能力的防守方动作
+defender_actions:
+  - id: naval_escort
+    name: 海军护航
+    unit_label: ship
+    description: 专业军舰，最强防御
+    base_success:
+      flipit: 0.90     # 提升FlipIt模式优势
+      cheat: 0.80      # 提升Cheat模式下的防御效果
+    nonlinear:
+      alpha: 0.40      # 军舰协同效率高
+      cap: 0.95
+    cost_per_unit: 6.0           # 降低成本增加可用性
+    max_units: 3                 # 增加可用数量
+
+  - id: platform_security
+    name: 平台安保
+    unit_label: team
+    description: 专业安保队伍
+    base_success:
+      flipit: 0.80     # 提升FlipIt模式优势
+      cheat: 0.65      # 提升Cheat模式下的防御效果
+    nonlinear:
+      alpha: 0.55
+      cap: 0.90
+    cost_per_unit: 2.0           # 降低成本
+    max_units: 5
+
+  - id: helicopter_support
+    name: 直升机支援
+    unit_label: helicopter
+    description: 快速机动火力支援
+    base_success:
+      flipit: 0.85     # 提升直升机效果
+      cheat: 0.75      # 增强抗干扰能力
+    nonlinear:
+      alpha: 0.50
+      cap: 0.90
+    cost_per_unit: 4.5           # 降低成本
+    max_units: 3                 # 增加可用数量
+
+  - id: automated_systems
+    name: 自动防御系统
+    unit_label: system
+    description: 雷达监控+自动报警
+    base_success:
+      flipit: 0.75     # 提升自动化系统效果
+      cheat: 0.50      # 增加抗电子攻击能力
+    nonlinear:
+      alpha: 0.35
+      cap: 0.85
+    cost_per_unit: 3.0           # 降低成本
+    max_units: 4
+
+  - id: patrol_boats
+    name: 巡逻艇
+    unit_label: boat
+    description: 周围水域巡逻
+    base_success:
+      flipit: 0.70     # 提升巡逻效果
+      cheat: 0.55      # 增强识别能力
+    nonlinear:
+      alpha: 0.60
+      cap: 0.80
+    cost_per_unit: 2.0           # 降低成本
+    max_units: 5
+
+constraints:
+  max_units:
+    attacker: 4
+    defender: 4
+  budgeting:
+    enabled: true
+    attacker_budget: 75.0    # 稍微降低攻击方资源
+    defender_budget: 100.0   # 稍微增加防守方预算
+
+environmental_factors:
+  weather_condition: "moderate"
+  sea_state: 3              # 适中海况
+  visibility: "normal"      # 正常能见度
+  time_of_day: "day"        # 白天（对防守有利）
+  threat_intelligence: "partial"
+
+rew_config:
+  success_reward: 0         # 删除成功奖励，只依赖占领奖励
+  partial_success: 0        # 删除部分成功奖励
+  cost_penalty: 1.0         # 成本惩罚倍率（用于训练奖励计算）
+  unit_loss_penalty: 0      # 删除单位损失惩罚
+  defense_bonus: 0          # 删除防御奖励
+  occupation_reward: 2.0    # 每时间单位占领奖励
+  # 新增：每步资源增长配置
+  defender_income_per_step: 2.0  # 防守方每步获得2预算
+  attacker_income_per_step: 1.0  # 攻击方每步获得1预算
+
+obs_type: "maritime_multiunit"
+rew_type: "maritime_multiunit"
+
+# 算法配置
+p1_strategy: "maritime_greedy"
+p1_config:
+  algorithm_type: "greedy"
+  move_cost_weight: 1.5
+  success_rate_weight: 2.0
+  risk_aversion: 0.3
+  budget_conservation: 0.6
+
+p0_strategy: "maritime_dqn"
+p0_config:
+  algorithm_type: "dqn"
+
+drl_config:
+  algorithm: "dqn"
+  training_episodes: 500      # 充分训练：500轮 × 30步 = 15,000步
+  save_frequency: 50          # 每50轮保存一次模型
+  evaluation_frequency: 25    # 每25轮评估一次性能
+  warmup_steps: 1500          # 预热10%训练步数，充分探索状态空间
+  
+  dqn:
+    # ========== 网络架构参数 ==========
+    obs_dim: 13             # 海事博弈观察空间：13维特征
+    action_dim: 20          # 动作空间：5种防守动作 × 4个最大单位 = 20维
+    max_units: 4            # 与约束条件严格一致：defender最大4单位
+    hidden_layers: [128, 128]  # 双层网络适合中等复杂度博弈
+    
+    # ========== 短期博弈优化的学习参数 ==========
+    lr: 0.0005              # 提高学习率适配短期博弈（30步快速决策）
+    gamma: 0.92             # 降低折扣因子：海盗攻击重视即时威胁
+    epsilon_start: 1.0      # 初期完全随机探索
+    epsilon_end: 0.01       # 最终保留1%探索应对随机性
+    epsilon_decay: 10000    # 在10,000步(67%训练期)完成探索衰减
+    
+    # ========== 短期博弈训练调度 ==========
+    target_update_freq: 300  # 每300步(约10轮)更新目标网络
+    memory_size: 8000       # 保留最近8,000步经验(约267轮)
+    batch_size: 64          # 批次大小：平衡稳定性与计算效率
+    
+    # ========== TRC科研级高级特性 ==========
+    double_dqn: true        # Double DQN：减少Q值过估计
+    dueling_network: true   # Dueling架构：分离状态价值与动作优势
+    prioritized_replay: true # PER：优先学习重要经验
+    noisy_networks: false   # 关闭：避免短期训练不稳定
+    multi_step: true        # N-step learning：提高样本效率
+    n_step: 3               # 3步前瞻：适配30步博弈长度
+    distributional: false   # 关闭：简化短期训练
+    device: "auto"          # 自动选择GPU/CPU
+    
+    # ========== 训练稳定性策略 ==========
+    gradient_clip: 1.0      # 梯度裁剪：防止梯度爆炸
+    weight_decay: 1e-4      # L2正则化：防止过拟合
+    learning_starts: 1500   # 与warmup_steps一致：充分探索后开始学习
+    polyak_tau: 0.01        # 软更新系数：平衡目标网络稳定性与更新速度
+
+evaluation_config:
+  evaluation_frequency: 10
+  num_episodes: 15
+  detailed_logging: true
+
+maritime_scenario:
+  name: "平衡现实海上油田平台防御实验"
+  description: "基于真实数据的平衡海盗vs油田平台场景，攻击方有合理威胁性"
+  scenario_type: "balanced_realistic_defense"
+
+experiment_type: "main_experiment_balanced"
+experiment_id: "trc_balanced_realistic_drl_defense_vs_greedy_attack"
+focus: "balanced_realistic_validation"
+

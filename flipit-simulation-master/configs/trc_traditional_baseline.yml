@@ -1,0 +1,208 @@
+#
+# TRC基线实验：双方传统算法对比
+# 目的：建立传统方法基线，突出DRL的技术优势
+#
+
+debug: false
+outfile: "trc_traditional_baseline.csv"
+duration: 30  # 海盗攻击短期博弈：最多30回合（控制变量：与DRL实验一致）
+random_seed: 42
+scenario: maritime_platform_defense_traditional_baseline
+target: offshore_oil_platform
+
+deception_mode: "cheat"    # 保持Cheat模式进行公平对比
+num_experiments: 15
+save_summary: true
+
+# 相同的非线性参数
+nonlinear:
+  default_alpha_attacker: 0.75
+  default_cap_attacker: 0.88
+  default_alpha_defender: 0.55
+  default_cap_defender: 0.92
+  combine_rule: multiplicative_block
+  formula: "p_eff(n) = min(cap, 1 - (1 - p)^(n^alpha))"
+
+# 攻击方动作（提高成功率以实现合理的博弈平衡）
+attacker_actions:
+  - id: inflatable_fast_boat
+    name: 充气快艇袭击
+    unit_label: boat
+    description: 高速机动，海盗常用战术
+    base_success:
+      cheat: 0.65      # 提高攻击成功率，使传统防守面临真实威胁
+      flipit: 0.45
+    nonlinear:
+      alpha: 0.75
+      cap: 0.85
+    cost_per_unit: 2.0
+    max_units: 4
+
+  - id: hard_hull_speedboat
+    name: 武装硬壳快艇
+    unit_label: boat
+    description: 重武器平台，高威胁但成本高
+    base_success:
+      cheat: 0.75      # 提高攻击成功率
+      flipit: 0.55
+    nonlinear:
+      alpha: 0.70
+      cap: 0.80
+    cost_per_unit: 4.0
+    max_units: 3
+
+  - id: boarding_assault
+    name: 武装登船
+    unit_label: team
+    description: 直接占领平台，高风险高回报
+    base_success:
+      cheat: 0.85      # 提高攻击成功率，高风险高回报
+      flipit: 0.65
+    nonlinear:
+      alpha: 0.80
+      cap: 0.85
+    cost_per_unit: 5.0
+    max_units: 2
+
+  - id: standoff_attack
+    name: 远程火力攻击
+    unit_label: team
+    description: RPG/重机枪远程压制
+    base_success:
+      cheat: 0.60      # 提高攻击成功率
+      flipit: 0.40
+    nonlinear:
+      alpha: 0.75
+      cap: 0.75
+    cost_per_unit: 3.0
+    max_units: 3
+
+# 控制变量：与DRL实验完全一致的防守方动作
+defender_actions:
+  - id: naval_escort
+    name: 海军护航
+    unit_label: ship
+    description: 专业军舰，最强防御
+    base_success:
+      flipit: 0.90
+      cheat: 0.80
+    nonlinear:
+      alpha: 0.40
+      cap: 0.95
+    cost_per_unit: 6.0
+    max_units: 3
+
+  - id: platform_security
+    name: 平台安保
+    unit_label: team
+    description: 专业安保队伍
+    base_success:
+      flipit: 0.80
+      cheat: 0.65
+    nonlinear:
+      alpha: 0.55
+      cap: 0.90
+    cost_per_unit: 2.0
+    max_units: 5
+
+  - id: helicopter_support
+    name: 直升机支援
+    unit_label: helicopter
+    description: 快速机动火力支援
+    base_success:
+      flipit: 0.85
+      cheat: 0.75
+    nonlinear:
+      alpha: 0.50
+      cap: 0.90
+    cost_per_unit: 4.5
+    max_units: 3
+
+  - id: automated_systems
+    name: 自动防御系统
+    unit_label: system
+    description: 雷达监控+自动报警
+    base_success:
+      flipit: 0.75
+      cheat: 0.50
+    nonlinear:
+      alpha: 0.35
+      cap: 0.85
+    cost_per_unit: 3.0
+    max_units: 4
+
+  - id: patrol_boats
+    name: 巡逻艇
+    unit_label: boat
+    description: 周围水域巡逻
+    base_success:
+      flipit: 0.70
+      cheat: 0.55
+    nonlinear:
+      alpha: 0.60
+      cap: 0.80
+    cost_per_unit: 2.0
+    max_units: 5
+
+# 控制变量：与DRL实验完全一致的约束
+constraints:
+  max_units:
+    attacker: 4
+    defender: 4
+  budgeting:
+    enabled: true
+    attacker_budget: 75.0
+    defender_budget: 100.0
+
+environmental_factors:
+  weather_condition: "moderate"
+  sea_state: 3
+  visibility: "normal"
+  time_of_day: "day"
+  threat_intelligence: "partial"
+
+rew_config:
+  success_reward: 0         # 删除成功奖励，只依赖占领奖励
+  partial_success: 0        # 删除部分成功奖励
+  cost_penalty: 1.0         # 控制变量：与DRL实验一致
+  unit_loss_penalty: 0      # 删除单位损失惩罚
+  defense_bonus: 0          # 删除防御奖励
+  occupation_reward: 2.0    # 每时间单位占领奖励
+  # 控制变量：与DRL实验一致的资源增长
+  defender_income_per_step: 2.0
+  attacker_income_per_step: 1.0
+
+obs_type: "maritime_multiunit"
+rew_type: "maritime_multiunit"
+
+# 双方都使用传统算法（基线对比）
+p1_strategy: "maritime_greedy"
+p1_config:
+  algorithm_type: "greedy"
+  move_cost_weight: 1.5
+  success_rate_weight: 2.0
+  risk_aversion: 0.3
+  budget_conservation: 0.6
+
+p0_strategy: "maritime_defensive_greedy"  # 使用传统防守算法
+p0_config:
+  algorithm_type: "defensive_greedy"
+  cost_effectiveness_weight: 2.0
+  threat_response_weight: 2.5
+  resource_conservation: 0.7
+  early_warning_preference: 0.6
+
+# 禁用DRL（这是传统基线实验）
+drl_config:
+  enabled: false
+  reason: "traditional_baseline_comparison"
+
+evaluation_config:
+  evaluation_frequency: 50
+  num_episodes: 50
+  detailed_logging: true
+
+experiment_type: "traditional_baseline"
+experiment_id: "trc_traditional_baseline_vs_greedy_cheat"
+focus: "establish_traditional_performance_baseline"
+
