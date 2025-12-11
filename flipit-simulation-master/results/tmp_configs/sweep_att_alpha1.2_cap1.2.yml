@@ -1,0 +1,205 @@
+debug: false
+outfile: trc_balanced_realistic.csv
+duration: 30
+random_seed: 42
+scenario: maritime_platform_defense_balanced
+target: offshore_oil_platform
+deception_mode: cheat
+num_experiments: 15
+save_summary: true
+nonlinear:
+  default_alpha_attacker: 0.75
+  default_cap_attacker: 0.88
+  default_alpha_defender: 0.55
+  default_cap_defender: 0.92
+  combine_rule: multiplicative_block
+  formula: p_eff(n) = min(cap, 1 - (1 - p)^(n^alpha))
+attacker_actions:
+- id: inflatable_fast_boat
+  name: 充气快艇袭击
+  unit_label: boat
+  description: 高速机动，海盗常用战术
+  base_success:
+    cheat: 0.45
+    flipit: 0.25
+  nonlinear:
+    alpha: 0.8999999999999999
+    cap: 1.0
+  cost_per_unit: 2.0
+  max_units: 4
+- id: hard_hull_speedboat
+  name: 武装硬壳快艇
+  unit_label: boat
+  description: 重武器平台，高威胁但成本高
+  base_success:
+    cheat: 0.55
+    flipit: 0.35
+  nonlinear:
+    alpha: 0.84
+    cap: 0.96
+  cost_per_unit: 4.0
+  max_units: 3
+- id: boarding_assault
+  name: 武装登船
+  unit_label: team
+  description: 直接占领平台，高风险高回报
+  base_success:
+    cheat: 0.65
+    flipit: 0.4
+  nonlinear:
+    alpha: 0.96
+    cap: 1.0
+  cost_per_unit: 5.0
+  max_units: 2
+- id: standoff_attack
+  name: 远程火力攻击
+  unit_label: team
+  description: RPG/重机枪远程压制
+  base_success:
+    cheat: 0.4
+    flipit: 0.25
+  nonlinear:
+    alpha: 0.8999999999999999
+    cap: 0.8999999999999999
+  cost_per_unit: 3.0
+  max_units: 3
+defender_actions:
+- id: naval_escort
+  name: 海军护航
+  unit_label: ship
+  description: 专业军舰，最强防御
+  base_success:
+    flipit: 0.9
+    cheat: 0.8
+  nonlinear:
+    alpha: 0.4
+    cap: 0.95
+  cost_per_unit: 6.0
+  max_units: 3
+- id: platform_security
+  name: 平台安保
+  unit_label: team
+  description: 专业安保队伍
+  base_success:
+    flipit: 0.8
+    cheat: 0.65
+  nonlinear:
+    alpha: 0.55
+    cap: 0.9
+  cost_per_unit: 2.0
+  max_units: 5
+- id: helicopter_support
+  name: 直升机支援
+  unit_label: helicopter
+  description: 快速机动火力支援
+  base_success:
+    flipit: 0.85
+    cheat: 0.75
+  nonlinear:
+    alpha: 0.5
+    cap: 0.9
+  cost_per_unit: 4.5
+  max_units: 3
+- id: automated_systems
+  name: 自动防御系统
+  unit_label: system
+  description: 雷达监控+自动报警
+  base_success:
+    flipit: 0.75
+    cheat: 0.5
+  nonlinear:
+    alpha: 0.35
+    cap: 0.85
+  cost_per_unit: 3.0
+  max_units: 4
+- id: patrol_boats
+  name: 巡逻艇
+  unit_label: boat
+  description: 周围水域巡逻
+  base_success:
+    flipit: 0.7
+    cheat: 0.55
+  nonlinear:
+    alpha: 0.6
+    cap: 0.8
+  cost_per_unit: 2.0
+  max_units: 5
+constraints:
+  max_units:
+    attacker: 4
+    defender: 4
+  budgeting:
+    enabled: true
+    attacker_budget: 75.0
+    defender_budget: 100.0
+environmental_factors:
+  weather_condition: moderate
+  sea_state: 3
+  visibility: normal
+  time_of_day: day
+  threat_intelligence: partial
+rew_config:
+  success_reward: 0
+  partial_success: 0
+  cost_penalty: 1.0
+  unit_loss_penalty: 0
+  defense_bonus: 0
+  occupation_reward: 2.0
+  defender_income_per_step: 2.0
+  attacker_income_per_step: 1.0
+obs_type: maritime_multiunit
+rew_type: maritime_multiunit
+p1_strategy: maritime_greedy
+p1_config:
+  algorithm_type: greedy
+  move_cost_weight: 1.5
+  success_rate_weight: 2.0
+  risk_aversion: 0.3
+  budget_conservation: 0.6
+p0_strategy: maritime_dqn
+p0_config:
+  algorithm_type: dqn
+drl_config:
+  algorithm: dqn
+  training_episodes: 500
+  save_frequency: 50
+  evaluation_frequency: 25
+  warmup_steps: 1500
+  dqn:
+    obs_dim: 13
+    action_dim: 20
+    max_units: 4
+    hidden_layers:
+    - 128
+    - 128
+    lr: 0.0005
+    gamma: 0.92
+    epsilon_start: 1.0
+    epsilon_end: 0.01
+    epsilon_decay: 10000
+    target_update_freq: 300
+    memory_size: 8000
+    batch_size: 64
+    double_dqn: true
+    dueling_network: true
+    prioritized_replay: true
+    noisy_networks: false
+    multi_step: true
+    n_step: 3
+    distributional: false
+    device: auto
+    gradient_clip: 1.0
+    weight_decay: 1e-4
+    learning_starts: 1500
+    polyak_tau: 0.01
+evaluation_config:
+  evaluation_frequency: 10
+  num_episodes: 15
+  detailed_logging: true
+maritime_scenario:
+  name: 平衡现实海上油田平台防御实验
+  description: 基于真实数据的平衡海盗vs油田平台场景，攻击方有合理威胁性
+  scenario_type: balanced_realistic_defense
+experiment_type: main_experiment_balanced
+experiment_id: sweep_att_alpha1.2_cap1.2
+focus: balanced_realistic_validation

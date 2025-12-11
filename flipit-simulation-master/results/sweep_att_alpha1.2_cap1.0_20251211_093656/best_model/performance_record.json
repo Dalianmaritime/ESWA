@@ -1,0 +1,6 @@
+{
+  "episode": 0,
+  "performance": 56.0,
+  "model_path": "results\\sweep_att_alpha1.2_cap1.0_20251211_093656\\best_model\\best_defender_episode_0.pth",
+  "timestamp": "2025-12-11T09:36:58.806339"
+}
