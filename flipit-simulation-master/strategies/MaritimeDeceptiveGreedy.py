@@ -55,35 +55,124 @@ class MaritimeDeceptiveGreedy:
 
     def pre(self, tick, prev_observation):
         """
-        决策函数：选择不行动(0)、真实攻击(1)或欺骗攻击(2)
+        决策函数：选择动作ID和单位数量 (action_id, n_units)
         """
+        # 获取当前预算信息（如果可用）
+        current_budget = 100.0  # 默认值
+        if isinstance(prev_observation, dict):
+             # 尝试从字典观察中获取
+             pass
+        elif hasattr(prev_observation, 'shape') and len(prev_observation.shape) > 0:
+             # 从归一化向量中恢复（假设max_budget=100，这是环境默认值）
+             # obs[1] 是 attacker_budget / max_budget
+             if len(prev_observation) >= 2:
+                 current_budget = prev_observation[1] * 100.0
+        
+        # 确定动作ID
         if tick == 0:
-            # 首次行动：海运中通常先进行侦察（欺骗）
-            return self._initial_maritime_strategy()
-        
-        # 计算各动作的预期收益
-        no_action_value = self._calculate_no_action_value(tick, prev_observation)
-        real_attack_value = self._calculate_real_attack_value(tick, prev_observation)
-        cheat_value = self._calculate_cheat_value(tick, prev_observation)
-        
-        if self.debug:
-            print(f"\n海运策略评估 (回合 {tick}):")
-            print(f"不行动价值: {no_action_value:.3f}")
-            print(f"真实攻击价值: {real_attack_value:.3f}")
-            print(f"欺骗攻击价值: {cheat_value:.3f}")
-            print(f"防守方怀疑度估计: {self.defender_suspicion_estimate:.3f}")
-        
-        # 选择最优动作
-        values = [no_action_value, real_attack_value, cheat_value]
-        optimal_action = np.argmax(values)
-        
-        # 应用海运环境的随机性和不确定性
-        optimal_action = self._apply_maritime_uncertainty(optimal_action, values)
+            action_id = self._initial_maritime_strategy()
+        else:
+            # 计算各动作的预期收益
+            no_action_value = self._calculate_no_action_value(tick, prev_observation)
+            real_attack_value = self._calculate_real_attack_value(tick, prev_observation)
+            cheat_value = self._calculate_cheat_value(tick, prev_observation)
+            
+            # 新增：考虑远程火力 (Action 3)
+            standoff_value = self._calculate_standoff_value(tick, prev_observation)
+            
+            if self.debug:
+                print(f"\n海运策略评估 (回合 {tick}):")
+                print(f"不行动价值: {no_action_value:.3f}")
+                print(f"真实攻击价值: {real_attack_value:.3f}")
+                print(f"欺骗攻击价值: {cheat_value:.3f}")
+                print(f"远程压制价值: {standoff_value:.3f}")
+            
+            # 选择最优动作
+            values = [no_action_value, real_attack_value, cheat_value, standoff_value]
+            optimal_action = np.argmax(values)
+            
+            # 应用海运环境的随机性和不确定性
+            action_id = self._apply_maritime_uncertainty(optimal_action, values)
+            
+        # 计算最优单位数量
+        action_config = self._get_action_config(action_id)
+        n_units = self._calculate_optimal_units(action_id, current_budget, action_config)
         
         # 更新状态
-        self._update_strategy_state(optimal_action)
+        self._update_strategy_state(action_id)
         
-        return optimal_action
+        return (action_id, n_units)
+
+    def _get_action_config(self, action_id):
+        """获取动作配置简表"""
+        # 这里硬编码了环境配置中的关键参数，为了保持策略独立性
+        configs = {
+            0: {'cost': 0, 'max': 0},         # No Action
+            1: {'cost': 2.0, 'max': 4},       # Inflatable Boat
+            2: {'cost': 4.0, 'max': 3},       # Hard Hull Speedboat (原逻辑映射可能有误，这里按config修正)
+            3: {'cost': 5.0, 'max': 2},       # Boarding Assault
+            4: {'cost': 3.0, 'max': 3}        # Standoff Attack
+        }
+        # 注意：Greedy策略内部ID与环境ID的映射需要对齐
+        # 原始代码假设：0=NoAction, 1=Real, 2=Cheat
+        # 环境Action列表：0=inflatable, 1=hard_hull, 2=boarding, 3=standoff
+        # 为了兼容，我们需要做一个映射：
+        # Greedy 0 -> (0, 0)
+        # Greedy 1 (Real) -> Action 1 (Hard Hull) or Action 0 (Inflatable)? 
+        # 原代码只用了1和2。
+        # 我们重新定义映射以利用所有动作：
+        # Greedy 0 -> Action -1 (Wait)
+        # Greedy 1 -> Action 0 (Inflatable) - 低成本试探
+        # Greedy 2 -> Action 2 (Boarding) - 高风险强攻 (Cheat模式优势大)
+        # Greedy 3 -> Action 3 (Standoff) - 中距离压制
+        
+        # 修正后的映射表
+        if action_id == 0: return {'cost': 0, 'max': 0, 'env_id': 0} # 实际上是空动作，Env中处理为(0,0)
+        if action_id == 1: return {'cost': 2.0, 'max': 4, 'env_id': 0} # Inflatable
+        if action_id == 2: return {'cost': 5.0, 'max': 2, 'env_id': 2} # Boarding (最强)
+        if action_id == 3: return {'cost': 3.0, 'max': 3, 'env_id': 3} # Standoff
+        
+        return {'cost': 2.0, 'max': 1, 'env_id': 0}
+
+    def _calculate_optimal_units(self, action_id, budget, config):
+        """计算最优单位投入量"""
+        if action_id == 0:
+            return 0
+            
+        cost_per_unit = config['cost']
+        max_units = config['max']
+        
+        if cost_per_unit <= 0:
+            return 1
+            
+        # 1. 预算约束
+        max_affordable = int(budget // cost_per_unit)
+        if max_affordable == 0:
+            return 0 # 买不起
+            
+        # 2. 策略性投入
+        # 资金充裕时(>20)，倾向于投入更多；资金紧张时保守
+        if budget > 20:
+            desired_units = max_units
+        elif budget > 10:
+            desired_units = max(1, int(max_units * 0.7))
+        else:
+            desired_units = 1 # 保守试探
+            
+        # 3. 取交集
+        final_units = min(desired_units, max_affordable, max_units)
+        return max(1, final_units) # 至少投入1个，除非买不起(前面已处理)
+
+    def _calculate_standoff_value(self, tick, observation):
+        """计算远程压制价值"""
+        # 远程压制成本适中，且不易受反击（假设）
+        base_value = 18.0
+        # 如果最近多次被拦截，远程压制价值提升
+        if self.consecutive_cheats < 0: # 表示失败
+            base_value += 5.0
+        return base_value
+
+
 
     def post(self, tick, prev_observation, observation, reward, action, true_action, info=None):
         """

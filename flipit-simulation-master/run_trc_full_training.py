@@ -85,6 +85,14 @@ class TRCFullTrainingExperiment:
         # 创建环境
         env = MaritimeNontraditionalEnv(self.config_path)
         
+        # 自动获取观察空间维度
+        if hasattr(env.observation_space, 'shape'):
+            actual_obs_dim = env.observation_space.shape[0]
+            print(f"[ENV] 检测到观察空间维度: {actual_obs_dim}")
+        else:
+            actual_obs_dim = 15
+            print(f"[ENV] 无法检测观察空间维度，使用默认值: {actual_obs_dim}")
+        
         # 创建策略
         attacker = MaritimeDeceptiveGreedy(
             move_cost=15, cheat_cost=5, debug=False
@@ -94,7 +102,7 @@ class TRCFullTrainingExperiment:
         dqn_config = drl_config.get('dqn', {})
         
         defender = RainbowDQNAgent(
-            obs_dim=dqn_config.get('obs_dim', 15),
+            obs_dim=actual_obs_dim,
             action_dim=dqn_config.get('action_dim', 5),
             max_units=dqn_config.get('max_units', 8),
             lr=dqn_config.get('lr', 0.0001),
@@ -198,13 +206,36 @@ class TRCFullTrainingExperiment:
             
             # 转换格式
             if isinstance(att_action, int):
-                # 支持“无动作”语义：att_action==0 表示潜伏/不出手
+                # 兼容旧策略返回int的情况
                 att_action = (0, 0) if att_action == 0 else (att_action, 1)
-            elif not isinstance(att_action, tuple):
+            elif isinstance(att_action, tuple) and len(att_action) == 2:
+                # 新策略直接返回 (action_id, units)
+                # 需要重新映射动作ID，以匹配环境定义
+                # Greedy策略定义：1->Inflatable(Env:0), 2->Boarding(Env:2), 3->Standoff(Env:3)
+                greedy_id, units = att_action
+                if greedy_id == 0:
+                    env_id = 0
+                    units = 0
+                elif greedy_id == 1:
+                    env_id = 0 # Inflatable
+                elif greedy_id == 2:
+                    env_id = 2 # Boarding
+                elif greedy_id == 3:
+                    env_id = 3 # Standoff
+                else:
+                    env_id = 0
+                att_action = (env_id, units)
+            else:
                 att_action = (0, 1)
                 
             if not isinstance(def_action, tuple):
-                def_action = (def_action, 1)
+                # 解码Rainbow DQN的离散动作ID (0-19) -> (type, units)
+                # 假设 action_dim=20, 5种动作 * 4种单位数量(1-4)
+                # 注意：这需要与ActionAdapter保持一致，或者在此处硬编码解码逻辑
+                max_units = 4 
+                type_id = def_action // max_units
+                units = (def_action % max_units) + 1
+                def_action = (type_id, units)
             
             combined_action = (att_action, def_action)
             
@@ -414,16 +445,29 @@ class TRCFullTrainingExperiment:
                 json.dump(perf_record, f, indent=2)
                 
     def _generate_complete_results(self, final_evaluation: List[Dict]) -> Dict:
-        """生成完整结果"""
+        """生成完整结果 (包含科学统计指标)"""
         
         # 计算最终统计（基于纯净占领奖励）
+        n_samples = len(final_evaluation)
         attack_successes = sum(1 for r in final_evaluation if r['attacker_success'])
-        attack_success_rate = attack_successes / len(final_evaluation)
+        attack_success_rate = attack_successes / n_samples
+        
+        # 基础均值
         avg_attacker_occupation = np.mean([r['attacker_occupation_reward'] for r in final_evaluation])
         avg_defender_occupation = np.mean([r['defender_occupation_reward'] for r in final_evaluation])
         avg_steps = np.mean([r['total_steps'] for r in final_evaluation])
         avg_occupation_advantage = np.mean([r['occupation_advantage'] for r in final_evaluation])
         avg_total_occupation = np.mean([r['total_occupation_rewards'] for r in final_evaluation])
+        
+        # 科学统计指标：标准差 (稳定性)
+        std_attacker_occupation = np.std([r['attacker_occupation_reward'] for r in final_evaluation])
+        std_defender_occupation = np.std([r['defender_occupation_reward'] for r in final_evaluation])
+        std_occupation_advantage = np.std([r['occupation_advantage'] for r in final_evaluation])
+        
+        # 科学统计指标：胜率置信区间 (95% CI)
+        # SE = sqrt(p(1-p)/n)
+        se_win_rate = np.sqrt(attack_success_rate * (1 - attack_success_rate) / n_samples) if n_samples > 1 else 0
+        ci95_win_rate = 1.96 * se_win_rate
         
         # 计算每步平均占领奖励效率
         avg_attacker_per_step = avg_attacker_occupation / avg_steps if avg_steps > 0 else 0
@@ -438,6 +482,7 @@ class TRCFullTrainingExperiment:
                 'timestamp': datetime.now().isoformat()
             },
             'final_performance': {
+                # 核心均值
                 'attacker_success_rate': attack_success_rate,
                 'avg_attacker_occupation_reward': avg_attacker_occupation,
                 'avg_defender_occupation_reward': avg_defender_occupation,
@@ -445,7 +490,14 @@ class TRCFullTrainingExperiment:
                 'avg_occupation_advantage': avg_occupation_advantage,
                 'avg_total_occupation_rewards': avg_total_occupation,
                 'avg_attacker_per_step_occupation': avg_attacker_per_step,
-                'avg_defender_per_step_occupation': avg_defender_per_step
+                'avg_defender_per_step_occupation': avg_defender_per_step,
+                
+                # 科学统计量
+                'std_attacker_occupation': std_attacker_occupation,
+                'std_defender_occupation': std_defender_occupation,
+                'std_occupation_advantage': std_occupation_advantage,
+                'win_rate_ci95': ci95_win_rate,
+                'sample_size': n_samples
             },
             'training_history': self.training_history,
             'evaluation_history': self.evaluation_history,
@@ -476,7 +528,7 @@ class TRCFullTrainingExperiment:
             f.write(summary_report)
             
     def _generate_training_summary(self, results: Dict) -> str:
-        """生成训练摘要报告"""
+        """生成训练摘要报告 (ESWA科研标准)"""
         
         info = results['experiment_info']
         perf = results['final_performance']
@@ -495,68 +547,62 @@ class TRCFullTrainingExperiment:
             early_att_rate = late_att_rate = 0
             
         # 使用字符串格式化避免f-string问题
-        report = """# TRC完整DRL训练实验报告
+        report = """# TRC完整DRL训练实验报告 (ESWA科研标准)
 
-## 📊 实验基本信息
+## 📊 实验概况
 - **实验ID**: {}
 - **欺骗模式**: {}
+- **样本量(N)**: {} (最终评估局数)
 - **训练轮数**: {}
-- **完成时间**: {}
 
-## 🎯 最终性能指标
+## 🎯 核心性能指标 (Mean ± Std)
 
-### 占领奖励统计（算法对比核心指标）
-- **攻击方平均占领奖励**: {:.2f}
-- **防守方平均占领奖励**: {:.2f}
-- **平均占领优势差**: {:.2f}
-- **平均总占领奖励**: {:.2f}
+### 1. 占领奖励 (Occupation Reward)
+*反映控制权的总体分布*
+- **攻击方**: {:.2f} ± {:.2f}
+- **防守方**: {:.2f} ± {:.2f}
+- **优势差 (Advantage)**: {:.2f} ± {:.2f} (正值代表攻击方优势)
 
-### 每步占领效率
-- **攻击方每步平均占领奖励**: {:.3f}
-- **防守方每步平均占领奖励**: {:.3f}
-- **占领奖励机制**: 控制方每回合+1.0占领奖励
+### 2. 胜率分析 (Win Rate Analysis)
+- **攻击方胜率**: {:.1%} ± {:.1%} (95% CI)
+- **博弈长度**: {:.1f}步
 
-### 博弈结果
-- **攻击方胜率**: {:.1%}
-- **平均游戏长度**: {:.1f}步
+### 3. 效率指标 (Efficiency)
+- **攻击方每步收益**: {:.3f}
+- **防守方每步收益**: {:.3f}
 
-## 📈 学习效果分析
-- **防守方学习改进**: {:.2f}
-- **早期攻击成功率**: {:.1%}
-- **后期攻击成功率**: {:.1%}
+## 📈 学习动态 (Learning Dynamics)
+- **策略改进幅度**: {:.2f} (收敛值 - 初始值)
+- **攻击成功率演变**: {:.1%} (Early) -> {:.1%} (Late)
 
-## 💡 结果解读
-
-### 占领奖励机制
-本实验采用了修正后的占领奖励统计，反映了：
-1. **系统每步基础资源**: 攻击方+1.0, 防守方+2.0
-2. **控制奖励**: 控制方额外获得占领奖励
-3. **纯净对比**: 统计仅记录占领奖励，排除系统预算和行动成本
-
-### 性能评估
-- 占领奖励效率体现了双方的战略优势
-- 每步占领效率反映了策略的控制能力
-- 总占领奖励体现了系统的竞争性
+## 💡 科学性解读
+- **稳定性分析**: 优势差的标准差为 {:.2f}，体现了对抗过程的波动性。
+- **统计显著性**: 胜率置信区间 ±{:.1%} 表明了结果的可靠程度。
 
 ---
 *报告生成时间: {}*
-*统计方法: 基于纯净占领奖励的算法对比分析*
 """.format(
             info.get('experiment_id', 'N/A'),
             info.get('deception_mode', 'N/A'),
+            perf.get('sample_size', 0),
             info.get('training_episodes', 'N/A'),
-            info.get('timestamp', 'N/A'),
-            perf['avg_attacker_occupation_reward'],
-            perf['avg_defender_occupation_reward'],
-            perf['avg_occupation_advantage'],
-            perf['avg_total_occupation_rewards'],
+            
+            perf['avg_attacker_occupation_reward'], perf['std_attacker_occupation'],
+            perf['avg_defender_occupation_reward'], perf['std_defender_occupation'],
+            perf['avg_occupation_advantage'], perf['std_occupation_advantage'],
+            
+            perf['attacker_success_rate'], perf['win_rate_ci95'],
+            perf['avg_game_length'],
+            
             perf['avg_attacker_per_step_occupation'],
             perf['avg_defender_per_step_occupation'],
-            perf['attacker_success_rate'],
-            perf['avg_game_length'],
+            
             learning_improvement,
             early_att_rate,
             late_att_rate,
+            
+            perf['std_occupation_advantage'],
+            perf['win_rate_ci95'],
             datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         )
         

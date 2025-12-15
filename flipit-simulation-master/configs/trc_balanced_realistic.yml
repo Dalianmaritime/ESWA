@@ -100,7 +100,7 @@ defender_actions:
     description: 专业安保队伍
     base_success:
       flipit: 0.80     # 提升FlipIt模式优势
-      cheat: 0.65      # 提升Cheat模式下的防御效果
+      cheat: 0.50      # 提升Cheat模式下的防御效果
     nonlinear:
       alpha: 0.55
       cap: 0.90
@@ -139,7 +139,7 @@ defender_actions:
     description: 周围水域巡逻
     base_success:
       flipit: 0.70     # 提升巡逻效果
-      cheat: 0.55      # 增强识别能力
+      cheat: 0.40      # 增强识别能力
     nonlinear:
       alpha: 0.60
       cap: 0.80
@@ -148,12 +148,12 @@ defender_actions:
 
 constraints:
   max_units:
-    attacker: 4
+    attacker: 8
     defender: 4
   budgeting:
     enabled: true
-    attacker_budget: 75.0    # 稍微降低攻击方资源
-    defender_budget: 100.0   # 稍微增加防守方预算
+    attacker_budget: 25.0    # 稍微降低攻击方资源
+    defender_budget: 30.0   # 稍微增加防守方预算
 
 environmental_factors:
   weather_condition: "moderate"

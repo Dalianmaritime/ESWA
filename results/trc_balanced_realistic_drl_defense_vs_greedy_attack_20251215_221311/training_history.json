@@ -1,0 +1,57 @@
+[
+  {
+    "episode": 0,
+    "defender_reward": -126.0,
+    "attacker_reward": 126.0,
+    "defender_occupation_reward": 56.0,
+    "attacker_occupation_reward": 4.0,
+    "game_length": 30,
+    "winner": "defender",
+    "termination_reason": "duration_limit",
+    "attacker_success": false
+  },
+  {
+    "episode": 1,
+    "defender_reward": -126.0,
+    "attacker_reward": 126.0,
+    "defender_occupation_reward": 56.0,
+    "attacker_occupation_reward": 4.0,
+    "game_length": 30,
+    "winner": "defender",
+    "termination_reason": "duration_limit",
+    "attacker_success": false
+  },
+  {
+    "episode": 2,
+    "defender_reward": -124.0,
+    "attacker_reward": 124.0,
+    "defender_occupation_reward": 58.0,
+    "attacker_occupation_reward": 2.0,
+    "game_length": 30,
+    "winner": "defender",
+    "termination_reason": "duration_limit",
+    "attacker_success": false
+  },
+  {
+    "episode": 3,
+    "defender_reward": -122.0,
+    "attacker_reward": 122.0,
+    "defender_occupation_reward": 60.0,
+    "attacker_occupation_reward": 0,
+    "game_length": 30,
+    "winner": "defender",
+    "termination_reason": "duration_limit",
+    "attacker_success": false
+  },
+  {
+    "episode": 4,
+    "defender_reward": -126.0,
+    "attacker_reward": 126.0,
+    "defender_occupation_reward": 56.0,
+    "attacker_occupation_reward": 4.0,
+    "game_length": 30,
+    "winner": "defender",
+    "termination_reason": "duration_limit",
+    "attacker_success": false
+  }
+]

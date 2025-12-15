@@ -30,12 +30,12 @@ attacker_actions:
     unit_label: boat
     description: 高速机动，海盗常用战术
     base_success:
-      cheat: 0.65      # 提高攻击成功率，使传统防守面临真实威胁
-      flipit: 0.45
+      cheat: 0.45      # 降低欺骗模式优势：伪装渔船，GPS欺骗接近
+      flipit: 0.25     # 正常模式：大型平台防御较强
     nonlinear:
       alpha: 0.75
       cap: 0.85
-    cost_per_unit: 2.0
+    cost_per_unit: 2.0            # 合理成本
     max_units: 4
 
   - id: hard_hull_speedboat
@@ -43,8 +43,8 @@ attacker_actions:
     unit_label: boat
     description: 重武器平台，高威胁但成本高
     base_success:
-      cheat: 0.75      # 提高攻击成功率
-      flipit: 0.55
+      cheat: 0.55      # 降低欺骗模式：虚假身份+重武器威胁
+      flipit: 0.35     # 正常模式：重武器威胁但平台防御系统发达
     nonlinear:
       alpha: 0.70
       cap: 0.80
@@ -56,8 +56,8 @@ attacker_actions:
     unit_label: team
     description: 直接占领平台，高风险高回报
     base_success:
-      cheat: 0.85      # 提高攻击成功率，高风险高回报
-      flipit: 0.65
+      cheat: 0.65      # 降低欺骗模式：内应配合+虚假身份，大幅提升成功率
+      flipit: 0.40     # 正常模式：大型平台人员多，登船很困难
     nonlinear:
       alpha: 0.80
       cap: 0.85
@@ -69,8 +69,8 @@ attacker_actions:
     unit_label: team
     description: RPG/重机枪远程压制
     base_success:
-      cheat: 0.60      # 提高攻击成功率
-      flipit: 0.40
+      cheat: 0.40      # 降低欺骗模式：虚假情报分散注意力，提升攻击效果
+      flipit: 0.25     # 正常模式：远程火力对大型平台效果有限
     nonlinear:
       alpha: 0.75
       cap: 0.75
@@ -98,7 +98,7 @@ defender_actions:
     description: 专业安保队伍
     base_success:
       flipit: 0.80
-      cheat: 0.65
+      cheat: 0.50
     nonlinear:
       alpha: 0.55
       cap: 0.90
@@ -137,7 +137,7 @@ defender_actions:
     description: 周围水域巡逻
     base_success:
       flipit: 0.70
-      cheat: 0.55
+      cheat: 0.40
     nonlinear:
       alpha: 0.60
       cap: 0.80
@@ -147,12 +147,12 @@ defender_actions:
 # 控制变量：与DRL实验完全一致的约束
 constraints:
   max_units:
-    attacker: 4
+    attacker: 8
     defender: 4
   budgeting:
     enabled: true
-    attacker_budget: 75.0
-    defender_budget: 100.0
+    attacker_budget: 25.0
+    defender_budget: 30.0
 
 environmental_factors:
   weather_condition: "moderate"

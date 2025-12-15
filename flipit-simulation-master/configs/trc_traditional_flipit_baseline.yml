@@ -29,8 +29,8 @@ attacker_actions:
     unit_label: boat
     description: 高速机动，海盗常用战术
     base_success:
-      cheat: 0.65
-      flipit: 0.45
+      cheat: 0.50      # 不使用
+      flipit: 0.30     # FlipIt模式：无欺骗优势
     nonlinear:
       alpha: 0.75
       cap: 0.85
@@ -42,8 +42,8 @@ attacker_actions:
     unit_label: boat
     description: 重武器平台
     base_success:
-      cheat: 0.75
-      flipit: 0.55
+      cheat: 0.60
+      flipit: 0.40     # FlipIt模式：直接武力攻击
     nonlinear:
       alpha: 0.70
       cap: 0.80
@@ -55,8 +55,8 @@ attacker_actions:
     unit_label: team
     description: 直接占领平台
     base_success:
-      cheat: 0.85
-      flipit: 0.65
+      cheat: 0.65
+      flipit: 0.45     # FlipIt模式：无内应配合
     nonlinear:
       alpha: 0.80
       cap: 0.85
@@ -68,8 +68,8 @@ attacker_actions:
     unit_label: team
     description: RPG/重机枪远程压制
     base_success:
-      cheat: 0.60
-      flipit: 0.40
+      cheat: 0.45
+      flipit: 0.30     # FlipIt模式：无信息优势
     nonlinear:
       alpha: 0.75
       cap: 0.75
@@ -97,7 +97,7 @@ defender_actions:
     description: 专业安保队伍
     base_success:
       flipit: 0.80
-      cheat: 0.65
+      cheat: 0.50
     nonlinear:
       alpha: 0.55
       cap: 0.90
@@ -136,7 +136,7 @@ defender_actions:
     description: 周围水域巡逻
     base_success:
       flipit: 0.70
-      cheat: 0.55
+      cheat: 0.40
     nonlinear:
       alpha: 0.60
       cap: 0.80
@@ -145,12 +145,12 @@ defender_actions:
 
 constraints:
   max_units:
-    attacker: 4
+    attacker: 8
     defender: 4
   budgeting:
     enabled: true
-    attacker_budget: 75.0
-    defender_budget: 100.0
+    attacker_budget: 25.0
+    defender_budget: 30.0
 
 environmental_factors:
   weather_condition: "moderate"

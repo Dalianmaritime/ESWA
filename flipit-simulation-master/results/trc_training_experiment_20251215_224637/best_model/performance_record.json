@@ -1,0 +1,6 @@
+{
+  "episode": 10,
+  "performance": 56.4,
+  "model_path": "results\\trc_training_experiment_20251215_224637\\best_model\\best_defender_episode_10.pth",
+  "timestamp": "2025-12-15T22:46:41.102986"
+}

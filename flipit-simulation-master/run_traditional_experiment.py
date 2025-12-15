@@ -170,13 +170,13 @@ class TraditionalExperiment:
             
             # 转换动作格式为 (action_id, n_units)
             if isinstance(att_action, int):
-                # 允许攻击方显式选择“无动作”
-                att_action = (0, 0) if att_action == 0 else (att_action, 1)
+                # 无动作或最大可负担单位（上限4）
+                att_action = (0, 0) if att_action == 0 else (att_action, 4)
             elif not isinstance(att_action, tuple):
                 att_action = (0, 1)
                 
             if isinstance(def_action, int):
-                def_action = (def_action, 1)
+                def_action = (def_action, 4)
             elif not isinstance(def_action, tuple):
                 def_action = (0, 1)
             
