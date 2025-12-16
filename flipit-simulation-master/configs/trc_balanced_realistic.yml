@@ -191,10 +191,10 @@ p0_config:
 
 drl_config:
   algorithm: "dqn"
-  training_episodes: 500      # 充分训练：500轮 × 30步 = 15,000步
+  training_episodes: 200      # 充分训练：200轮
   save_frequency: 50          # 每50轮保存一次模型
   evaluation_frequency: 25    # 每25轮评估一次性能
-  warmup_steps: 1500          # 预热10%训练步数，充分探索状态空间
+  warmup_steps: 500           # 预热步数调整
   
   dqn:
     # ========== 网络架构参数 ==========

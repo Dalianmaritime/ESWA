@@ -302,9 +302,20 @@ class TRCDRLDefenseAnalyzer:
             ('DRL + FlipIt', 'trc_balanced_realistic_drl_defense_vs_greedy_attack_flipit'),
         ]
         
-        # 添加模拟的传统算法数据
+        # 检查是否存在真实的传统算法数据
+        if 'trc_traditional_baseline_vs_greedy_cheat' in self.experiment_data:
+            experiments.append(('Traditional + Cheat', 'trc_traditional_baseline_vs_greedy_cheat'))
+        elif 'simulated_traditional_cheat' in self.experiment_data:
+            experiments.append(('Traditional + Cheat', 'simulated_traditional_cheat'))
+            
+        if 'trc_traditional_flipit_baseline' in self.experiment_data:
+            experiments.append(('Traditional + FlipIt', 'trc_traditional_flipit_baseline'))
+        elif 'simulated_traditional_flipit' in self.experiment_data:
+            experiments.append(('Traditional + FlipIt', 'simulated_traditional_flipit'))
+
+        # 如果没有真实数据，且有主实验数据，则添加模拟数据
         main_exp = self.experiment_data.get('trc_balanced_realistic_drl_defense_vs_greedy_attack', {})
-        if main_exp:
+        if main_exp and 'trc_traditional_baseline_vs_greedy_cheat' not in self.experiment_data:
             main_metrics = main_exp.get('metrics', {})
             # 模拟传统算法数据
             traditional_cheat_metrics = {
@@ -319,8 +330,8 @@ class TRCDRLDefenseAnalyzer:
             }
             
             experiments.extend([
-                ('Traditional + Cheat', 'simulated_traditional_cheat'),
-                ('Traditional + FlipIt', 'simulated_traditional_flipit')
+                ('Traditional + Cheat (Sim)', 'simulated_traditional_cheat'),
+                ('Traditional + FlipIt (Sim)', 'simulated_traditional_flipit')
             ])
             
             # 添加模拟数据到实验数据中

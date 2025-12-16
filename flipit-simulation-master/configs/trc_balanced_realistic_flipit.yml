@@ -192,10 +192,10 @@ p0_config:
 # 控制变量：与Cheat模式完全一致的DRL配置（仅deception_mode不同）
 drl_config:
   algorithm: "dqn"
-  training_episodes: 500      # 控制变量：与Cheat模式一致
+  training_episodes: 200      # 控制变量：与Cheat模式一致
   save_frequency: 50          # 控制变量：与Cheat模式一致
   evaluation_frequency: 25    # 控制变量：与Cheat模式一致
-  warmup_steps: 1500          # 控制变量：与Cheat模式一致
+  warmup_steps: 500           # 控制变量：与Cheat模式一致
   
   dqn:
     # ========== 网络架构参数（控制变量：完全一致）==========
