@@ -1,0 +1,206 @@
+Adversarial Modeling and Analysis of Maritime Non-Traditional Security Based on Cheat-FlipIt Game and Deep Reinforcement Learning
+
+Chenhao Zhi? , Shuai Ye, Zhanglingling, langYu
+Shenzhen International  Graduate School,  Tsinghua  University,  518055, Shenzhen,  China
+
+
+
+
+Abstract
+¡¡Maritime non-traditional security (NTS) threats, characterized by piracy and terrorism on o?shore platforms,  increasingly employ deceptive tactics that render traditional static defense strategies ine?ective.  Addressing the limitations of existing game-theoretic models in handling information asymmetry  and  dynamic  resource  constraints,  this  paper  proposes  a  novel  adversarial  decision support framework. First, we formalize the Cheat-FlipIt game, an extension of the classical FlipIt model that explicitly incorporates a "Cheat" mechanism to simulate deceptive adversarial signals and the resulting defender suspicion dynamics.  Second, to solve the intractable equilibrium in this high-dimensional, stochastic environment, we develop a tailored Rainbow Deep Q-Network (DQN) agent.   This  agent  integrates  Prioritized  Experience  Replay  and  Dueling  architectures  to  learn robust resource allocation policies under strict budget constraints.  Extensive experiments based on real-world maritime data demonstrate that the proposed approach achieves a 100% interception rate against deceptive greedy attackers, signi?cantly outperforming traditional heuristic strategies which su?er a 38.5% failure rate under deception.  Furthermore, we quantify the value of deception, revealing  that  deceptive  tactics  can  amplify  attack  e?cacy  by  over  200%  against  non-adaptive defenders.  These ?ndings provide actionable insights for maritime security operators, validating the proposed framework as a robust expert system for dynamic threat response.
+¡¡Keywords:   Maritime Security; Expert Systems; Deep Reinforcement Learning; Cheat-FlipIt Game; Deception Modeling; Adaptive Defense.
+
+1.  Introduction
+
+1.1.  Background
+¡¡¡¡Maritime transportation serves as the backbone of the global economy, responsible for carrying over 80% of international trade volume (UNCTAD, 2023).  Beyond logistics, o?shore infrastructure- such as oil rigs, wind farms, and research stationsrepresents critical strategic assets.  In the context of national strategies like the "Belt and Road Initiative" and the drive for "Maritime Power," ensur- ing the safety of these sea lines of communication  (SLOCs) and stationary assets is of paramount importance.  However, the maritime domain is increasingly threatened by non-traditional security
+
+? Corresponding author
+
+Preprint submitted to Expert Systems with Applications                                                                                December 17, 2025
+
+¡¡challenges,  including piracy,  armed robbery,  and maritime terrorism.   Unlike conventional naval warfare, these threats are characterized by their asymmetry, unpredictability, and high economic impact, necessitating robust and cost-e?ective defense mechanisms.
+1.2.   Challenges and Limitations
+¡¡¡¡The primary challenge in countering maritime non-traditional threats lies in the adversary¡¯s evolving  tactics.   Modern  pirates  and  terrorists  frequently  employ  deceptionsuch  as  using  false identi?cation systems (AIS spoo?ng), feigning distress, or disguising as ?shing vesselsto approach targets undetected.Existing defense methodologies exhibit signi?cant limitations in addressing these dynamics: Static Risk Assessment: Traditional methods, such as risk matrices or Fault Tree Analy- sis (FTA), are often static and fail to capture the continuous, real-time interaction between attackers and defenders.
+1.  Inadequacy of Static Models:  Traditional Quantitative Risk Assessment (QRA) frameworks (Yang et al., 2018) assume static threat probabilities, failing to capture the real-time inter- action where attackers dynamically alter tactics based on defense postures.
+2.  Limitations of Classical Game Theory:  While the FlipIt game (van Dijk et al., 2013) models stealthy takeovers, it typically assumes perfect veri?cation mechanisms.  It does not account for information asymmetry caused by active deception, where an attacker¡¯s  "Cheat" action can manipulate the defender¡¯s belief state.
+3.  Lack of Adaptive Decision Support:  Current defense strategies often rely on greedy heuristics or ?xed patrol schedules.  These approaches struggle to balance the trade-o? between imme- diate security and long-term resource sustainability, especially when facing an adversary who intentionally induces false alarms to drain the defender¡¯s budget.
+
+1.3.  Proposed Methodology
+¡¡¡¡To  address  these  gaps,  this  study  proposes  a  novel  adversarial  decision  support  framework combining a re?ned game-theoretic model with advanced Deep Reinforcement Learning (DRL).We introduce the  "Cheat-FlipIt" game,  an extension of the classical FlipIt model.   Unlike standard formulations, our model explicitly incorporates a "Cheat" mechanism and a "Defender Suspicion" variable, mathematically formalizing the dynamic process of trust decay and vigilance recovery in maritime operations.  Recognizing the high-dimensional state space and stochasticity of deceptive attacks, we frame the defense problem as a resource-constrained Markov Decision Process (MDP). We employ a tailored Rainbow Deep Q-Network (DQN) agent.  This algorithm is speci?cally chosen for  its ability to handle the  sparse rewards and  highly  stochastic outcomes typical of maritime security, utilizing Prioritized Experience Replay to learn e?ciently from rare but critical "successful deception" events.
+1.4.  Contributions
+¡¡¡¡The primary contributions of this paper to the ?eld of expert systems and maritime security are as follows:
+
+1.  A Novel Adversarial Model with Deception: We formulate the Cheat-FlipIt game, which is the ?rst to integrate active deception and dynamic suspicion accumulation into the continuous- time  FlipIt  framework.   This  provides  a  more  realistic  mathematical  abstraction  for  non- traditional maritime con?icts.
+2.  An Adaptive Expert System for Resource Allocation: We develop a DRL-based defense agent that functions as an automated expert system.   Unlike static policies, this agent learns to dynamically allocate limited budget across heterogeneous assets (e.g., naval escorts vs.  patrol boats) based on real-time threat levels and historical engagement data.
+3.  Empirical Quanti?cation of Deception Impact: Through comprehensive simulations, we quan- tify the strategic value of deception.  Our results reveal that deceptive tactics can increase the attack success rate of a greedy adversary by over 200%. We demonstrate that our DRL-based approach achieves a robust 100% win rate in validation, e?ectively neutralizing the advantage of deceptive attackers where traditional methods fail.
+
+2.  Literature Review
+
+¡¡¡¡Maritime security defense has long been a focal point of transportation research, evolving from static risk assessments to dynamic adversarial modeling. This section synthesizes existing research across three interconnected domains:  maritime risk assessment,  game-theoretic security models, and deep reinforcement learning in adversarial contexts.  We critically analyze the progression of these methodologies to highlight the speci?c gapnamely, the lack of adaptive defense mechanisms against deceptive threatsthat this study addresses.
+2.1.  From Static Risk
+¡¡¡¡Assessment to Dynamic Adversarial ModelingEarly research in maritime security primarily re- lied on quantitative risk assessment (QRA) frameworks.  Methodologies such as Bayesian Networks (BNs) and Fuzzy Analytical Hierarchy Process  (AHP) have been widely adopted to evaluate the vulnerability of o?shore assets and shipping routes.  For instance, Yang et al.  (2018) utilized a fuzzy Bayesian network to assess risk factors in maritime supply chains, providing a robust framework for identifying critical vulnerabilities under static conditions.   Similarly,  Zhang and Thai  (2016) proposed a vulnerability model for port infrastructure, emphasizing the cascading e?ects of secu- rity breaches.While these approaches provide a foundational understanding of security postures, they inherently assume a static environment where threat probabilities remain constant or follow a ?xed distribution.  This assumption, however, fails to capture the intelligent and adaptive na- ture of modern adversaries, such as pirates and terrorists, who dynamically alter their tactics in response to defense measures.  As noted by limitations in recent reviews, static models cannot ac- count for the continuous interaction between attackers and defenders, necessitating a shift towards game-theoretic approaches that explicitly model this adversarial interplay.
+
+2.2.   The FlipIt Game and Control-Theoretic Security
+¡¡¡¡To address the dynamism of persistent threats, game theoryspeci?cally the "FlipIt" game intro- duced by van Dijk et al.  (2013)has emerged as a powerful paradigm.  Unlike one-shot Stackelberg security games often used in patrol planning, FlipIt models a continuous, stealthy takeover game where players compete for control of a resource over time. This structure is particularly analogous to maritime platform defense, where control can be lost (e.g., via a stealthy boarding) without im- mediate detection.Recent extensions of FlipIt have explored various dimensions of the game. Laszka et al.  (2014) analyzed FlipIt under resource constraints, proving that periodic strategies are often suboptimal when costs vary.   Further work by Bowers et al.   (2012) applied similar concepts to defending against Advanced Persistent Threats (APTs) in cyber-physical systems.  However, a crit- ical limitation persists in this body of literature:  standard FlipIt models typically assume perfect veri?cation, meaning that once a defender "checks" or "defends," they gain accurate knowledge of the system state.  In the maritime domain, this assumption is ?awed.  Adversaries frequently em- ploy deceptionsuch as AIS spoo?ng or false distress signalscreating information asymmetry where a defenders action does not guarantee an accurate assessment of control.  The inability of classical FlipIt models to incorporate this deceptive dimension represents a signi?cant theoretical gap.
+2.3.   Deception in Adversarial Interactions
+¡¡¡¡The role of deception in security games has garnered increasing attention.   Current research often utilizes signaling games or hypergames to model scenarios where players act based on di?er- ent perceptions of the game state.  Pawlick et al.   (2019) provided a comprehensive taxonomy of deception in cyber-physical systems, categorizing attacks based on information manipulation.  In the maritime context, determining the veracity of incoming signals is crucial.  Zhuang et al.  (2010) modeled deception in varying security contexts, demonstrating that the presence of secrecy and deception fundamentally alters equilibrium strategies,  often favoring attackers who can success- fully manipulate the defenders beliefs.Despite these theoretical advancements, solving equilibrium strategies for games involving continuous time, resource constraints, and deceptive actions is com- putationally intractable using traditional analytical methods. As the complexity of the state space increasesintroduced by the stochastic nature of deception and the continuous accumulation of "oc- cupation rewards"?nding a closed-form solution becomes infeasible.  This computational bottleneck paves the way for learning-based approaches.
+2.4.   Deep Reinforcement Learning for  Complex Security  Games
+¡¡¡¡The advent of Deep Reinforcement Learning  (DRL) has provided new tools for solving high- dimensional, dynamic games.  Since the breakthrough of Deep Q-Networks (DQN) by Mnih et al. (2015), DRL has been successfully applied to complex decision-making problems where an agent must learn from interaction rather than pre-programmed rules.  In the realm of transportation and security, Wang et al.  (2023) demonstrated the e?cacy of DRL in optimizing tra?c signal control under  dynamic  ?ow  conditions,  while  Nguyen  and  Reddi  (2021)  surveyed  DRL  applications  in cyber security, highlighting its superiority in detecting novel attack patterns compared to heuristic
+
+¡¡methods.However, the application of DRL to maritime non-traditional security remains nascent. Most existing DRL applications in the maritime sector focus on autonomous navigation or collision avoidance, rather than adversarial defense. Furthermore, standard DQN algorithms often struggle with the  speci?c  challenges  of security  games,  such  as  overestimation  of Q-values  in  stochastic environments.  This necessitates the use of advanced variants, such as Rainbow DQN  (Hessel et al.,  2018), which combines multiple improvements to enhance stability and sample e?ciency.2.5 SummaryIn conclusion, while the literature has progressed from static risk analysis to dynamic game theory, there remains a distinct lack of frameworks that simultaneously address continuous- time contention, deceptive adversarial tactics, and adaptive strategy learning within the maritime domain.   This study bridges these gaps by proposing the Cheat-FlipIt model to mathematically formalize deceptive takeovers and employing a Rainbow DQN-based agent to computationally solve for robust defense strategies, thereby integrating game-theoretic rigor with the adaptive power of deep learning.
+
+3.  Preliminaries
+
+¡¡¡¡Before delving into the speci?c methodology, we ?rst establish the theoretical foundations of the proposed framework.  This section formalizes the classical FlipIt game model, introduces the mathematical preliminaries for the maritime adversarial context, and outlines the fundamentals of the reinforcement learning algorithms utilized in this study.
+3.1.   The Standard FlipIt  Game Model
+¡¡¡¡The FlipIt game,  introduced by van Dijk et al.   (2013),  models  a continuous-time  "stealthy takeover" scenario between an attacker (A) and a defender (D).  Let ¦Ó ¡Ê [0, T] denote the continuous time domain.  At any given time t, the state of the target resource  (e.g., an o?shore platform) is binary:  controlled by either the attacker (state(t) = 1) or the defender (state(t) = 0).  Players act asynchronously.   A player can choose to  "?ip" the state to the ir control by paying a move cost
+¡¡C.   Crucially, in the standard FlipIt formulation  (speci?cally the Last-Mover-Takes-All variant), a move instantly grants control,  and players operate under imperfect information regarding the current state unless they perform a move or audit.
+¡¡¡¡The objective for each player i ¡Ê {A, D} is to maximize their total utility  Ui, de?ned as the integral of control time minus the total cost of moves:
+Ui  =  I(state(t) = i) ¡¤ Ri dt ?  Cmove
+where I(¡¤) is the indicator function, Ri  is the reward rate for controlling the resource, and Ki  is the number of moves made by player i.  Table  1 outlines the heterogeneous action space designed for the maritime security scenario.
+
+
+Role	ID	Action Name	Cost  (C)	Nmax	¦Ñ  (Cheat / FlipIt)	Description
+
+Attacker	A1	In?atable Fast Boat	2.0	4	0.45 / 0.25	High mobility, swarm tactics
+	A2	Hard-hull Speedboat	4.0	3	0.55 / 0.35	Heavy weaponry threat
+	A3	Boarding Assault	5.0	2	0.65 / 0.40	Direct platform takeover
+	A4	Stando? Attack	3.0	3	0.40 / 0.25	Remote ?re suppression
+
+
+Defender	D1	Naval Escort	6.0	3	0.80 / 0.90	High deterrence, capital ship
+	D2	Platform Security	2.0	5	0.50 / 0.80	On-board tactical team
+	D3	Helicopter Support	4.5	3	0.75 / 0.85	Rapid air response
+	D4	Automated Systems	3.0	4	0.50 / 0.75	Radar & sensor network
+	D5	Patrol Boats	2.0	5	0.40 / 0.70	Low-cost perimeter surveillance
+
+3.2.   Maritime Adversarial Context Formulation
+¡¡¡¡While the standard FlipIt model captures the essence of stealthy con?ict, the maritime non- traditional security environment introduces speci?c complexities that necessitate a re?ned formu- lation.  We de?ne the maritime security game as a tuple G  = ?N, S , A, T, R, ¦Ã?, aligned with the structure of a Markov Decision Process (MDP):
+1.  Players (N):  The set of players N = {D , A}, where D represents the maritime defense force (e.g., naval escorts, platform security) and A represents non-traditional threats (e.g., pirates).
+2.  State Space (S):  Unlike the single binary state in FlipIt, the maritime environment is char- acterized  by  a  high-dimensional  state  vector  st   ¡Ê  S.   This  includes  not  only  the  current controller but also observable environmental factors (e.g., weather, sea state), resource con- straints (budget levels), and historical engagement outcomes.
+3.  Action Space (A):  The action space is discrete and ?nite.  Let AD  and AA  denote the set of available actions for the defender and attacker, respectively.  A key distinction in this study is the asymmetry of actions, particularly the introduction of deceptive capabilities for the attacker to characterize the psychological dynamics of the attacker, which will be elaborated in the Methodology section.
+
+3.3.   Deep Reinforcement Learning Foundations
+¡¡¡¡Given the high dimensionality of the state space S and the stochastic nature of the transitions T, analytical equilibrium solutions are intractable. We therefore resort to Deep Reinforcement Learn- ing (DRL) to approximate optimal policies. The core objective of the DRL agent (the defender) is to learn a policy ¦Ð : S ¡ú AD  that maximizes the expected discounted return Gt:
+Gt  = ¦Ã k rt+k+1
+where ¦Ã  ¡Ê  [0, 1]  is the  discount factor balancing immediate and future rewards.   To handle the complexity and potential instability of training in adversarial environments,  we build upon the
+
+
+
+
+
+¡¡Deep  Q-Network  (DQN) framework  (Mnih et al.,  2015).   The standard DQN approximates the optimal action-value function  Q(s, a)  = max ¦ÐE[Gt|st   =  s, at   =  a] using a neural network with parameters ¦È . The network is optimized by minimizing the loss function derived from the Bellman equation:
+L(¦È) = E(s, a, r, s¡ä ) ¡« M [ (r + ¦Ã max a¡ä Q(s¡ä , a¡ä ; ¦È ? ) ? Q(s, a; ¦È))2]
+where M is the experience replay bu?er and ¦È ? represents the parameters of a target network, frozen periodically to stabilize learning.  In this study, we speci?cally employ the Rainbow architecture (Hessel et al., 2018), which integrates several fundamental extensions to the vanilla DQN, including Double Q-learning, Prioritized Experience Replay (PER), and Dueling Networks. This integration aims to enhance sample e?ciency and convergence speed within dynamic game-theoretic settings.
+¡¡¡¡These algorithms facilitate equilibrium attainment by engaging agents in self-play, where they continuously adapt their strategies in response to the opponent¡¯s average strategy.   Speci?cally, agents iteratively adopt the best response against the opponent¡¯s average strategya process that leads to strategy convergence to the Nash Equilibrium  (NE) in certain classes of games, such as two-player zero-sum games (Brown, 1951).
+
+4.  Methodology
+
+¡¡¡¡To  overcome  the  shortcomings  of static  maritime  defense  strategies,  we  introduce  a  uni?ed framework merging a re?ned game-theoretic model with deep reinforcement learning.   This sec- tion presents the mathematical formulation of the Cheat-FlipIt gamecapturing both the stochastic nature of attacks and the psychological interplay between adversariesand details the Rainbow DQN- based solution.
+¡¡¡¡We employ Neural Fictitious Self-Play (NFSP), an advanced algorithm integrating neural ap- proximation for equilibrium ?nding.  Speci?cally, each agent in the Cheat-FlipIt game consists of two neural components:  a reinforcement learning network that utilizes historical self-play experi- ence to learn an approximate best response to other agents, and a supervised learning network that learns from the agent¡¯s own decision history to mimic its average strategy.
+4.1.  The  Cheat-FlipIt Game Model
+4.2.   Modeling Deception and Information Asymmetry
+¡¡¡¡The  core  innovation  of our  framework  lies  in  the  extension  of the  classical  FlipIt  game  to incorporate a "Cheat" mechanism. In standard FlipIt formulations, the success of a move is typically deterministic or governed by a ?xed probability.   However, in the maritime domain, adversaries actively manipulate informationusing false ?ags or feigned distressto obscure their intent.  To model this, we construct an asymmetric action space.  The defender¡¯s action set, AD, consists of standard overt defensive measures (e.g., Naval Escort, Platform Security). In contrast, the attacker¡¯s action set, AA, is augmented with a mode parameter m ¡Ê {Normal, Cheat} .  We quantify the impact of deception through a nonlinear e?ectiveness function.  Let n denote the number of units deployed
+
+
+
+
+
+for a speci?c action, and pbase  be the baseline success probability of a single unit.  The e?ective success probability Peff(n) follows a diminishing returns logic, modeled as:
+Peff(n) = min (¦Ê, 1 ? (1 ? pbase)n¦Á)
+where  ¦Á  ¡Ê (0, 1)  is a non-linearity exponent re?ecting  coordination e?ciency,  and  ¦Ê represents the theoretical success cap.   Crucially, when the attacker employs the Cheat mode, the baseline probability pbase  is fundamentally altered.  We de?ne a deception bonus ?cheat, such that the e?ec- tive probability under deception becomes p¡ä base = pbase + ?cheat.  This mathematical adjustment re?ects the tactical advantage gained by bypassing early warning systems.  The ?nal engagement
+outcome is then determined by the interaction of the attacker¡¯s e?ective power Pf  and the de-
+fender¡¯s counter-measures Pf, yielding a ?nal takeover probability:
+Pfinal  = Pf  ¡¤ (1 ? Pf)
+
+¡¡This formulation explicitly captures the adversarial dynamic:  a stronger defense reduces the at- tacker¡¯s  probability  of success,  but  deception  can  partially  negate  this  defense  by  in?ating  the attacker¡¯s initial e?ective power.Moreover, from the defender¡¯s perspective, deceptive information cannot be distinguished immediately.
+4.2.1.   Occupation Rewards  and Resource  Constraints
+¡¡¡¡Unlike traditional security games that often prioritize instantaneous payouts, maritime defense represents a continuous struggle for control.  Similar to typical scenarios such as o?shore oil plat- forms, rewards are harvested speci?cally during periods of occupation.  We introduce the concept of Occupation Reward, which aligns the agent¡¯s objective with the operational reality of maintaining control over time.The game unfolds over a discrete timeline t  =  1, . . . , T.   At each time step, if the defender maintains control of the platform  (controller t  = D), they accrue a positive reward rocc.  Conversely, if the attacker seizes control (controller t  = A), the attacker gains the reward.This pursuit of control is constrained by strictly ?nite resources. Both players operate under a dynamic budget Bt.  The cost of an action C(a, n) is deducted from the current budget, while passive in- come (simulating revenue generated from occupying the platform or vessel) is added at each step. A critical feature of our model is the hard budget constraint:  if an agent¡¯s intended action cost exceeds their available budget Bt, the action is forcibly downgraded or cancelled.   Furthermore, severe budget overdrafts (e.g., Bt  < B threshold) trigger immediate game termination, simulating a catastrophic logistical collapse.  This mechanism forces the DRL agent to learn not just tactical superiority but also strategic ?nancial sustainability, e?ectively safeguarding o?shore platforms or vessels situated far from inland support.
+
+
+
+
+
+4.3.   Deep Reinforcement Learning for Strategic Defense
+4.3.1.   State Representation and Neural Architecture
+¡¡¡¡Solving the Cheat-FlipIt game requires mapping the high-dimensional game state to optimal actions.  We formulate the observation space as a  13-dimensional vector st, incorporating critical tactical information: the current controller status, normalized remaining budgets for both players, the historical outcomes of recent engagements (attack and defense success probabilities), environ- mental modi?ers (e.g., sea state, visibility), and accumulated occupation rewards.  This comprehen- sive state representation ensures the agent can perceive both the immediate tactical situation and the long-term strategic trend.  The decision-making core is a Rainbow Deep Q-Network.  Unlike a standard DQN which may su?er from instability in stochastic environments,  our architecture integrates Double Q-learning to mitigate value overestimation and a Dueling Network structure. The Dueling architecture splits the ?nal shared layer into two streams:  one estimating the state value function V (s) and the other estimating the advantage function A(s, a).  These are aggregated to produce the Q-values:
+Q(s, a; ¦È, ¦Â) = V (s; ¦È) + (A(s, a; ¦Â) ?   A(s, a¡ä ; ¦Â))
+¡¡This separation allows the agent to learn which states are valuable regardless of the speci?c action taken, signi?cantly accelerating convergence in the maritime security context where many actions might have similar null e?ects in safe states.
+4.3.2.   Reward Shaping and  Training Stability
+¡¡¡¡To guide the agent towards robust strategies, we design a composite reward function Rt.  While the primary component is the Occupation Reward, relying solely on this sparse signal can lead to slow learning. We therefore augment the reward with a cost penalty proportional to the resources spent, encouraging e?ciency. The total reward at step t is given by:
+Rt  = I(controller t  = D) ¡¤ rocc  ? ¦Ë ¡¤ C(at)
+¡¡¡¡where ¦Ë is a weight factor balancing security and economy.Training is conducted using Priori- tized Experience Replay (PER). In this game environment, successful "Cheat" attacks are rare but catastrophic events.   Given that resources are precious, executing ine?ective defense actions can compromise the defender¡¯s vigilance. Under such conditions, uniform sampling of past experiences would  cause the  agent to  forget these  critical  lessons.   PER  ensures that transitions with  high Temporal-Di?erence  (TD) errorrepresenting  "surprising" or poorly understood eventsare sampled more frequently. This is particularly crucial for defending against deceptive tactics, as it forces the agent to repeatedly learn from instances where it was successfully deceived, thereby hardening its policy against future attempts.It is particularly worth highlighting that, from the agent¡¯s cognitive perspective, being deceived may induce a vigilant mindset, leading to the temporary adoption of
+
+
+
+
+
+¡¡a more conservative defensive strategy.  The approach employed in this study e?ectively captures these speci?c psychological dynamics.
+
+5.  Experiments
+
+5.1.  Experimental Settings
+¡¡¡¡All experiments were executed in the balanced o?shore platform scenario.   To ensure repro- ducibility,  Table  2  details  the  critical  hyperparam-eters  used  in  our  experiments.   The  budget parameters  (Batt  = 25,  Bdef = 30) werecalibrated to create a resource-constrained asymmetry, forcing agents to prioritize cost-e?ectiveness over brute-force dominance.  The Rainbow DQN agent utilizes a Duel- ing architecture with Noisy Nets to handle the exploration-exploitation trade-o? in the high-dimensional stochastic environment.The attacker action set follows the IMB-inspired catalog of in?atable fast boats, hard-hull speedboats, boarding teams, and stando? attacks with costs between 2 and  5.   The defender can schedule naval escorts,  platform security teams,  heli- copter ?ights, automated systems, and patrol boats with commensurate costs.  The DRL agent is a Rainbow-style DQN (Double Q targets, dueling heads, prioritized replay) trained for 500 episodes with evaluation snapshots every 25 episodes; The both sides follow the maritime greedy heuristics without learning.  Key evaluation metrics comprise average occupation rewards, attacker success rate, average game length, per-step resource accumulation, rolling win-rate statistics, action usage distributions, and convergence diagnostics.
+Table 2:  Hyperparameter settings for the simulation environment and the Rainbow DQN agent.
+
+Category	Parameter	Value	Description
+
+
+Environment	Attacker Budget (Batt)	25.0	Total resource cap for the attacker
+	Defender Budget (B def)	30.0	Total resource cap for the defender
+	Game Duration (T)	30	Max time steps per episode
+	Occupation Reward (Rocc)	2.0	Reward per step for controlling target
+	Income Rate	(+1.0, +2.0)	Step-wise budget increment
+
+
+
+Rainbow DQN	Learning Rate (¦Á)	1 ¡Á 10?4	Adam optimizer learning rate
+	Discount Factor (¦Ã)	0.99	Importance of future rewards
+	Batch Size	64	Number of transitions per update
+	Replay Bu?er Size	10,000	Capacity of prioritized replay memory
+	Update Frequency	100	Target network synchronization steps
+	Epsilon Decay	1.0 ¡ú 0.05	Linear decay over 500 steps
+	Architecture	Dueling + Noisy	2-layer FC (128 units) with Noisy Nets
+
+5.2.   Performance Evaluation in Asymmetric Adversarial Environments
+¡¡¡¡The  e?cacy  of a  defensive  strategy  in  maritime  security  is  fundamentally  measured  by  its ability to maintain continuous control over critical assets while minimizing resource expenditure. As  illustrated  in  the  comparative  performance  metrics  (Table  3)  and  the  comprehensive  radar
+
+
+
+
+
+¡¡analysis (Fig.  1), the proposed Rainbow DQN agent demonstrates a decisive operational superiority over the traditional greedy baseline.   Speci?cally,  under the high-uncertainty  Cheat modewhich serves as the primary testbed for our hypothesisthe DRL agent achieves a mean occupation reward of 53.90, outperforming the baselines 49.82 by a statistically signi?cant margin of approximately 8.2%. This performance gap is not merely numerical but indicative of a qualitative shift in decision- making paradigms.  While the greedy strategy, constrained by its immediate payo? maximization logic, often exhausts its budget prematurely in response to feint attacks, the DRL agent exhibits a sophisticated temporal resource smoothing capability.   By learning the latent value of budget conservation through the prioritized experience replay mechanism, the agent e?ectively neutralizes the attackers attempts to induce resource depletion,  thereby maintaining a consistent defensive posture throughout the episode duration.
+¡¡¡¡Furthermore, the robustness of the proposed framework is underscored by its suppression ca- pability.   Throughout the  comprehensive  evaluation  phase,  the  DRL-driven  defense  successfully restricted the  attacker¡¯s win  rate to  0.0%,  e?ectively  creating  an  impenetrable  denial-of-service condition  for the  adversary.   This  contrasts  sharply with the  baseline  approach,  which,  despite achieving a comparable win rate suppression, incurred signi?cantly higher operational costs, result- ing in a lower net utility.  The resource e?ciency analysis  (Fig.  2) corroborates this observation, revealing that the DRL agent generates higher occupation utility per unit of budget consumed, a critical attribute for sustained maritime operations where logistical constraints are often binding.
+Table 3:  Comparative performance metrics of defense strategies under the Cheat Mode (High Uncertainty).  Results are averaged over 200 evaluation episodes (Mean ¡À Std).
+
+Method	Defender Rwd	Attacker Rwd	Win Rate	Advantage Gap	E?ciency
+Rainbow DQN  (Ours)	53.90 ¡À 3.43	6.10 ¡À 3.43	0.0%	+47.80	High
+Traditional Greedy	49.82 ¡À 3.72	10.18 ¡À 3.72	0.0%	+39.64	Medium
+Random Baseline?	18.45 ¡À 8.21	41.55 ¡À 8.21	62.5%	-23.10	Low
+
+5.3.   Deception Dynamics and Information Asymmetry
+¡¡¡¡A central theoretical contribution of this study lies in the explicit modeling of the deception channel, which fundamentally alters the payo? landscape of the classical FlipIt game.  To quantify the  "friction"  introduced  by  imperfect  information,  we  conducted  an  ablation  study  comparing system performance across Cheat and FlipIt modes  (Table 4).  The empirical evidence reveals a tangible *Deception Cost*: the introduction of the cheat mechanism precipitates a universal decline in defensive performance, with the DRL agents mean reward dropping from 58.50 in the transparent FlipIt mode to 53.90 in the deceptive Cheat mode.  This degradation, quantifying a reward loss of approximately 4.60 units, represents the inevitable entropic penalty paid for operating under partial observability.
+However, the resilience of the learning algorithm is manifested in its comparative advantage.
+Remarkably, the DRL agent operating under the adverse conditions of the  Cheat mode  (53.90) still outperforms the traditional agent operating under the favorable conditions of the FlipIt mode
+
+
+
+
+
+¡¡(52.95).  This counter-intuitive ?nding suggests that the algorithmic superiority of deep reinforce- ment learning is su?cient to compensate for the informational disadvantage inherent in deceptive environments.  The analysis of attack action distribution  (Fig.  3) further elucidates the strategic drift induced by the deception mechanism.  In the Cheat mode, the adversary strategically shifts towards low-cost, high-deception vectorssuch as disguised ?shing vesselsattempting to exploit the defender¡¯s uncertainty. In response, the DRL agent does not retreat into a passive shell but rather adopts a probabilistic interception strategy, e?ectively raising the cost of deception for the attacker and forcing the game equilibrium towards a state favorable to the defender.
+Table 4 isolates the e?ect of informational asymmetry introduced by our Cheat-FlipIt model.
+Table 4:  Ablation study quantifying the impact of the deception mechanism on defense performance.
+
+Metric	Mode	Rainbow DQN	Traditional Greedy	?  (DRL vs Trad)
+
+Defender Rwd	FlipIt (No Deception)	58.50	52.95	+5.55
+	Cheat  (With Deception)	53.90	49.82	+4.08
+	Deception  Cost	-4.60	-3.13	¨C
+Attacker Success	FlipIt (No Deception)	0.0%	0.0%	0.0%
+	Cheat  (With Deception)	10.2%	17.0%	-6.8%
+
+5.4.   Emergent Strategies and Convergence Kinetics
+¡¡¡¡Beyond macroscopic performance metrics, it is imperative to dissect the micro-structural evo- lution of the defensive policy to understand how the agent solves the resource allocation puzzle. The training convergence trajectory (Fig.  4) delineates a three-phase learning process:  an initial exploration phase characterized by high variance and suboptimal rewards, followed by a rapid ex- ploitation phase where the agent discovers the dominant strategy, and ?nally a stabilization phase where the policy is ?ne-tuned to handle edge cases.  The swift convergencestabilizing within the ?rst 100 episodesvalidates the e?ciency of the Rainbow architecture, particularly the contribution of the Dueling Network component in decoupling state value estimation from action advantage, thereby accelerating learning in states with similar action outcomes.
+Perhaps the most profound insight emerges from the budget-action sensitivity analysis  (Fig.
+¡¡6), which visualizes the agent¡¯s decision preferences across di?erent resource states.  Without any explicit rule-based programming, the agent spontaneously developed a hierarchical defense doctrine strikingly similar to real-world naval protocols.   In low-budget states  (0-20 units), the heatmap shows a strong preference for Patrol Boats, a low-cost solution that maintains minimal presence to prevent total loss of control. Conversely, as the budget reservoir replenishes (60-80 units), the policy shifts dramatically towards capital-intensive assets like Naval Escorts and Helicopter Support.  This emergent behavior indicates that the agent has successfully encoded a non-linear utility function that dynamically weighs the marginal cost of deployment against the risk of territory loss.  Unlike the static heuristic of the traditional baseline,  this dynamic adaptability allows the DRL agent to weather resource droughts while maximizing dominance during periods of abundance, thereby solving the core dilemma of the Cheat-FlipIt game.
