@@ -1,0 +1,70 @@
+[
+  {
+    "experiment": "DRL + Cheat (主实验)",
+    "config": "configs/trc_balanced_realistic.yml",
+    "start_time": "2025-12-18T09:43:30.161398",
+    "end_time": "2025-12-18T09:46:56.072712",
+    "duration_seconds": 205.91131353378296,
+    "duration_formatted": "3.4分钟",
+    "success": true,
+    "stdout": null,
+    "stderr": "Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.\nPlease upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.\nUsers of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.\nSee the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.\nC:\\Users\\Windows\\AppData\\Roaming\\Python\\Python313\\site-packages\\gym\\spaces\\box.py:127: UserWarning: \u001b[33mWARN: Box bound precision lowered by casting to float32\u001b[0m\n  logger.warn(f\"Box bound precision lowered by casting to {self.dtype}\")\n"
+  },
+  {
+    "experiment": "DRL + Cheat (主实验)",
+    "config": "configs/trc_balanced_realistic.yml",
+    "success": false,
+    "error": "argument of type 'NoneType' is not iterable"
+  },
+  {
+    "experiment": "DRL + FlipIt (消融实验)",
+    "config": "configs/trc_balanced_realistic_flipit.yml",
+    "start_time": "2025-12-18T09:47:01.075021",
+    "end_time": "2025-12-18T09:48:33.094646",
+    "duration_seconds": 92.01962447166443,
+    "duration_formatted": "1.5分钟",
+    "success": true,
+    "stdout": null,
+    "stderr": "Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.\nPlease upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.\nUsers of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.\nSee the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.\nC:\\Users\\Windows\\AppData\\Roaming\\Python\\Python313\\site-packages\\gym\\spaces\\box.py:127: UserWarning: \u001b[33mWARN: Box bound precision lowered by casting to float32\u001b[0m\n  logger.warn(f\"Box bound precision lowered by casting to {self.dtype}\")\n"
+  },
+  {
+    "experiment": "DRL + FlipIt (消融实验)",
+    "config": "configs/trc_balanced_realistic_flipit.yml",
+    "success": false,
+    "error": "argument of type 'NoneType' is not iterable"
+  },
+  {
+    "experiment": "传统 + Cheat (基线)",
+    "config": "configs/trc_traditional_baseline.yml",
+    "start_time": "2025-12-18T09:48:38.096687",
+    "end_time": "2025-12-18T09:48:41.541700",
+    "duration_seconds": 3.4450135231018066,
+    "duration_formatted": "0.1分钟",
+    "success": true,
+    "stdout": null,
+    "stderr": "Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.\nPlease upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.\nUsers of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.\nSee the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.\nC:\\Users\\Windows\\AppData\\Roaming\\Python\\Python313\\site-packages\\gym\\spaces\\box.py:127: UserWarning: \u001b[33mWARN: Box bound precision lowered by casting to float32\u001b[0m\n  logger.warn(f\"Box bound precision lowered by casting to {self.dtype}\")\n"
+  },
+  {
+    "experiment": "传统 + Cheat (基线)",
+    "config": "configs/trc_traditional_baseline.yml",
+    "success": false,
+    "error": "argument of type 'NoneType' is not iterable"
+  },
+  {
+    "experiment": "传统 + FlipIt (基线)",
+    "config": "configs/trc_traditional_flipit_baseline.yml",
+    "start_time": "2025-12-18T09:48:46.543738",
+    "end_time": "2025-12-18T09:48:49.907179",
+    "duration_seconds": 3.363440990447998,
+    "duration_formatted": "0.1分钟",
+    "success": true,
+    "stdout": null,
+    "stderr": "Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.\nPlease upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.\nUsers of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.\nSee the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.\nC:\\Users\\Windows\\AppData\\Roaming\\Python\\Python313\\site-packages\\gym\\spaces\\box.py:127: UserWarning: \u001b[33mWARN: Box bound precision lowered by casting to float32\u001b[0m\n  logger.warn(f\"Box bound precision lowered by casting to {self.dtype}\")\n"
+  },
+  {
+    "experiment": "传统 + FlipIt (基线)",
+    "config": "configs/trc_traditional_flipit_baseline.yml",
+    "success": false,
+    "error": "argument of type 'NoneType' is not iterable"
+  }
+]

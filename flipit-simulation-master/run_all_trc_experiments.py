@@ -90,6 +90,7 @@ class TRCExperimentRunner:
                 capture_output=True,
                 text=True,
                 encoding='utf-8',
+                errors='replace',  # Ignore/replace decoding errors
                 cwd=str(self.project_root)
             )
             
@@ -151,7 +152,8 @@ class TRCExperimentRunner:
         total_estimated_time = "约40-60分钟"
         print(f"\n⏰ 预计总时间: {total_estimated_time}")
         
-        input("\n按Enter键开始执行所有实验...")
+        # input("\n按Enter键开始执行所有实验...")
+        print("\n自动开始执行所有实验...")
         
         overall_start = time.time()
         
@@ -200,9 +202,16 @@ class TRCExperimentRunner:
         
         # 检查是否可以运行分析
         if successful == len(self.experiments):
-            print(f"\n🎉 所有实验完成！现在可以运行可视化分析了")
-            print(f"\n运行以下命令生成分析报告:")
-            print(f"   python analysis/trc_drl_defense_analysis.py results")
+            print(f"\n🎉 所有实验完成！自动运行可视化分析...")
+            try:
+                subprocess.run(
+                    [sys.executable, 'analysis/trc_drl_defense_analysis.py', 'results'],
+                    check=True,
+                    cwd=str(self.project_root)
+                )
+                print(f"\n✅ 可视化分析完成！图表已保存到 results/ 和 Fig/")
+            except Exception as e:
+                print(f"\n❌ 可视化分析运行失败: {e}")
         else:
             print(f"\n⚠️  有{failed}个实验失败，请检查日志并重新运行失败的实验")
 

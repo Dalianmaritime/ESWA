@@ -1,0 +1,924 @@
+{
+  "experiment_info": {
+    "experiment_id": "trc_traditional_baseline_vs_greedy_cheat",
+    "config_path": "configs/trc_traditional_baseline.yml",
+    "deception_mode": "cheat",
+    "num_episodes": 100,
+    "timestamp": "2025-12-18T09:48:41.141520"
+  },
+  "final_performance": {
+    "attacker_success_rate": 0.0,
+    "avg_attacker_reward": -38.55,
+    "avg_defender_reward": 38.55,
+    "std_attacker_reward": 8.780802924562195,
+    "std_defender_reward": 8.780802924562195,
+    "avg_attacker_occupation_reward": 10.18,
+    "avg_defender_occupation_reward": 49.82,
+    "std_attacker_occupation_reward": 3.699675661460069,
+    "std_defender_occupation_reward": 3.699675661460069,
+    "avg_game_length": 30.0,
+    "std_game_length": 0.0
+  },
+  "detailed_results": [
+    {
+      "attacker_reward": -25.5,
+      "defender_reward": 25.5,
+      "attacker_occupation_reward": 14.0,
+      "defender_occupation_reward": 46.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 0
+    },
+    {
+      "attacker_reward": -37.5,
+      "defender_reward": 37.5,
+      "attacker_occupation_reward": 12.0,
+      "defender_occupation_reward": 48.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 1
+    },
+    {
+      "attacker_reward": -31.0,
+      "defender_reward": 31.0,
+      "attacker_occupation_reward": 12.0,
+      "defender_occupation_reward": 48.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 2
+    },
+    {
+      "attacker_reward": -55.0,
+      "defender_reward": 55.0,
+      "attacker_occupation_reward": 4.0,
+      "defender_occupation_reward": 56.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 3
+    },
+    {
+      "attacker_reward": -36.0,
+      "defender_reward": 36.0,
+      "attacker_occupation_reward": 10.0,
+      "defender_occupation_reward": 50.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 4
+    },
+    {
+      "attacker_reward": -53.0,
+      "defender_reward": 53.0,
+      "attacker_occupation_reward": 4.0,
+      "defender_occupation_reward": 56.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 5
+    },
+    {
+      "attacker_reward": -39.0,
+      "defender_reward": 39.0,
+      "attacker_occupation_reward": 8.0,
+      "defender_occupation_reward": 52.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 6
+    },
+    {
+      "attacker_reward": -42.0,
+      "defender_reward": 42.0,
+      "attacker_occupation_reward": 10.0,
+      "defender_occupation_reward": 50.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 7
+    },
+    {
+      "attacker_reward": -42.0,
+      "defender_reward": 42.0,
+      "attacker_occupation_reward": 8.0,
+      "defender_occupation_reward": 52.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 8
+    },
+    {
+      "attacker_reward": -47.0,
+      "defender_reward": 47.0,
+      "attacker_occupation_reward": 6.0,
+      "defender_occupation_reward": 54.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 9
+    },
+    {
+      "attacker_reward": -37.0,
+      "defender_reward": 37.0,
+      "attacker_occupation_reward": 8.0,
+      "defender_occupation_reward": 52.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 10
+    },
+    {
+      "attacker_reward": -21.5,
+      "defender_reward": 21.5,
+      "attacker_occupation_reward": 18.0,
+      "defender_occupation_reward": 42.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 11
+    },
+    {
+      "attacker_reward": -42.0,
+      "defender_reward": 42.0,
+      "attacker_occupation_reward": 10.0,
+      "defender_occupation_reward": 50.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 12
+    },
+    {
+      "attacker_reward": -48.0,
+      "defender_reward": 48.0,
+      "attacker_occupation_reward": 6.0,
+      "defender_occupation_reward": 54.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 13
+    },
+    {
+      "attacker_reward": -32.5,
+      "defender_reward": 32.5,
+      "attacker_occupation_reward": 12.0,
+      "defender_occupation_reward": 48.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 14
+    },
+    {
+      "attacker_reward": -26.5,
+      "defender_reward": 26.5,
+      "attacker_occupation_reward": 12.0,
+      "defender_occupation_reward": 48.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 15
+    },
+    {
+      "attacker_reward": -48.0,
+      "defender_reward": 48.0,
+      "attacker_occupation_reward": 4.0,
+      "defender_occupation_reward": 56.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 16
+    },
+    {
+      "attacker_reward": -35.0,
+      "defender_reward": 35.0,
+      "attacker_occupation_reward": 14.0,
+      "defender_occupation_reward": 46.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 17
+    },
+    {
+      "attacker_reward": -50.5,
+      "defender_reward": 50.5,
+      "attacker_occupation_reward": 8.0,
+      "defender_occupation_reward": 52.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 18
+    },
+    {
+      "attacker_reward": -38.5,
+      "defender_reward": 38.5,
+      "attacker_occupation_reward": 8.0,
+      "defender_occupation_reward": 52.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 19
+    },
+    {
+      "attacker_reward": -34.5,
+      "defender_reward": 34.5,
+      "attacker_occupation_reward": 8.0,
+      "defender_occupation_reward": 52.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 20
+    },
+    {
+      "attacker_reward": -46.0,
+      "defender_reward": 46.0,
+      "attacker_occupation_reward": 8.0,
+      "defender_occupation_reward": 52.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 21
+    },
+    {
+      "attacker_reward": -39.5,
+      "defender_reward": 39.5,
+      "attacker_occupation_reward": 12.0,
+      "defender_occupation_reward": 48.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 22
+    },
+    {
+      "attacker_reward": -26.0,
+      "defender_reward": 26.0,
+      "attacker_occupation_reward": 12.0,
+      "defender_occupation_reward": 48.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 23
+    },
+    {
+      "attacker_reward": -48.0,
+      "defender_reward": 48.0,
+      "attacker_occupation_reward": 10.0,
+      "defender_occupation_reward": 50.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 24
+    },
+    {
+      "attacker_reward": -33.0,
+      "defender_reward": 33.0,
+      "attacker_occupation_reward": 12.0,
+      "defender_occupation_reward": 48.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 25
+    },
+    {
+      "attacker_reward": -29.5,
+      "defender_reward": 29.5,
+      "attacker_occupation_reward": 14.0,
+      "defender_occupation_reward": 46.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 26
+    },
+    {
+      "attacker_reward": -40.5,
+      "defender_reward": 40.5,
+      "attacker_occupation_reward": 6.0,
+      "defender_occupation_reward": 54.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 27
+    },
+    {
+      "attacker_reward": -59.0,
+      "defender_reward": 59.0,
+      "attacker_occupation_reward": 4.0,
+      "defender_occupation_reward": 56.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 28
+    },
+    {
+      "attacker_reward": -42.0,
+      "defender_reward": 42.0,
+      "attacker_occupation_reward": 10.0,
+      "defender_occupation_reward": 50.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 29
+    },
+    {
+      "attacker_reward": -54.0,
+      "defender_reward": 54.0,
+      "attacker_occupation_reward": 6.0,
+      "defender_occupation_reward": 54.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 30
+    },
+    {
+      "attacker_reward": -36.0,
+      "defender_reward": 36.0,
+      "attacker_occupation_reward": 12.0,
+      "defender_occupation_reward": 48.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 31
+    },
+    {
+      "attacker_reward": -38.0,
+      "defender_reward": 38.0,
+      "attacker_occupation_reward": 10.0,
+      "defender_occupation_reward": 50.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 32
+    },
+    {
+      "attacker_reward": -40.5,
+      "defender_reward": 40.5,
+      "attacker_occupation_reward": 8.0,
+      "defender_occupation_reward": 52.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 33
+    },
+    {
+      "attacker_reward": -56.0,
+      "defender_reward": 56.0,
+      "attacker_occupation_reward": 2.0,
+      "defender_occupation_reward": 58.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 34
+    },
+    {
+      "attacker_reward": -49.0,
+      "defender_reward": 49.0,
+      "attacker_occupation_reward": 4.0,
+      "defender_occupation_reward": 56.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 35
+    },
+    {
+      "attacker_reward": -38.0,
+      "defender_reward": 38.0,
+      "attacker_occupation_reward": 14.0,
+      "defender_occupation_reward": 46.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 36
+    },
+    {
+      "attacker_reward": -41.0,
+      "defender_reward": 41.0,
+      "attacker_occupation_reward": 10.0,
+      "defender_occupation_reward": 50.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 37
+    },
+    {
+      "attacker_reward": -38.5,
+      "defender_reward": 38.5,
+      "attacker_occupation_reward": 12.0,
+      "defender_occupation_reward": 48.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 38
+    },
+    {
+      "attacker_reward": -32.0,
+      "defender_reward": 32.0,
+      "attacker_occupation_reward": 12.0,
+      "defender_occupation_reward": 48.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 39
+    },
+    {
+      "attacker_reward": -31.5,
+      "defender_reward": 31.5,
+      "attacker_occupation_reward": 12.0,
+      "defender_occupation_reward": 48.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 40
+    },
+    {
+      "attacker_reward": -38.5,
+      "defender_reward": 38.5,
+      "attacker_occupation_reward": 10.0,
+      "defender_occupation_reward": 50.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 41
+    },
+    {
+      "attacker_reward": -34.0,
+      "defender_reward": 34.0,
+      "attacker_occupation_reward": 14.0,
+      "defender_occupation_reward": 46.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 42
+    },
+    {
+      "attacker_reward": -49.0,
+      "defender_reward": 49.0,
+      "attacker_occupation_reward": 8.0,
+      "defender_occupation_reward": 52.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 43
+    },
+    {
+      "attacker_reward": -35.0,
+      "defender_reward": 35.0,
+      "attacker_occupation_reward": 12.0,
+      "defender_occupation_reward": 48.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 44
+    },
+    {
+      "attacker_reward": -37.0,
+      "defender_reward": 37.0,
+      "attacker_occupation_reward": 12.0,
+      "defender_occupation_reward": 48.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 45
+    },
+    {
+      "attacker_reward": -51.0,
+      "defender_reward": 51.0,
+      "attacker_occupation_reward": 4.0,
+      "defender_occupation_reward": 56.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 46
+    },
+    {
+      "attacker_reward": -27.0,
+      "defender_reward": 27.0,
+      "attacker_occupation_reward": 16.0,
+      "defender_occupation_reward": 44.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 47
+    },
+    {
+      "attacker_reward": -41.5,
+      "defender_reward": 41.5,
+      "attacker_occupation_reward": 12.0,
+      "defender_occupation_reward": 48.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 48
+    },
+    {
+      "attacker_reward": -37.5,
+      "defender_reward": 37.5,
+      "attacker_occupation_reward": 6.0,
+      "defender_occupation_reward": 54.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 49
+    },
+    {
+      "attacker_reward": -35.5,
+      "defender_reward": 35.5,
+      "attacker_occupation_reward": 10.0,
+      "defender_occupation_reward": 50.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 50
+    },
+    {
+      "attacker_reward": -25.0,
+      "defender_reward": 25.0,
+      "attacker_occupation_reward": 12.0,
+      "defender_occupation_reward": 48.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 51
+    },
+    {
+      "attacker_reward": -32.0,
+      "defender_reward": 32.0,
+      "attacker_occupation_reward": 16.0,
+      "defender_occupation_reward": 44.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 52
+    },
+    {
+      "attacker_reward": -23.0,
+      "defender_reward": 23.0,
+      "attacker_occupation_reward": 18.0,
+      "defender_occupation_reward": 42.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 53
+    },
+    {
+      "attacker_reward": -50.0,
+      "defender_reward": 50.0,
+      "attacker_occupation_reward": 10.0,
+      "defender_occupation_reward": 50.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 54
+    },
+    {
+      "attacker_reward": -37.5,
+      "defender_reward": 37.5,
+      "attacker_occupation_reward": 12.0,
+      "defender_occupation_reward": 48.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 55
+    },
+    {
+      "attacker_reward": -39.5,
+      "defender_reward": 39.5,
+      "attacker_occupation_reward": 10.0,
+      "defender_occupation_reward": 50.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 56
+    },
+    {
+      "attacker_reward": -43.5,
+      "defender_reward": 43.5,
+      "attacker_occupation_reward": 10.0,
+      "defender_occupation_reward": 50.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 57
+    },
+    {
+      "attacker_reward": -29.5,
+      "defender_reward": 29.5,
+      "attacker_occupation_reward": 12.0,
+      "defender_occupation_reward": 48.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 58
+    },
+    {
+      "attacker_reward": -50.0,
+      "defender_reward": 50.0,
+      "attacker_occupation_reward": 6.0,
+      "defender_occupation_reward": 54.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 59
+    },
+    {
+      "attacker_reward": -44.0,
+      "defender_reward": 44.0,
+      "attacker_occupation_reward": 10.0,
+      "defender_occupation_reward": 50.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 60
+    },
+    {
+      "attacker_reward": -33.5,
+      "defender_reward": 33.5,
+      "attacker_occupation_reward": 10.0,
+      "defender_occupation_reward": 50.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 61
+    },
+    {
+      "attacker_reward": -41.0,
+      "defender_reward": 41.0,
+      "attacker_occupation_reward": 12.0,
+      "defender_occupation_reward": 48.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 62
+    },
+    {
+      "attacker_reward": -38.0,
+      "defender_reward": 38.0,
+      "attacker_occupation_reward": 12.0,
+      "defender_occupation_reward": 48.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 63
+    },
+    {
+      "attacker_reward": -32.5,
+      "defender_reward": 32.5,
+      "attacker_occupation_reward": 8.0,
+      "defender_occupation_reward": 52.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 64
+    },
+    {
+      "attacker_reward": -34.0,
+      "defender_reward": 34.0,
+      "attacker_occupation_reward": 10.0,
+      "defender_occupation_reward": 50.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 65
+    },
+    {
+      "attacker_reward": -32.5,
+      "defender_reward": 32.5,
+      "attacker_occupation_reward": 12.0,
+      "defender_occupation_reward": 48.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 66
+    },
+    {
+      "attacker_reward": -32.0,
+      "defender_reward": 32.0,
+      "attacker_occupation_reward": 10.0,
+      "defender_occupation_reward": 50.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 67
+    },
+    {
+      "attacker_reward": -45.5,
+      "defender_reward": 45.5,
+      "attacker_occupation_reward": 8.0,
+      "defender_occupation_reward": 52.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 68
+    },
+    {
+      "attacker_reward": -35.0,
+      "defender_reward": 35.0,
+      "attacker_occupation_reward": 8.0,
+      "defender_occupation_reward": 52.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 69
+    },
+    {
+      "attacker_reward": -39.5,
+      "defender_reward": 39.5,
+      "attacker_occupation_reward": 8.0,
+      "defender_occupation_reward": 52.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 70
+    },
+    {
+      "attacker_reward": -48.5,
+      "defender_reward": 48.5,
+      "attacker_occupation_reward": 6.0,
+      "defender_occupation_reward": 54.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 71
+    },
+    {
+      "attacker_reward": -32.0,
+      "defender_reward": 32.0,
+      "attacker_occupation_reward": 14.0,
+      "defender_occupation_reward": 46.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 72
+    },
+    {
+      "attacker_reward": -49.0,
+      "defender_reward": 49.0,
+      "attacker_occupation_reward": 6.0,
+      "defender_occupation_reward": 54.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 73
+    },
+    {
+      "attacker_reward": -27.5,
+      "defender_reward": 27.5,
+      "attacker_occupation_reward": 16.0,
+      "defender_occupation_reward": 44.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 74
+    },
+    {
+      "attacker_reward": -44.0,
+      "defender_reward": 44.0,
+      "attacker_occupation_reward": 6.0,
+      "defender_occupation_reward": 54.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 75
+    },
+    {
+      "attacker_reward": -31.0,
+      "defender_reward": 31.0,
+      "attacker_occupation_reward": 12.0,
+      "defender_occupation_reward": 48.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 76
+    },
+    {
+      "attacker_reward": -42.0,
+      "defender_reward": 42.0,
+      "attacker_occupation_reward": 14.0,
+      "defender_occupation_reward": 46.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 77
+    },
+    {
+      "attacker_reward": -44.0,
+      "defender_reward": 44.0,
+      "attacker_occupation_reward": 8.0,
+      "defender_occupation_reward": 52.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 78
+    },
+    {
+      "attacker_reward": -46.5,
+      "defender_reward": 46.5,
+      "attacker_occupation_reward": 8.0,
+      "defender_occupation_reward": 52.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 79
+    },
+    {
+      "attacker_reward": -46.5,
+      "defender_reward": 46.5,
+      "attacker_occupation_reward": 10.0,
+      "defender_occupation_reward": 50.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 80
+    },
+    {
+      "attacker_reward": -29.5,
+      "defender_reward": 29.5,
+      "attacker_occupation_reward": 16.0,
+      "defender_occupation_reward": 44.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 81
+    },
+    {
+      "attacker_reward": -33.0,
+      "defender_reward": 33.0,
+      "attacker_occupation_reward": 16.0,
+      "defender_occupation_reward": 44.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 82
+    },
+    {
+      "attacker_reward": -39.5,
+      "defender_reward": 39.5,
+      "attacker_occupation_reward": 8.0,
+      "defender_occupation_reward": 52.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 83
+    },
+    {
+      "attacker_reward": -41.0,
+      "defender_reward": 41.0,
+      "attacker_occupation_reward": 8.0,
+      "defender_occupation_reward": 52.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 84
+    },
+    {
+      "attacker_reward": -33.0,
+      "defender_reward": 33.0,
+      "attacker_occupation_reward": 10.0,
+      "defender_occupation_reward": 50.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 85
+    },
+    {
+      "attacker_reward": -28.5,
+      "defender_reward": 28.5,
+      "attacker_occupation_reward": 16.0,
+      "defender_occupation_reward": 44.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 86
+    },
+    {
+      "attacker_reward": -49.0,
+      "defender_reward": 49.0,
+      "attacker_occupation_reward": 8.0,
+      "defender_occupation_reward": 52.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 87
+    },
+    {
+      "attacker_reward": -25.5,
+      "defender_reward": 25.5,
+      "attacker_occupation_reward": 18.0,
+      "defender_occupation_reward": 42.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 88
+    },
+    {
+      "attacker_reward": -48.0,
+      "defender_reward": 48.0,
+      "attacker_occupation_reward": 8.0,
+      "defender_occupation_reward": 52.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 89
+    },
+    {
+      "attacker_reward": -35.0,
+      "defender_reward": 35.0,
+      "attacker_occupation_reward": 12.0,
+      "defender_occupation_reward": 48.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 90
+    },
+    {
+      "attacker_reward": -30.0,
+      "defender_reward": 30.0,
+      "attacker_occupation_reward": 12.0,
+      "defender_occupation_reward": 48.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 91
+    },
+    {
+      "attacker_reward": -32.0,
+      "defender_reward": 32.0,
+      "attacker_occupation_reward": 8.0,
+      "defender_occupation_reward": 52.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 92
+    },
+    {
+      "attacker_reward": -20.0,
+      "defender_reward": 20.0,
+      "attacker_occupation_reward": 16.0,
+      "defender_occupation_reward": 44.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 93
+    },
+    {
+      "attacker_reward": -22.5,
+      "defender_reward": 22.5,
+      "attacker_occupation_reward": 20.0,
+      "defender_occupation_reward": 40.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 94
+    },
+    {
+      "attacker_reward": -29.5,
+      "defender_reward": 29.5,
+      "attacker_occupation_reward": 14.0,
+      "defender_occupation_reward": 46.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 95
+    },
+    {
+      "attacker_reward": -55.0,
+      "defender_reward": 55.0,
+      "attacker_occupation_reward": 4.0,
+      "defender_occupation_reward": 56.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 96
+    },
+    {
+      "attacker_reward": -30.5,
+      "defender_reward": 30.5,
+      "attacker_occupation_reward": 8.0,
+      "defender_occupation_reward": 52.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 97
+    },
+    {
+      "attacker_reward": -38.0,
+      "defender_reward": 38.0,
+      "attacker_occupation_reward": 10.0,
+      "defender_occupation_reward": 50.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 98
+    },
+    {
+      "attacker_reward": -61.0,
+      "defender_reward": 61.0,
+      "attacker_occupation_reward": 2.0,
+      "defender_occupation_reward": 58.0,
+      "attacker_success": false,
+      "total_steps": 30,
+      "episode": 99
+    }
+  ]
+}

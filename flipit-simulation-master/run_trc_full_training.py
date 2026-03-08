@@ -109,6 +109,8 @@ class TRCFullTrainingExperiment:
             gamma=dqn_config.get('gamma', 0.98),
             memory_size=dqn_config.get('memory_size', 100000),
             batch_size=dqn_config.get('batch_size', 256),
+            v_min=dqn_config.get('v_min', -100),  # 扩大价值范围防止截断
+            v_max=dqn_config.get('v_max', 100),   # 扩大价值范围防止截断
             device=str(self.device)
         )
         
@@ -689,7 +691,17 @@ class TRCFullTrainingExperiment:
         plt.savefig(self.results_dir / "occupation_reward_analysis.png", dpi=300, bbox_inches='tight')
         plt.savefig(self.results_dir / "occupation_reward_analysis.pdf", bbox_inches='tight')
 
-        print(f"[SAVE] 占领奖励可视化已保存")
+        # 同时也保存到 Fig 文件夹 (User request)
+        fig_dir = Path("Fig")
+        fig_dir.mkdir(exist_ok=True)
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        plt.savefig(fig_dir / f"occupation_reward_analysis_{timestamp}.png", dpi=300, bbox_inches='tight')
+        plt.savefig(fig_dir / f"occupation_reward_analysis_{timestamp}.pdf", bbox_inches='tight')
+        # Also save as the standard name for the paper
+        plt.savefig(fig_dir / "occupation_reward_analysis.png", dpi=300, bbox_inches='tight')
+        plt.savefig(fig_dir / "occupation_reward_analysis.pdf", bbox_inches='tight')
+
+        print(f"[SAVE] 占领奖励可视化已保存到 {self.results_dir} 和 Fig 文件夹")
 
 def main():
     """主函数"""

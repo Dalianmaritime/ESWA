@@ -191,7 +191,7 @@ p0_config:
 
 drl_config:
   algorithm: "dqn"
-  training_episodes: 200      # 充分训练：200轮
+  training_episodes: 500      # 增加训练轮数以保证收敛
   save_frequency: 50          # 每50轮保存一次模型
   evaluation_frequency: 25    # 每25轮评估一次性能
   warmup_steps: 500           # 预热步数调整
@@ -204,32 +204,34 @@ drl_config:
     hidden_layers: [128, 128]  # 双层网络适合中等复杂度博弈
     
     # ========== 短期博弈优化的学习参数 ==========
-    lr: 0.0005              # 提高学习率适配短期博弈（30步快速决策）
-    gamma: 0.92             # 降低折扣因子：海盗攻击重视即时威胁
-    epsilon_start: 1.0      # 初期完全随机探索
-    epsilon_end: 0.01       # 最终保留1%探索应对随机性
-    epsilon_decay: 10000    # 在10,000步(67%训练期)完成探索衰减
+    lr: 0.0001              # 降低学习率提高稳定性 (原0.0005)
+    gamma: 0.95             # 稍微提高折扣因子 (原0.92)
+    v_min: -100.0           # 扩大价值范围
+    v_max: 100.0            # 扩大价值范围
+    epsilon_start: 1.0      # (注意：RainbowDQN主要使用NoisyNet探索)
+    epsilon_end: 0.01       
+    epsilon_decay: 5000     
     
     # ========== 短期博弈训练调度 ==========
     target_update_freq: 300  # 每300步(约10轮)更新目标网络
-    memory_size: 8000       # 保留最近8,000步经验(约267轮)
+    memory_size: 10000      # 增加经验池
     batch_size: 64          # 批次大小：平衡稳定性与计算效率
     
     # ========== TRC科研级高级特性 ==========
     double_dqn: true        # Double DQN：减少Q值过估计
     dueling_network: true   # Dueling架构：分离状态价值与动作优势
     prioritized_replay: true # PER：优先学习重要经验
-    noisy_networks: false   # 关闭：避免短期训练不稳定
+    noisy_networks: true    # 确保开启NoisyNet
     multi_step: true        # N-step learning：提高样本效率
     n_step: 3               # 3步前瞻：适配30步博弈长度
-    distributional: false   # 关闭：简化短期训练
+    distributional: true    # 开启分布强化学习
     device: "auto"          # 自动选择GPU/CPU
     
     # ========== 训练稳定性策略 ==========
-    gradient_clip: 1.0      # 梯度裁剪：防止梯度爆炸
-    weight_decay: 1e-4      # L2正则化：防止过拟合
-    learning_starts: 1500   # 与warmup_steps一致：充分探索后开始学习
-    polyak_tau: 0.01        # 软更新系数：平衡目标网络稳定性与更新速度
+    gradient_clip: 10.0     # 增加梯度裁剪阈值 (原1.0可能太严格)
+    weight_decay: 1e-5      # 降低正则化 (原1e-4)
+    learning_starts: 500    # 提前开始学习 (原1500)
+    polyak_tau: 0.005       # 降低软更新速率 (原0.01)
 
 evaluation_config:
   evaluation_frequency: 10

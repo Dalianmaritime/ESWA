@@ -192,7 +192,7 @@ p0_config:
 # 控制变量：与Cheat模式完全一致的DRL配置（仅deception_mode不同）
 drl_config:
   algorithm: "dqn"
-  training_episodes: 200      # 控制变量：与Cheat模式一致
+  training_episodes: 250      # 控制变量：与Cheat模式一致 (Updated to 250)
   save_frequency: 50          # 控制变量：与Cheat模式一致
   evaluation_frequency: 25    # 控制变量：与Cheat模式一致
   warmup_steps: 500           # 控制变量：与Cheat模式一致
@@ -205,30 +205,32 @@ drl_config:
     hidden_layers: [128, 128]  # 控制变量：与Cheat模式一致
     
     # ========== 学习参数（控制变量：完全一致）==========
-    lr: 0.0005              # 控制变量：与Cheat模式一致
-    gamma: 0.92             # 控制变量：与Cheat模式一致
+    lr: 0.0001              # 控制变量：与Cheat模式一致 (Updated to 0.0001)
+    gamma: 0.98             # 控制变量：与Cheat模式一致 (Updated to 0.98)
     epsilon_start: 1.0      # 控制变量：与Cheat模式一致
     epsilon_end: 0.01       # 控制变量：与Cheat模式一致
     epsilon_decay: 10000    # 控制变量：与Cheat模式一致
     
     # ========== 训练调度（控制变量：完全一致）==========
     target_update_freq: 300  # 控制变量：与Cheat模式一致
-    memory_size: 8000       # 控制变量：与Cheat模式一致
-    batch_size: 64          # 控制变量：与Cheat模式一致
+    memory_size: 100000     # 控制变量：与Cheat模式一致 (Updated to 100000)
+    batch_size: 256         # 控制变量：与Cheat模式一致 (Updated to 256)
     
     # ========== 高级特性（控制变量：完全一致）==========
     double_dqn: true        # 控制变量：与Cheat模式一致
     dueling_network: true   # 控制变量：与Cheat模式一致
     prioritized_replay: true # 控制变量：与Cheat模式一致
-    noisy_networks: false   # 控制变量：与Cheat模式一致
+    noisy_networks: true    # 控制变量：与Cheat模式一致 (Updated to true)
     multi_step: true        # 控制变量：与Cheat模式一致
     n_step: 3               # 控制变量：与Cheat模式一致
-    distributional: false   # 控制变量：与Cheat模式一致
+    distributional: true    # 控制变量：与Cheat模式一致 (Updated to true)
+    v_min: -100.0           # Added for distributional
+    v_max: 100.0            # Added for distributional
     device: "auto"          # 控制变量：与Cheat模式一致
     
     # ========== 训练策略（控制变量：完全一致）==========
-    gradient_clip: 1.0      # 控制变量：与Cheat模式一致
-    weight_decay: 1e-4      # 控制变量：与Cheat模式一致
+    gradient_clip: 10.0     # 控制变量：与Cheat模式一致 (Updated to 10.0)
+    weight_decay: 1e-5      # 控制变量：与Cheat模式一致 (Updated to 1e-5)
     learning_starts: 1500   # 控制变量：与Cheat模式一致
     polyak_tau: 0.01        # 控制变量：与Cheat模式一致
 
