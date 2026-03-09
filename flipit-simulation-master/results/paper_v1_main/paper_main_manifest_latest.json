@@ -1,0 +1,179 @@
+{
+  "paper_group": "main",
+  "timestamp": "2026-03-09T16:43:22.606296",
+  "seeds": [
+    42,
+    123
+  ],
+  "resume_missing": true,
+  "runs": [
+    {
+      "experiment_id": "paper_main_cheat_drl_seed42",
+      "scenario_id": "cheat",
+      "method_id": "drl",
+      "seed": 42,
+      "config_path": "E:\\1031\\flipit-simulation-master\\configs\\paper_v1\\main\\main_cheat_drl.yml",
+      "result_dir": "E:\\1031\\flipit-simulation-master\\results\\paper_v1_main\\paper_main_cheat_drl_seed42_20260309_155105",
+      "final_performance": {
+        "attacker_success_rate": 0.48,
+        "defender_control_rate": 0.5085000000000001,
+        "attacker_control_rate": 0.49149999999999994,
+        "avg_defender_return": 48.37,
+        "avg_defender_training_return": -11.014500000000005,
+        "avg_attacker_return": -142.695,
+        "avg_false_response_rate": 0.023999999999999994,
+        "avg_missed_response_rate": 0.03533333333333333,
+        "avg_inspection_precision": 0.21814701398926709,
+        "avg_episode_length": 60.0,
+        "sample_size": 100
+      }
+    },
+    {
+      "experiment_id": "paper_main_flipit_drl_seed42",
+      "scenario_id": "flipit",
+      "method_id": "drl",
+      "seed": 42,
+      "config_path": "E:\\1031\\flipit-simulation-master\\configs\\paper_v1\\main\\main_flipit_drl.yml",
+      "result_dir": "E:\\1031\\flipit-simulation-master\\results\\paper_v1_main\\paper_main_flipit_drl_seed42_20260309_160417",
+      "final_performance": {
+        "attacker_success_rate": 0.63,
+        "defender_control_rate": 0.4643333333333333,
+        "attacker_control_rate": 0.5356666666666667,
+        "avg_defender_return": 14.77,
+        "avg_defender_training_return": -30.1525,
+        "avg_attacker_return": -144.335,
+        "avg_false_response_rate": 0.039,
+        "avg_missed_response_rate": 0.07866666666666666,
+        "avg_inspection_precision": 0.23676849889331045,
+        "avg_episode_length": 60.0,
+        "sample_size": 100
+      }
+    },
+    {
+      "experiment_id": "paper_main_cheat_baseline_seed42",
+      "scenario_id": "cheat",
+      "method_id": "baseline",
+      "seed": 42,
+      "config_path": "E:\\1031\\flipit-simulation-master\\configs\\paper_v1\\main\\main_cheat_baseline.yml",
+      "result_dir": "E:\\1031\\flipit-simulation-master\\results\\paper_v1_main\\paper_main_cheat_baseline_seed42_20260309_161718",
+      "final_performance": {
+        "attacker_success_rate": 0.9,
+        "defender_control_rate": 0.3446666666666667,
+        "attacker_control_rate": 0.6553333333333332,
+        "avg_defender_return": -112.03,
+        "avg_defender_training_return": -110.60350000000003,
+        "avg_attacker_return": -114.97,
+        "avg_false_response_rate": 0.2125,
+        "avg_missed_response_rate": 0.2235,
+        "avg_inspection_precision": 0.3040326464884065,
+        "avg_episode_length": 60.0,
+        "sample_size": 100
+      }
+    },
+    {
+      "experiment_id": "paper_main_flipit_baseline_seed42",
+      "scenario_id": "flipit",
+      "method_id": "baseline",
+      "seed": 42,
+      "config_path": "E:\\1031\\flipit-simulation-master\\configs\\paper_v1\\main\\main_flipit_baseline.yml",
+      "result_dir": "E:\\1031\\flipit-simulation-master\\results\\paper_v1_main\\paper_main_flipit_baseline_seed42_20260309_161720",
+      "final_performance": {
+        "attacker_success_rate": 0.73,
+        "defender_control_rate": 0.40049999999999997,
+        "attacker_control_rate": 0.5995,
+        "avg_defender_return": -151.58,
+        "avg_defender_training_return": -124.88599999999998,
+        "avg_attacker_return": -129.105,
+        "avg_false_response_rate": 0.33716666666666667,
+        "avg_missed_response_rate": 0.23249999999999996,
+        "avg_inspection_precision": 0.2546190062928352,
+        "avg_episode_length": 60.0,
+        "sample_size": 100
+      }
+    },
+    {
+      "experiment_id": "paper_main_cheat_drl_seed123",
+      "scenario_id": "cheat",
+      "method_id": "drl",
+      "seed": 123,
+      "config_path": "E:\\1031\\flipit-simulation-master\\configs\\paper_v1\\main\\main_cheat_drl.yml",
+      "result_dir": "E:\\1031\\flipit-simulation-master\\results\\paper_v1_main\\paper_main_cheat_drl_seed123_20260309_161721",
+      "final_performance": {
+        "attacker_success_rate": 0.58,
+        "defender_control_rate": 0.4441666666666666,
+        "attacker_control_rate": 0.5558333333333334,
+        "avg_defender_return": 27.52,
+        "avg_defender_training_return": -28.568000000000005,
+        "avg_attacker_return": -118.81,
+        "avg_false_response_rate": 0.023166666666666665,
+        "avg_missed_response_rate": 0.06166666666666666,
+        "avg_inspection_precision": 0.25775323001328887,
+        "avg_episode_length": 60.0,
+        "sample_size": 100
+      }
+    },
+    {
+      "experiment_id": "paper_main_flipit_drl_seed123",
+      "scenario_id": "flipit",
+      "method_id": "drl",
+      "seed": 123,
+      "config_path": "E:\\1031\\flipit-simulation-master\\configs\\paper_v1\\main\\main_flipit_drl.yml",
+      "result_dir": "E:\\1031\\flipit-simulation-master\\results\\paper_v1_main\\paper_main_flipit_drl_seed123_20260309_164322",
+      "final_performance": {
+        "attacker_success_rate": 0.62,
+        "defender_control_rate": 0.4356666666666667,
+        "attacker_control_rate": 0.5643333333333334,
+        "avg_defender_return": 8.49,
+        "avg_defender_training_return": -36.90650000000001,
+        "avg_attacker_return": -137.185,
+        "avg_false_response_rate": 0.0365,
+        "avg_missed_response_rate": 0.09016666666666667,
+        "avg_inspection_precision": 0.2836901342506273,
+        "avg_episode_length": 60.0,
+        "sample_size": 100
+      }
+    },
+    {
+      "experiment_id": "paper_main_cheat_baseline_seed123",
+      "scenario_id": "cheat",
+      "method_id": "baseline",
+      "seed": 123,
+      "config_path": "E:\\1031\\flipit-simulation-master\\configs\\paper_v1\\main\\main_cheat_baseline.yml",
+      "result_dir": "E:\\1031\\flipit-simulation-master\\results\\paper_v1_main\\paper_main_cheat_baseline_seed123_20260309_165616",
+      "final_performance": {
+        "attacker_success_rate": 0.82,
+        "defender_control_rate": 0.37666666666666665,
+        "attacker_control_rate": 0.6233333333333334,
+        "avg_defender_return": -94.76,
+        "avg_defender_training_return": -97.96300000000001,
+        "avg_attacker_return": -121.945,
+        "avg_false_response_rate": 0.19749999999999995,
+        "avg_missed_response_rate": 0.21166666666666664,
+        "avg_inspection_precision": 0.30054985421713787,
+        "avg_episode_length": 60.0,
+        "sample_size": 100
+      }
+    },
+    {
+      "experiment_id": "paper_main_flipit_baseline_seed123",
+      "scenario_id": "flipit",
+      "method_id": "baseline",
+      "seed": 123,
+      "config_path": "E:\\1031\\flipit-simulation-master\\configs\\paper_v1\\main\\main_flipit_baseline.yml",
+      "result_dir": "E:\\1031\\flipit-simulation-master\\results\\paper_v1_main\\paper_main_flipit_baseline_seed123_20260309_165617",
+      "final_performance": {
+        "attacker_success_rate": 0.77,
+        "defender_control_rate": 0.38566666666666655,
+        "attacker_control_rate": 0.6143333333333334,
+        "avg_defender_return": -154.48,
+        "avg_defender_training_return": -128.53099999999998,
+        "avg_attacker_return": -125.35,
+        "avg_false_response_rate": 0.33383333333333326,
+        "avg_missed_response_rate": 0.22816666666666663,
+        "avg_inspection_precision": 0.2520226009781636,
+        "avg_episode_length": 60.0,
+        "sample_size": 100
+      }
+    }
+  ]
+}

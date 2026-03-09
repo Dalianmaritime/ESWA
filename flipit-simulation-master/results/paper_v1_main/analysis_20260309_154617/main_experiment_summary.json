@@ -1,0 +1,197 @@
+{
+  "manifest_path": "E:\\1031\\flipit-simulation-master\\results\\paper_v1_main\\paper_main_manifest_20260309_154616.json",
+  "grouped_summary": {
+    "cheat_drl": {
+      "num_seeds": 1,
+      "seeds": [
+        42
+      ],
+      "defender_control_rate": {
+        "mean": 0.11666666666666667,
+        "std": 0.0,
+        "min": 0.11666666666666667,
+        "max": 0.11666666666666667
+      },
+      "attacker_success_rate": {
+        "mean": 1.0,
+        "std": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "avg_defender_return": {
+        "mean": -46.0,
+        "std": 0.0,
+        "min": -46.0,
+        "max": -46.0
+      },
+      "avg_defender_training_return": {
+        "mean": -88.55000000000007,
+        "std": 0.0,
+        "min": -88.55000000000007,
+        "max": -88.55000000000007
+      },
+      "avg_false_response_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "avg_missed_response_rate": {
+        "mean": 0.058333333333333334,
+        "std": 0.0,
+        "min": 0.058333333333333334,
+        "max": 0.058333333333333334
+      },
+      "avg_inspection_precision": {
+        "mean": 0.5666666666666667,
+        "std": 0.0,
+        "min": 0.5666666666666667,
+        "max": 0.5666666666666667
+      }
+    },
+    "flipit_drl": {
+      "num_seeds": 1,
+      "seeds": [
+        42
+      ],
+      "defender_control_rate": {
+        "mean": 0.20833333333333331,
+        "std": 0.0,
+        "min": 0.20833333333333331,
+        "max": 0.20833333333333331
+      },
+      "attacker_success_rate": {
+        "mean": 1.0,
+        "std": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "avg_defender_return": {
+        "mean": -30.0,
+        "std": 0.0,
+        "min": -30.0,
+        "max": -30.0
+      },
+      "avg_defender_training_return": {
+        "mean": -78.70000000000003,
+        "std": 0.0,
+        "min": -78.70000000000003,
+        "max": -78.70000000000003
+      },
+      "avg_false_response_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "avg_missed_response_rate": {
+        "mean": 0.08333333333333333,
+        "std": 0.0,
+        "min": 0.08333333333333333,
+        "max": 0.08333333333333333
+      },
+      "avg_inspection_precision": {
+        "mean": 0.39166666666666666,
+        "std": 0.0,
+        "min": 0.39166666666666666,
+        "max": 0.39166666666666666
+      }
+    },
+    "cheat_baseline": {
+      "num_seeds": 1,
+      "seeds": [
+        42
+      ],
+      "defender_control_rate": {
+        "mean": 0.25,
+        "std": 0.0,
+        "min": 0.25,
+        "max": 0.25
+      },
+      "attacker_success_rate": {
+        "mean": 1.0,
+        "std": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "avg_defender_return": {
+        "mean": -164.0,
+        "std": 0.0,
+        "min": -164.0,
+        "max": -164.0
+      },
+      "avg_defender_training_return": {
+        "mean": -141.64999999999998,
+        "std": 0.0,
+        "min": -141.64999999999998,
+        "max": -141.64999999999998
+      },
+      "avg_false_response_rate": {
+        "mean": 0.25,
+        "std": 0.0,
+        "min": 0.25,
+        "max": 0.25
+      },
+      "avg_missed_response_rate": {
+        "mean": 0.225,
+        "std": 0.0,
+        "min": 0.225,
+        "max": 0.225
+      },
+      "avg_inspection_precision": {
+        "mean": 0.34071428571428575,
+        "std": 0.0,
+        "min": 0.34071428571428575,
+        "max": 0.34071428571428575
+      }
+    },
+    "flipit_baseline": {
+      "num_seeds": 1,
+      "seeds": [
+        42
+      ],
+      "defender_control_rate": {
+        "mean": 0.4833333333333334,
+        "std": 0.0,
+        "min": 0.4833333333333334,
+        "max": 0.4833333333333334
+      },
+      "attacker_success_rate": {
+        "mean": 0.5,
+        "std": 0.0,
+        "min": 0.5,
+        "max": 0.5
+      },
+      "avg_defender_return": {
+        "mean": -156.5,
+        "std": 0.0,
+        "min": -156.5,
+        "max": -156.5
+      },
+      "avg_defender_training_return": {
+        "mean": -111.37500000000003,
+        "std": 0.0,
+        "min": -111.37500000000003,
+        "max": -111.37500000000003
+      },
+      "avg_false_response_rate": {
+        "mean": 0.4083333333333333,
+        "std": 0.0,
+        "min": 0.4083333333333333,
+        "max": 0.4083333333333333
+      },
+      "avg_missed_response_rate": {
+        "mean": 0.21666666666666667,
+        "std": 0.0,
+        "min": 0.21666666666666667,
+        "max": 0.21666666666666667
+      },
+      "avg_inspection_precision": {
+        "mean": 0.38421052631578945,
+        "std": 0.0,
+        "min": 0.38421052631578945,
+        "max": 0.38421052631578945
+      }
+    }
+  }
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "episode": 0,
+    "performance": {
+      "attacker_success_rate": 1.0,
+      "defender_control_rate": 0.10833333333333332,
+      "attacker_control_rate": 0.8916666666666666,
+      "avg_defender_return": -50.0,
+      "avg_attacker_return": -45.5,
+      "avg_false_response_rate": 0.0,
+      "avg_missed_response_rate": 0.06666666666666667,
+      "avg_inspection_precision": 0.375,
+      "avg_episode_length": 60.0,
+      "sample_size": 2
+    },
+    "num_episodes": 2
+  },
+  {
+    "episode": 1,
+    "performance": {
+      "attacker_success_rate": 1.0,
+      "defender_control_rate": 0.25,
+      "attacker_control_rate": 0.75,
+      "avg_defender_return": -78.0,
+      "avg_attacker_return": -93.0,
+      "avg_false_response_rate": 0.15,
+      "avg_missed_response_rate": 0.041666666666666664,
+      "avg_inspection_precision": 0.34983766233766234,
+      "avg_episode_length": 60.0,
+      "sample_size": 2
+    },
+    "num_episodes": 2
+  },
+  {
+    "episode": 2,
+    "performance": {
+      "attacker_success_rate": 1.0,
+      "defender_control_rate": 0.04166666666666667,
+      "attacker_control_rate": 0.9583333333333333,
+      "avg_defender_return": -34.0,
+      "avg_attacker_return": -43.0,
+      "avg_false_response_rate": 0.0,
+      "avg_missed_response_rate": 0.18333333333333335,
+      "avg_inspection_precision": 0.0,
+      "avg_episode_length": 60.0,
+      "sample_size": 2
+    },
+    "num_episodes": 2
+  },
+  {
+    "episode": 3,
+    "performance": {
+      "attacker_success_rate": 1.0,
+      "defender_control_rate": 0.25833333333333336,
+      "attacker_control_rate": 0.7416666666666667,
+      "avg_defender_return": -230.0,
+      "avg_attacker_return": -92.75,
+      "avg_false_response_rate": 0.6333333333333333,
+      "avg_missed_response_rate": 0.125,
+      "avg_inspection_precision": 0.3611111111111111,
+      "avg_episode_length": 60.0,
+      "sample_size": 2
+    },
+    "num_episodes": 2
+  },
+  {
+    "episode": 4,
+    "performance": {
+      "attacker_success_rate": 1.0,
+      "defender_control_rate": 0.125,
+      "attacker_control_rate": 0.875,
+      "avg_defender_return": -40.0,
+      "avg_attacker_return": -62.25,
+      "avg_false_response_rate": 0.0,
+      "avg_missed_response_rate": 0.041666666666666664,
+      "avg_inspection_precision": 0.29166666666666663,
+      "avg_episode_length": 60.0,
+      "sample_size": 2
+    },
+    "num_episodes": 2
+  }
+]

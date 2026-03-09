@@ -14,6 +14,13 @@ pip install gym numpy pyyaml pandas matplotlib
 cd gym-flipit-master && pip install -e .
 ```
 
+## Legacy vs V2
+
+- `legacy`：原始 `MaritimeNontraditionalEnv` 链路，现已整体收进 [legacy](/e:/1031/flipit-simulation-master/legacy) 目录。
+- `V2`：新的信号-区域 Maritime Cheat-FlipIt 建模，攻击方动作为 `wait / cheat(zone) / takeover(zone)`，防守方动作为 `hold / inspect(zone) / respond(zone)`。
+- 顶层运行入口和配置现在默认只保留 V2；历史脚本、历史策略、历史配置与历史分析均在 `legacy/` 下归档。
+- 依赖边界：V2 使用 `Gymnasium`；`legacy/` 继续依赖原始 `gym`。
+
 ### 运行仿真
 
 ```bash
@@ -25,6 +32,24 @@ python run_resource_constraint.py configs/pirate_assault_scenario.yml
 
 # Cheat-FlipIt系统  
 python run_cheat_flipit.py configs/maritime_security_scenario.yml
+```
+
+### 运行 V2 信号-区域实验
+
+```bash
+# DRL 防守方训练
+python run_trc_full_training_v2.py configs/trc_signal_cheat_v2.yml
+python run_trc_full_training_v2.py configs/trc_signal_flipit_v2.yml
+
+# 传统 baseline
+python run_traditional_experiment_v2.py configs/trc_signal_baseline_cheat_v2.yml --episodes 100
+python run_traditional_experiment_v2.py configs/trc_signal_baseline_flipit_v2.yml --episodes 100
+
+# 一键运行四组 V2 实验并分析
+python run_all_trc_experiments_v2.py
+
+# 快速 smoke test
+python run_all_trc_experiments_v2.py --smoke
 ```
 
 ### 测试系统
@@ -50,6 +75,7 @@ python test_cheat_flipit.py
 flipit-simulation-master/          # 主仿真模块
 ├── configs/                       # 场景配置文件
 ├── strategies/                    # 智能策略算法
+├── analysis/                      # 结果分析脚本
 ├── run_*.py                       # 仿真运行脚本
 ├── test_*.py                      # 系统测试脚本
 └── results/                       # 仿真结果输出

@@ -1,0 +1,94 @@
+[
+  {
+    "episode_index": 0,
+    "winner": "attacker",
+    "attacker_success": true,
+    "attacker_return": -39.5,
+    "defender_return": -76.0,
+    "defender_training_return": -118.80000000000005,
+    "attacker_control_rate": 0.9666666666666667,
+    "defender_control_rate": 0.03333333333333333,
+    "false_response_rate": 0.0,
+    "missed_response_rate": 0.1,
+    "inspection_precision": 0.48333333333333334,
+    "episode_length": 60,
+    "episode_metrics_snapshot": {
+      "tick": 60,
+      "attacker_control_steps": 58,
+      "defender_control_steps": 2,
+      "cheat_actions": 17,
+      "takeover_attempts": 32,
+      "takeover_successes": 13,
+      "response_successes": 0,
+      "inspect_actions": 60,
+      "positive_inspections": 29,
+      "false_responses": 0,
+      "missed_responses": 6,
+      "inspection_precision": 0.48333333333333334,
+      "signal_counts": {
+        "outer": 1,
+        "lane": 22,
+        "core": 6
+      },
+      "respond_counts": {
+        "outer": 0,
+        "lane": 0,
+        "core": 0
+      },
+      "inspect_counts": {
+        "outer": 0,
+        "lane": 60,
+        "core": 0
+      }
+    },
+    "step_records": [],
+    "mean_training_loss": 0.0,
+    "training": true
+  },
+  {
+    "episode_index": 1,
+    "winner": "attacker",
+    "attacker_success": true,
+    "attacker_return": -39.5,
+    "defender_return": -76.0,
+    "defender_training_return": -125.90000000000002,
+    "attacker_control_rate": 0.9666666666666667,
+    "defender_control_rate": 0.03333333333333333,
+    "false_response_rate": 0.0,
+    "missed_response_rate": 0.08333333333333333,
+    "inspection_precision": 0.3275862068965517,
+    "episode_length": 60,
+    "episode_metrics_snapshot": {
+      "tick": 60,
+      "attacker_control_steps": 58,
+      "defender_control_steps": 2,
+      "cheat_actions": 10,
+      "takeover_attempts": 33,
+      "takeover_successes": 9,
+      "response_successes": 0,
+      "inspect_actions": 58,
+      "positive_inspections": 19,
+      "false_responses": 0,
+      "missed_responses": 5,
+      "inspection_precision": 0.3275862068965517,
+      "signal_counts": {
+        "outer": 1,
+        "lane": 25,
+        "core": 9
+      },
+      "respond_counts": {
+        "outer": 0,
+        "lane": 0,
+        "core": 1
+      },
+      "inspect_counts": {
+        "outer": 2,
+        "lane": 52,
+        "core": 4
+      }
+    },
+    "step_records": [],
+    "mean_training_loss": 3.3456016381581626,
+    "training": true
+  }
+]

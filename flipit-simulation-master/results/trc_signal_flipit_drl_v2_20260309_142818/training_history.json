@@ -1,0 +1,232 @@
+[
+  {
+    "episode_index": 0,
+    "winner": "attacker",
+    "attacker_success": true,
+    "attacker_return": -31.5,
+    "defender_return": -96.0,
+    "defender_training_return": -140.7,
+    "attacker_control_rate": 1.0,
+    "defender_control_rate": 0.0,
+    "false_response_rate": 0.0,
+    "missed_response_rate": 0.15,
+    "inspection_precision": 0.35,
+    "episode_length": 60,
+    "episode_metrics_snapshot": {
+      "tick": 60,
+      "attacker_control_steps": 60,
+      "defender_control_steps": 0,
+      "cheat_actions": 0,
+      "takeover_attempts": 35,
+      "takeover_successes": 13,
+      "response_successes": 0,
+      "inspect_actions": 60,
+      "positive_inspections": 21,
+      "false_responses": 0,
+      "missed_responses": 9,
+      "inspection_precision": 0.35,
+      "signal_counts": {
+        "outer": 1,
+        "lane": 12,
+        "core": 7
+      },
+      "respond_counts": {
+        "outer": 0,
+        "lane": 0,
+        "core": 0
+      },
+      "inspect_counts": {
+        "outer": 0,
+        "lane": 60,
+        "core": 0
+      }
+    },
+    "step_records": [],
+    "mean_training_loss": 0.0,
+    "training": true
+  },
+  {
+    "episode_index": 1,
+    "winner": "attacker",
+    "attacker_success": true,
+    "attacker_return": -65.0,
+    "defender_return": -51.0,
+    "defender_training_return": -104.05000000000001,
+    "attacker_control_rate": 0.8666666666666667,
+    "defender_control_rate": 0.13333333333333333,
+    "false_response_rate": 0.0,
+    "missed_response_rate": 0.08333333333333333,
+    "inspection_precision": 0.2807017543859649,
+    "episode_length": 60,
+    "episode_metrics_snapshot": {
+      "tick": 60,
+      "attacker_control_steps": 52,
+      "defender_control_steps": 8,
+      "cheat_actions": 0,
+      "takeover_attempts": 36,
+      "takeover_successes": 8,
+      "response_successes": 0,
+      "inspect_actions": 57,
+      "positive_inspections": 16,
+      "false_responses": 0,
+      "missed_responses": 5,
+      "inspection_precision": 0.2807017543859649,
+      "signal_counts": {
+        "outer": 5,
+        "lane": 17,
+        "core": 7
+      },
+      "respond_counts": {
+        "outer": 0,
+        "lane": 0,
+        "core": 1
+      },
+      "inspect_counts": {
+        "outer": 3,
+        "lane": 51,
+        "core": 3
+      }
+    },
+    "step_records": [],
+    "mean_training_loss": 3.347434475308373,
+    "training": true
+  },
+  {
+    "episode_index": 2,
+    "winner": "attacker",
+    "attacker_success": true,
+    "attacker_return": -47.5,
+    "defender_return": -176.0,
+    "defender_training_return": -180.1999999999999,
+    "attacker_control_rate": 0.9333333333333333,
+    "defender_control_rate": 0.06666666666666667,
+    "false_response_rate": 0.18333333333333332,
+    "missed_response_rate": 0.2,
+    "inspection_precision": 0.4,
+    "episode_length": 60,
+    "episode_metrics_snapshot": {
+      "tick": 60,
+      "attacker_control_steps": 56,
+      "defender_control_steps": 4,
+      "cheat_actions": 0,
+      "takeover_attempts": 34,
+      "takeover_successes": 13,
+      "response_successes": 1,
+      "inspect_actions": 25,
+      "positive_inspections": 10,
+      "false_responses": 11,
+      "missed_responses": 12,
+      "inspection_precision": 0.4,
+      "signal_counts": {
+        "outer": 3,
+        "lane": 2,
+        "core": 11
+      },
+      "respond_counts": {
+        "outer": 0,
+        "lane": 5,
+        "core": 12
+      },
+      "inspect_counts": {
+        "outer": 8,
+        "lane": 0,
+        "core": 17
+      }
+    },
+    "step_records": [],
+    "mean_training_loss": 3.879750343163808,
+    "training": true
+  },
+  {
+    "episode_index": 3,
+    "winner": "attacker",
+    "attacker_success": true,
+    "attacker_return": -76.0,
+    "defender_return": -187.0,
+    "defender_training_return": -184.55000000000007,
+    "attacker_control_rate": 0.8333333333333334,
+    "defender_control_rate": 0.16666666666666666,
+    "false_response_rate": 0.45,
+    "missed_response_rate": 0.1,
+    "inspection_precision": 0.42857142857142855,
+    "episode_length": 60,
+    "episode_metrics_snapshot": {
+      "tick": 60,
+      "attacker_control_steps": 50,
+      "defender_control_steps": 10,
+      "cheat_actions": 0,
+      "takeover_attempts": 36,
+      "takeover_successes": 6,
+      "response_successes": 0,
+      "inspect_actions": 7,
+      "positive_inspections": 3,
+      "false_responses": 27,
+      "missed_responses": 6,
+      "inspection_precision": 0.42857142857142855,
+      "signal_counts": {
+        "outer": 5,
+        "lane": 6,
+        "core": 10
+      },
+      "respond_counts": {
+        "outer": 18,
+        "lane": 14,
+        "core": 0
+      },
+      "inspect_counts": {
+        "outer": 7,
+        "lane": 0,
+        "core": 0
+      }
+    },
+    "step_records": [],
+    "mean_training_loss": 3.8033662954966228,
+    "training": true
+  },
+  {
+    "episode_index": 4,
+    "winner": "attacker",
+    "attacker_success": true,
+    "attacker_return": -46.0,
+    "defender_return": -72.0,
+    "defender_training_return": -146.59999999999997,
+    "attacker_control_rate": 0.9333333333333333,
+    "defender_control_rate": 0.06666666666666667,
+    "false_response_rate": 0.06666666666666667,
+    "missed_response_rate": 0.16666666666666666,
+    "inspection_precision": 0.25,
+    "episode_length": 60,
+    "episode_metrics_snapshot": {
+      "tick": 60,
+      "attacker_control_steps": 56,
+      "defender_control_steps": 4,
+      "cheat_actions": 0,
+      "takeover_attempts": 36,
+      "takeover_successes": 10,
+      "response_successes": 0,
+      "inspect_actions": 8,
+      "positive_inspections": 2,
+      "false_responses": 4,
+      "missed_responses": 10,
+      "inspection_precision": 0.25,
+      "signal_counts": {
+        "outer": 7,
+        "lane": 7,
+        "core": 11
+      },
+      "respond_counts": {
+        "outer": 8,
+        "lane": 0,
+        "core": 0
+      },
+      "inspect_counts": {
+        "outer": 8,
+        "lane": 0,
+        "core": 0
+      }
+    },
+    "step_records": [],
+    "mean_training_loss": 3.7751128395398457,
+    "training": true
+  }
+]

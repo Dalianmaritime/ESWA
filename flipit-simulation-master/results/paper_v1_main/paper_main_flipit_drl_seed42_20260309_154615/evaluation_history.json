@@ -1,0 +1,40 @@
+[
+  {
+    "episode": 0,
+    "performance": {
+      "attacker_success_rate": 1.0,
+      "defender_control_rate": 0.0,
+      "attacker_control_rate": 1.0,
+      "avg_defender_return": -80.0,
+      "avg_defender_training_return": -126.70000000000006,
+      "avg_attacker_return": -28.5,
+      "avg_false_response_rate": 0.0,
+      "avg_missed_response_rate": 0.08333333333333333,
+      "avg_inspection_precision": 0.43333333333333335,
+      "avg_episode_length": 60.0,
+      "sample_size": 1
+    },
+    "checkpoint_metric": "avg_defender_training_return",
+    "checkpoint_score": -126.70000000000006,
+    "num_episodes": 1
+  },
+  {
+    "episode": 1,
+    "performance": {
+      "attacker_success_rate": 1.0,
+      "defender_control_rate": 0.25,
+      "attacker_control_rate": 0.75,
+      "avg_defender_return": -122.0,
+      "avg_defender_training_return": -128.1,
+      "avg_attacker_return": -96.0,
+      "avg_false_response_rate": 0.23333333333333334,
+      "avg_missed_response_rate": 0.1,
+      "avg_inspection_precision": 0.2391304347826087,
+      "avg_episode_length": 60.0,
+      "sample_size": 1
+    },
+    "checkpoint_metric": "avg_defender_training_return",
+    "checkpoint_score": -128.1,
+    "num_episodes": 1
+  }
+]

@@ -1,0 +1,325 @@
+[
+  {
+    "episode": 0,
+    "performance": {
+      "attacker_success_rate": 1.0,
+      "defender_control_rate": 0.08222222222222222,
+      "attacker_control_rate": 0.9177777777777778,
+      "avg_defender_return": -61.333333333333336,
+      "avg_defender_training_return": -110.27333333333338,
+      "avg_attacker_return": -52.083333333333336,
+      "avg_false_response_rate": 0.0,
+      "avg_missed_response_rate": 0.08777777777777777,
+      "avg_inspection_precision": 0.3783333333333333,
+      "avg_episode_length": 60.0,
+      "sample_size": 30
+    },
+    "checkpoint_metric": "avg_defender_training_return",
+    "checkpoint_score": -110.27333333333338,
+    "num_episodes": 30
+  },
+  {
+    "episode": 50,
+    "performance": {
+      "attacker_success_rate": 0.8,
+      "defender_control_rate": 0.35444444444444445,
+      "attacker_control_rate": 0.6455555555555554,
+      "avg_defender_return": -48.5,
+      "avg_defender_training_return": -78.405,
+      "avg_attacker_return": -118.31666666666666,
+      "avg_false_response_rate": 0.1527777777777778,
+      "avg_missed_response_rate": 0.08888888888888889,
+      "avg_inspection_precision": 0.24221475763166128,
+      "avg_episode_length": 60.0,
+      "sample_size": 30
+    },
+    "checkpoint_metric": "avg_defender_training_return",
+    "checkpoint_score": -78.405,
+    "num_episodes": 30
+  },
+  {
+    "episode": 100,
+    "performance": {
+      "attacker_success_rate": 0.9,
+      "defender_control_rate": 0.21944444444444444,
+      "attacker_control_rate": 0.7805555555555554,
+      "avg_defender_return": -40.0,
+      "avg_defender_training_return": -87.61333333333333,
+      "avg_attacker_return": -85.46666666666667,
+      "avg_false_response_rate": 0.03777777777777778,
+      "avg_missed_response_rate": 0.08777777777777777,
+      "avg_inspection_precision": 0.2827535391111551,
+      "avg_episode_length": 60.0,
+      "sample_size": 30
+    },
+    "checkpoint_metric": "avg_defender_training_return",
+    "checkpoint_score": -87.61333333333333,
+    "num_episodes": 30
+  },
+  {
+    "episode": 150,
+    "performance": {
+      "attacker_success_rate": 0.8666666666666667,
+      "defender_control_rate": 0.24777777777777774,
+      "attacker_control_rate": 0.7522222222222221,
+      "avg_defender_return": -44.9,
+      "avg_defender_training_return": -84.81500000000004,
+      "avg_attacker_return": -91.66666666666667,
+      "avg_false_response_rate": 0.05277777777777778,
+      "avg_missed_response_rate": 0.07888888888888888,
+      "avg_inspection_precision": 0.2739369955778549,
+      "avg_episode_length": 60.0,
+      "sample_size": 30
+    },
+    "checkpoint_metric": "avg_defender_training_return",
+    "checkpoint_score": -84.81500000000004,
+    "num_episodes": 30
+  },
+  {
+    "episode": 200,
+    "performance": {
+      "attacker_success_rate": 0.7666666666666667,
+      "defender_control_rate": 0.36166666666666664,
+      "attacker_control_rate": 0.6383333333333333,
+      "avg_defender_return": -17.233333333333334,
+      "avg_defender_training_return": -59.02500000000001,
+      "avg_attacker_return": -120.15,
+      "avg_false_response_rate": 0.060555555555555564,
+      "avg_missed_response_rate": 0.07222222222222223,
+      "avg_inspection_precision": 0.25472418715476786,
+      "avg_episode_length": 60.0,
+      "sample_size": 30
+    },
+    "checkpoint_metric": "avg_defender_training_return",
+    "checkpoint_score": -59.02500000000001,
+    "num_episodes": 30
+  },
+  {
+    "episode": 250,
+    "performance": {
+      "attacker_success_rate": 0.7333333333333333,
+      "defender_control_rate": 0.39222222222222225,
+      "attacker_control_rate": 0.6077777777777776,
+      "avg_defender_return": -3.966666666666667,
+      "avg_defender_training_return": -50.36833333333335,
+      "avg_attacker_return": -127.53333333333333,
+      "avg_false_response_rate": 0.046111111111111124,
+      "avg_missed_response_rate": 0.08333333333333333,
+      "avg_inspection_precision": 0.24191991674471422,
+      "avg_episode_length": 60.0,
+      "sample_size": 30
+    },
+    "checkpoint_metric": "avg_defender_training_return",
+    "checkpoint_score": -50.36833333333335,
+    "num_episodes": 30
+  },
+  {
+    "episode": 300,
+    "performance": {
+      "attacker_success_rate": 0.7333333333333333,
+      "defender_control_rate": 0.36055555555555546,
+      "attacker_control_rate": 0.6394444444444445,
+      "avg_defender_return": -15.466666666666667,
+      "avg_defender_training_return": -55.076666666666675,
+      "avg_attacker_return": -119.33333333333333,
+      "avg_false_response_rate": 0.04277777777777778,
+      "avg_missed_response_rate": 0.085,
+      "avg_inspection_precision": 0.2676735522929017,
+      "avg_episode_length": 60.0,
+      "sample_size": 30
+    },
+    "checkpoint_metric": "avg_defender_training_return",
+    "checkpoint_score": -55.076666666666675,
+    "num_episodes": 30
+  },
+  {
+    "episode": 350,
+    "performance": {
+      "attacker_success_rate": 0.6333333333333333,
+      "defender_control_rate": 0.45111111111111113,
+      "attacker_control_rate": 0.5488888888888889,
+      "avg_defender_return": 10.333333333333334,
+      "avg_defender_training_return": -32.910000000000004,
+      "avg_attacker_return": -140.61666666666667,
+      "avg_false_response_rate": 0.047222222222222214,
+      "avg_missed_response_rate": 0.06722222222222222,
+      "avg_inspection_precision": 0.25877712895171423,
+      "avg_episode_length": 60.0,
+      "sample_size": 30
+    },
+    "checkpoint_metric": "avg_defender_training_return",
+    "checkpoint_score": -32.910000000000004,
+    "num_episodes": 30
+  },
+  {
+    "episode": 400,
+    "performance": {
+      "attacker_success_rate": 0.7,
+      "defender_control_rate": 0.3511111111111111,
+      "attacker_control_rate": 0.6488888888888888,
+      "avg_defender_return": -4.466666666666667,
+      "avg_defender_training_return": -53.21666666666668,
+      "avg_attacker_return": -116.66666666666667,
+      "avg_false_response_rate": 0.031111111111111114,
+      "avg_missed_response_rate": 0.06777777777777778,
+      "avg_inspection_precision": 0.26430807183482696,
+      "avg_episode_length": 60.0,
+      "sample_size": 30
+    },
+    "checkpoint_metric": "avg_defender_training_return",
+    "checkpoint_score": -53.21666666666668,
+    "num_episodes": 30
+  },
+  {
+    "episode": 450,
+    "performance": {
+      "attacker_success_rate": 0.6666666666666666,
+      "defender_control_rate": 0.36666666666666664,
+      "attacker_control_rate": 0.6333333333333333,
+      "avg_defender_return": -7.766666666666667,
+      "avg_defender_training_return": -52.79166666666667,
+      "avg_attacker_return": -120.4,
+      "avg_false_response_rate": 0.04333333333333333,
+      "avg_missed_response_rate": 0.07944444444444444,
+      "avg_inspection_precision": 0.26136728464796183,
+      "avg_episode_length": 60.0,
+      "sample_size": 30
+    },
+    "checkpoint_metric": "avg_defender_training_return",
+    "checkpoint_score": -52.79166666666667,
+    "num_episodes": 30
+  },
+  {
+    "episode": 500,
+    "performance": {
+      "attacker_success_rate": 0.6,
+      "defender_control_rate": 0.4149999999999999,
+      "attacker_control_rate": 0.5849999999999999,
+      "avg_defender_return": 4.7,
+      "avg_defender_training_return": -40.158333333333346,
+      "avg_attacker_return": -132.45,
+      "avg_false_response_rate": 0.03333333333333333,
+      "avg_missed_response_rate": 0.07944444444444443,
+      "avg_inspection_precision": 0.28830368553804686,
+      "avg_episode_length": 60.0,
+      "sample_size": 30
+    },
+    "checkpoint_metric": "avg_defender_training_return",
+    "checkpoint_score": -40.158333333333346,
+    "num_episodes": 30
+  },
+  {
+    "episode": 550,
+    "performance": {
+      "attacker_success_rate": 0.6333333333333333,
+      "defender_control_rate": 0.4283333333333334,
+      "attacker_control_rate": 0.5716666666666667,
+      "avg_defender_return": -0.6333333333333333,
+      "avg_defender_training_return": -40.64166666666668,
+      "avg_attacker_return": -135.8,
+      "avg_false_response_rate": 0.05222222222222223,
+      "avg_missed_response_rate": 0.08277777777777778,
+      "avg_inspection_precision": 0.23562525223422565,
+      "avg_episode_length": 60.0,
+      "sample_size": 30
+    },
+    "checkpoint_metric": "avg_defender_training_return",
+    "checkpoint_score": -40.64166666666668,
+    "num_episodes": 30
+  },
+  {
+    "episode": 600,
+    "performance": {
+      "attacker_success_rate": 0.5333333333333333,
+      "defender_control_rate": 0.4394444444444445,
+      "attacker_control_rate": 0.5605555555555556,
+      "avg_defender_return": 11.066666666666666,
+      "avg_defender_training_return": -36.113333333333344,
+      "avg_attacker_return": -138.91666666666666,
+      "avg_false_response_rate": 0.03777777777777779,
+      "avg_missed_response_rate": 0.07777777777777778,
+      "avg_inspection_precision": 0.24089747489033086,
+      "avg_episode_length": 60.0,
+      "sample_size": 30
+    },
+    "checkpoint_metric": "avg_defender_training_return",
+    "checkpoint_score": -36.113333333333344,
+    "num_episodes": 30
+  },
+  {
+    "episode": 650,
+    "performance": {
+      "attacker_success_rate": 0.8333333333333334,
+      "defender_control_rate": 0.3277777777777778,
+      "attacker_control_rate": 0.6722222222222223,
+      "avg_defender_return": -12.833333333333334,
+      "avg_defender_training_return": -60.79500000000001,
+      "avg_attacker_return": -111.06666666666666,
+      "avg_false_response_rate": 0.03111111111111112,
+      "avg_missed_response_rate": 0.07777777777777778,
+      "avg_inspection_precision": 0.24243883840712246,
+      "avg_episode_length": 60.0,
+      "sample_size": 30
+    },
+    "checkpoint_metric": "avg_defender_training_return",
+    "checkpoint_score": -60.79500000000001,
+    "num_episodes": 30
+  },
+  {
+    "episode": 700,
+    "performance": {
+      "attacker_success_rate": 0.5666666666666667,
+      "defender_control_rate": 0.4444444444444445,
+      "attacker_control_rate": 0.5555555555555555,
+      "avg_defender_return": 13.7,
+      "avg_defender_training_return": -35.941666666666684,
+      "avg_attacker_return": -140.01666666666668,
+      "avg_false_response_rate": 0.03555555555555556,
+      "avg_missed_response_rate": 0.08222222222222221,
+      "avg_inspection_precision": 0.22333441215291497,
+      "avg_episode_length": 60.0,
+      "sample_size": 30
+    },
+    "checkpoint_metric": "avg_defender_training_return",
+    "checkpoint_score": -35.941666666666684,
+    "num_episodes": 30
+  },
+  {
+    "episode": 750,
+    "performance": {
+      "attacker_success_rate": 0.7666666666666667,
+      "defender_control_rate": 0.3827777777777777,
+      "attacker_control_rate": 0.6172222222222222,
+      "avg_defender_return": 1.2333333333333334,
+      "avg_defender_training_return": -45.505,
+      "avg_attacker_return": -125.81666666666666,
+      "avg_false_response_rate": 0.020000000000000007,
+      "avg_missed_response_rate": 0.07722222222222225,
+      "avg_inspection_precision": 0.26318494747856436,
+      "avg_episode_length": 60.0,
+      "sample_size": 30
+    },
+    "checkpoint_metric": "avg_defender_training_return",
+    "checkpoint_score": -45.505,
+    "num_episodes": 30
+  },
+  {
+    "episode": 799,
+    "performance": {
+      "attacker_success_rate": 0.5333333333333333,
+      "defender_control_rate": 0.49000000000000005,
+      "attacker_control_rate": 0.5099999999999999,
+      "avg_defender_return": 20.2,
+      "avg_defender_training_return": -24.650000000000013,
+      "avg_attacker_return": -150.55,
+      "avg_false_response_rate": 0.03888888888888889,
+      "avg_missed_response_rate": 0.07888888888888888,
+      "avg_inspection_precision": 0.23672608734251238,
+      "avg_episode_length": 60.0,
+      "sample_size": 30
+    },
+    "checkpoint_metric": "avg_defender_training_return",
+    "checkpoint_score": -24.650000000000013,
+    "num_episodes": 30
+  }
+]

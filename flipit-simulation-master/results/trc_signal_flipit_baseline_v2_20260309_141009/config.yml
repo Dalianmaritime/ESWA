@@ -1,0 +1,95 @@
+experiment:
+  experiment_id: trc_signal_flipit_baseline_v2
+  experiment_type: baseline
+  scenario: maritime_platform_control
+  random_seed: 42
+environment:
+  env_id: MaritimeCheatAttention-v0
+  max_steps: 60
+  breach_prior: 0.08
+zones:
+- outer
+- lane
+- core
+signal_model:
+  mode: flipit
+  cheat_emit_prob: 0.0
+  takeover_detect_prob_by_zone:
+    outer: 0.35
+    lane: 0.48
+    core: 0.62
+  background_noise_by_zone:
+    outer: 0.01
+    lane: 0.01
+    core: 0.005
+  inspection_accuracy_by_zone:
+    outer: 0.78
+    lane: 0.84
+    core: 0.9
+transition_model:
+  base_takeover_success_by_zone:
+    outer: 0.62
+    lane: 0.55
+    core: 0.48
+  respond_block_multiplier_same_zone:
+    outer: 0.3
+    lane: 0.25
+    core: 0.2
+  inspect_block_multiplier_same_zone:
+    outer: 0.8
+    lane: 0.74
+    core: 0.68
+  off_zone_vulnerability_multiplier: 1.18
+  recapture_success_by_zone:
+    outer: 0.65
+    lane: 0.72
+    core: 0.78
+costs_and_rewards:
+  defender_control_reward: 1.2
+  attacker_control_reward: 1.2
+  attacker_cheat_cost: 6.0
+  attacker_takeover_cost_by_zone:
+    outer: 14.0
+    lane: 17.0
+    core: 20.0
+  defender_inspect_cost: 5.0
+  defender_respond_cost_by_zone:
+    outer: 14.0
+    lane: 16.0
+    core: 18.0
+  false_response_penalty: 2.5
+  missed_threat_penalty: 3.5
+resources:
+  attacker_initial_budget: 100.0
+  defender_initial_budget: 120.0
+  attacker_income_per_step: 3.0
+  defender_income_per_step: 3.5
+policies:
+  belief_signal_sensitivity: 0.65
+  belief_decay: 0.92
+  attacker:
+    allow_cheat: false
+    takeover_trigger_belief: 0.42
+    exploit_false_response: true
+  defender:
+    inspect_threshold: 0.22
+    respond_threshold: 0.58
+drl:
+  obs_dim: 17
+  action_dim: 7
+  training_episodes: 240
+  evaluation_frequency: 20
+  evaluation_episodes: 10
+  final_evaluation_episodes: 5
+  learning_starts: 100
+  update_frequency: 1
+  batch_size: 64
+  memory_size: 20000
+  lr: 0.0002
+  gamma: 0.99
+  v_min: -30.0
+  v_max: 30.0
+  atom_size: 51
+  beta_start: 0.4
+  beta_frames: 10000
+  target_update_freq: 100
