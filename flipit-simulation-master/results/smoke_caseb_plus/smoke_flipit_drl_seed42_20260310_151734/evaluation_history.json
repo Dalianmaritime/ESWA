@@ -1,0 +1,86 @@
+[
+  {
+    "episode": 0,
+    "performance": {
+      "attacker_success_rate": 0.9,
+      "defender_control_rate": 0.11499999999999999,
+      "attacker_control_rate": 0.885,
+      "avg_defender_return": -47.13333333333333,
+      "avg_defender_training_return": -139.41666666666669,
+      "avg_attacker_return": 4.75,
+      "avg_false_response_rate": 0.0,
+      "avg_missed_response_rate": 0.061388888888888896,
+      "avg_inspection_precision": 0.3916666666666666,
+      "avg_episode_length": 60.0,
+      "attacker_resource_collapse_rate": 0.0,
+      "defender_resource_collapse_rate": 0.0,
+      "avg_final_attacker_budget": 1.1700000000000055,
+      "avg_final_defender_budget": 61.87000000000015,
+      "avg_attacker_below_guarantee_steps": 0.45,
+      "avg_defender_below_guarantee_steps": 0.0,
+      "avg_defender_spent_budget": 60.0,
+      "avg_defender_control_per_cost": 0.11499999999999999,
+      "sample_size": 60,
+      "validation_selection_score": -50.202777777777776
+    },
+    "checkpoint_metric": "constrained_operational",
+    "checkpoint_score": -49.28194444444444,
+    "num_episodes": 60,
+    "selection_metrics": {
+      "security_pass_count": 0,
+      "security_deficit": 1.6016666666666666,
+      "economic_score": -49.28194444444444,
+      "selection_feasible_under_tolerance": false,
+      "selection_feasible_under_baseline": false,
+      "security_margin_vs_baseline": {
+        "attacker_success_rate": -0.9,
+        "defender_control_rate": -0.7016666666666667
+      },
+      "economic_margin_vs_baseline": -133.53333333333333,
+      "raw_return_over_baseline": false
+    },
+    "checkpoint_path": "E:\\1031\\flipit-simulation-master\\results\\smoke_caseb_plus\\smoke_flipit_drl_seed42_20260310_151734\\checkpoint_candidates\\episode_0000.pth"
+  },
+  {
+    "episode": 49,
+    "performance": {
+      "attacker_success_rate": 0.45,
+      "defender_control_rate": 0.5155555555555555,
+      "attacker_control_rate": 0.4844444444444445,
+      "avg_defender_return": -38.35,
+      "avg_defender_training_return": -66.38083333333338,
+      "avg_attacker_return": -40.28333333333333,
+      "avg_false_response_rate": 0.2708333333333333,
+      "avg_missed_response_rate": 0.07805555555555553,
+      "avg_inspection_precision": 0.2604094484436153,
+      "avg_episode_length": 60.0,
+      "attacker_resource_collapse_rate": 0.0,
+      "defender_resource_collapse_rate": 0.0,
+      "avg_final_attacker_budget": -0.6033333333333306,
+      "avg_final_defender_budget": 66.29666666666668,
+      "avg_attacker_below_guarantee_steps": 3.5,
+      "avg_defender_below_guarantee_steps": 0.0,
+      "avg_defender_spent_budget": 110.85,
+      "avg_defender_control_per_cost": 0.25255597415579584,
+      "sample_size": 60,
+      "validation_selection_score": -47.669444444444444
+    },
+    "checkpoint_metric": "constrained_operational",
+    "checkpoint_score": -46.49861111111111,
+    "num_episodes": 60,
+    "selection_metrics": {
+      "security_pass_count": 0,
+      "security_deficit": 0.7511111111111111,
+      "economic_score": -46.49861111111111,
+      "selection_feasible_under_tolerance": false,
+      "selection_feasible_under_baseline": false,
+      "security_margin_vs_baseline": {
+        "attacker_success_rate": -0.45,
+        "defender_control_rate": -0.3011111111111111
+      },
+      "economic_margin_vs_baseline": -124.75,
+      "raw_return_over_baseline": false
+    },
+    "checkpoint_path": "E:\\1031\\flipit-simulation-master\\results\\smoke_caseb_plus\\smoke_flipit_drl_seed42_20260310_151734\\checkpoint_candidates\\episode_0049.pth"
+  }
+]

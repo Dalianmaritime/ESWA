@@ -1,0 +1,18 @@
+{
+  "generated_at": "2026-03-10T15:17:34.703870",
+  "results_root": "E:\\1031\\flipit-simulation-master\\results\\smoke_caseb_plus",
+  "scenarios": {
+    "flipit": {
+      "num_runs": 1,
+      "seeds": [
+        42
+      ],
+      "source_result_dirs": [
+        "E:\\1031\\flipit-simulation-master\\results\\smoke_caseb_plus\\smoke_flipit_baseline_seed42_20260310_151721"
+      ],
+      "attacker_success_rate": 0.0,
+      "defender_control_rate": 0.8166666666666667,
+      "avg_defender_return": 86.4
+    }
+  }
+}

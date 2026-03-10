@@ -14,6 +14,7 @@ from typing import Any, Dict, List, Tuple
 
 from run_traditional_experiment_v2 import TraditionalExperimentV2
 from run_trc_full_training_v2 import SignalDRLTrainingExperimentV2
+from signal_v2_utils import write_baseline_reference_targets
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 DEFAULT_RESULTS_SUBDIR = "paper_v1_main"
@@ -67,6 +68,24 @@ def format_duration(seconds: float) -> str:
     if hours:
         return f"{hours}h {minutes:02d}m {seconds:02d}s"
     return f"{minutes}m {seconds:02d}s"
+
+
+def build_run_plan(selected_entries: List[Dict[str, Any]], seeds: List[int]) -> List[Tuple[Dict[str, Any], int]]:
+    method_rank = {"baseline": 0, "drl": 1}
+    scenario_rank = {scenario_id: index for index, scenario_id in enumerate(["cheat", "flipit"])}
+    planned_runs = [(entry, int(seed)) for entry in selected_entries for seed in seeds]
+    planned_runs.sort(
+        key=lambda item: (
+            method_rank.get(item[0]["method_id"], 99),
+            scenario_rank.get(item[0]["scenario_id"], 99),
+            int(item[1]),
+        )
+    )
+    return planned_runs
+
+
+def ensure_baseline_reference(results_root: Path, scenarios: List[str]) -> Path:
+    return write_baseline_reference_targets(results_root, scenarios=scenarios)
 
 
 def write_manifest(manifest: Dict[str, Any], results_root: Path) -> Path:
@@ -229,7 +248,8 @@ def main():
 
     results_root = build_results_root(args.results_subdir)
     completed_runs = find_completed_runs(results_root) if args.resume_missing else {}
-    total_runs = len(args.seeds) * len(selected_entries)
+    planned_runs = build_run_plan(selected_entries, [int(seed) for seed in args.seeds])
+    total_runs = len(planned_runs)
     batch_started_at = time.time()
     manifest = {
         "paper_group": "main",
@@ -254,67 +274,69 @@ def main():
             "updated_at": datetime.now().isoformat(),
         },
     )
-    for seed in args.seeds:
-        for entry in selected_entries:
-            print(
-                f"[PROGRESS] {render_progress_bar(completed_count, total_runs)} next={entry['scenario_id']}/{entry['method_id']}/seed{seed}",
-                flush=True,
-            )
-            current_experiment_id = build_experiment_id(entry["scenario_id"], entry["method_id"], int(seed))
-            average_duration = sum(run_durations) / len(run_durations) if run_durations else 0.0
-            remaining_runs = total_runs - completed_count
-            eta_seconds = average_duration * remaining_runs if run_durations else None
-            write_batch_progress(
-                results_root,
-                {
-                    "status": "running",
-                    "results_subdir": str(args.results_subdir),
-                    "completed_runs": completed_count,
-                    "total_runs": total_runs,
-                    "current_run": {
-                        "experiment_id": current_experiment_id,
-                        "scenario_id": entry["scenario_id"],
-                        "method_id": entry["method_id"],
-                        "seed": int(seed),
-                        "result_dir_glob": str(results_root / f"{current_experiment_id}_*"),
-                    },
-                    "elapsed_seconds": float(time.time() - batch_started_at),
-                    "eta_seconds": None if eta_seconds is None else float(max(0.0, eta_seconds)),
-                    "updated_at": datetime.now().isoformat(),
+    selected_scenarios = sorted({entry["scenario_id"] for entry in selected_entries})
+    baseline_reference_path: Path | None = None
+    for entry, seed in planned_runs:
+        print(
+            f"[PROGRESS] {render_progress_bar(completed_count, total_runs)} next={entry['scenario_id']}/{entry['method_id']}/seed{seed}",
+            flush=True,
+        )
+        if entry["method_id"] == "drl":
+            baseline_reference_path = ensure_baseline_reference(results_root, scenarios=selected_scenarios)
+            print(f"[INFO] Baseline reference targets: {baseline_reference_path}", flush=True)
+        current_experiment_id = build_experiment_id(entry["scenario_id"], entry["method_id"], int(seed))
+        average_duration = sum(run_durations) / len(run_durations) if run_durations else 0.0
+        remaining_runs = total_runs - completed_count
+        eta_seconds = average_duration * remaining_runs if run_durations else None
+        write_batch_progress(
+            results_root,
+            {
+                "status": "running",
+                "results_subdir": str(args.results_subdir),
+                "completed_runs": completed_count,
+                "total_runs": total_runs,
+                "current_run": {
+                    "experiment_id": current_experiment_id,
+                    "scenario_id": entry["scenario_id"],
+                    "method_id": entry["method_id"],
+                    "seed": int(seed),
+                    "result_dir_glob": str(results_root / f"{current_experiment_id}_*"),
+                    "baseline_reference_path": None if baseline_reference_path is None else str(baseline_reference_path),
                 },
-            )
-            start_time = time.time()
-            if args.resume_missing:
-                run_key = (entry["scenario_id"], entry["method_id"], int(seed))
-                reused = run_key in completed_runs
-            else:
-                reused = False
-            run_payload = collect_run(entry, args, int(seed), completed_runs)
-            manifest["runs"].append(run_payload)
-            elapsed = time.time() - start_time
-            if not reused:
-                run_durations.append(elapsed)
-            completed_count += 1
-            average_duration = sum(run_durations) / len(run_durations) if run_durations else 0.0
-            remaining_runs = total_runs - completed_count
-            eta_seconds = average_duration * remaining_runs
-            write_batch_progress(
-                results_root,
-                {
-                    "status": "running" if completed_count < total_runs else "completed",
-                    "results_subdir": str(args.results_subdir),
-                    "completed_runs": completed_count,
-                    "total_runs": total_runs,
-                    "current_run": None,
-                    "elapsed_seconds": float(time.time() - batch_started_at),
-                    "eta_seconds": float(max(0.0, eta_seconds)),
-                    "updated_at": datetime.now().isoformat(),
-                },
-            )
-            print(
-                f"[PROGRESS] {render_progress_bar(completed_count, total_runs)} elapsed={format_duration(elapsed)} eta={format_duration(eta_seconds)}",
-                flush=True,
-            )
+                "elapsed_seconds": float(time.time() - batch_started_at),
+                "eta_seconds": None if eta_seconds is None else float(max(0.0, eta_seconds)),
+                "updated_at": datetime.now().isoformat(),
+            },
+        )
+        start_time = time.time()
+        run_key = (entry["scenario_id"], entry["method_id"], int(seed))
+        reused = bool(args.resume_missing and run_key in completed_runs)
+        run_payload = collect_run(entry, args, int(seed), completed_runs)
+        manifest["runs"].append(run_payload)
+        elapsed = time.time() - start_time
+        if not reused:
+            run_durations.append(elapsed)
+        completed_count += 1
+        average_duration = sum(run_durations) / len(run_durations) if run_durations else 0.0
+        remaining_runs = total_runs - completed_count
+        eta_seconds = average_duration * remaining_runs
+        write_batch_progress(
+            results_root,
+            {
+                "status": "running" if completed_count < total_runs else "completed",
+                "results_subdir": str(args.results_subdir),
+                "completed_runs": completed_count,
+                "total_runs": total_runs,
+                "current_run": None,
+                "elapsed_seconds": float(time.time() - batch_started_at),
+                "eta_seconds": float(max(0.0, eta_seconds)),
+                "updated_at": datetime.now().isoformat(),
+            },
+        )
+        print(
+            f"[PROGRESS] {render_progress_bar(completed_count, total_runs)} elapsed={format_duration(elapsed)} eta={format_duration(eta_seconds)}",
+            flush=True,
+        )
 
     manifest_path = write_manifest(manifest, results_root)
     print(f"[INFO] Manifest written to {manifest_path}", flush=True)

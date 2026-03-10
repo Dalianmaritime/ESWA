@@ -20,6 +20,8 @@ KEY_METRICS = [
     "attacker_success_rate",
     "avg_defender_return",
     "avg_defender_training_return",
+    "avg_defender_spent_budget",
+    "avg_defender_control_per_cost",
     "avg_false_response_rate",
     "avg_missed_response_rate",
     "avg_inspection_precision",
@@ -90,7 +92,11 @@ def analyze_drl_run(run: Dict[str, Any]) -> Dict[str, Any]:
     checkpoint_selection = complete_results.get("checkpoint_selection", {})
     evaluation_history = complete_results.get("evaluation_history", [])
     training_config = complete_results.get("config_snapshot", {}).get("drl", {})
-    training_episodes = int(training_config.get("training_episodes", 0))
+    early_stopping = complete_results.get("early_stopping", {})
+    configured_training_episodes = int(training_config.get("training_episodes", 0))
+    completed_training_episodes = int(
+        early_stopping.get("completed_training_episodes", len(complete_results.get("training_history", [])))
+    )
     best_episode = checkpoint_selection.get("best_episode")
 
     last_window = evaluation_history[-LAST_EVAL_WINDOW:] if evaluation_history else []
@@ -104,12 +110,25 @@ def analyze_drl_run(run: Dict[str, Any]) -> Dict[str, Any]:
         "experiment_id": run["experiment_id"],
         "scenario_id": run["scenario_id"],
         "seed": run["seed"],
+        "selection_strategy": checkpoint_selection.get("strategy", "single_metric"),
         "best_checkpoint_episode": best_episode,
-        "training_episodes": training_episodes,
-        "checkpoint_selected_last_episode": best_episode == training_episodes - 1 if best_episode is not None else False,
+        "training_episodes": configured_training_episodes,
+        "completed_training_episodes": completed_training_episodes,
+        "checkpoint_selected_last_episode": best_episode == completed_training_episodes - 1 if best_episode is not None else False,
         "last_three_raw_returns": last_raw_returns,
         "last_eval_rising": bool(last_eval_rising),
         "final_validation_score": compute_validation_score(run["final_performance"]),
+        "selection_feasible_under_baseline": checkpoint_selection.get("best_selection_metrics", {}).get(
+            "selection_feasible_under_baseline"
+        ),
+        "security_margin_vs_baseline": checkpoint_selection.get("best_selection_metrics", {}).get(
+            "security_margin_vs_baseline"
+        ),
+        "economic_margin_vs_baseline": checkpoint_selection.get("best_selection_metrics", {}).get(
+            "economic_margin_vs_baseline"
+        ),
+        "early_stopping_triggered": bool(early_stopping.get("triggered", False)),
+        "early_stopping_trigger_episode": early_stopping.get("trigger_episode"),
     }
 
 
@@ -137,6 +156,9 @@ def assess_pilot_readiness(grouped_summary: Dict[Tuple[str, str], Dict[str, Any]
         if drl["attacker_success_rate"]["mean"] > baseline["attacker_success_rate"]["mean"]:
             passes = False
             reasons.append("DRL attacker success rate is higher than baseline")
+        if drl["defender_control_rate"]["mean"] < baseline["defender_control_rate"]["mean"]:
+            passes = False
+            reasons.append("DRL defender control rate is lower than baseline")
 
         false_improved = drl["avg_false_response_rate"]["mean"] < baseline["avg_false_response_rate"]["mean"]
         missed_improved = drl["avg_missed_response_rate"]["mean"] < baseline["avg_missed_response_rate"]["mean"]
@@ -184,12 +206,28 @@ def determine_debug_recommendation(
         scenario_data.get("available") and "DRL raw return does not exceed baseline" not in scenario_data["reasons"]
         for scenario_data in pilot_assessment["scenario_checks"].values()
     )
+    constrained_selection_active = bool(
+        drl_run_diagnostics and all(item.get("selection_strategy") == "constrained_operational" for item in drl_run_diagnostics)
+    )
     if raw_advantage_all:
+        if constrained_selection_active:
+            return {
+                "case": "C",
+                "action": "extend_training_then_retune_shaping",
+                "summary": "Constrained checkpoint selection is active, but operational superiority is still not consistent enough across scenarios.",
+                "recommended_training_episodes": 1200,
+                "recommended_evaluation_frequency": 100,
+                "follow_up_reward_tuning": {
+                    "training_missed_threat_penalty": "increase slightly",
+                    "training_false_response_penalty": "increase slightly",
+                    "training_positive_inspection_bonus": "decrease slightly",
+                },
+            }
         return {
             "case": "B",
-            "action": "switch_checkpoint_selection_metric",
+            "action": "apply_constrained_checkpoint_selection",
             "summary": "Raw-return advantage exists, but operational stability is not consistent enough across scenarios.",
-            "validation_selection_metric": "avg_defender_return - 50 * avg_missed_response_rate - 20 * avg_false_response_rate",
+            "validation_selection_metric": "constrained_operational baseline-aware checkpoint selection",
         }
 
     return {
@@ -362,6 +400,8 @@ def write_summary_markdown(
                     f"- attacker_success_rate: {group['attacker_success_rate']['mean']:.2%} +- {group['attacker_success_rate']['std']:.3f}",
                     f"- avg_defender_return: {group['avg_defender_return']['mean']:.3f} +- {group['avg_defender_return']['std']:.3f}",
                     f"- avg_defender_training_return: {group['avg_defender_training_return']['mean']:.3f} +- {group['avg_defender_training_return']['std']:.3f}",
+                    f"- avg_defender_spent_budget: {group['avg_defender_spent_budget']['mean']:.3f} +- {group['avg_defender_spent_budget']['std']:.3f}",
+                    f"- avg_defender_control_per_cost: {group['avg_defender_control_per_cost']['mean']:.3f} +- {group['avg_defender_control_per_cost']['std']:.3f}",
                     f"- avg_false_response_rate: {group['avg_false_response_rate']['mean']:.3f} +- {group['avg_false_response_rate']['std']:.3f}",
                     f"- avg_missed_response_rate: {group['avg_missed_response_rate']['mean']:.3f} +- {group['avg_missed_response_rate']['std']:.3f}",
                     f"- avg_inspection_precision: {group['avg_inspection_precision']['mean']:.3f} +- {group['avg_inspection_precision']['std']:.3f}",
@@ -430,6 +470,8 @@ def write_eswa_review_report(
                 f"### {SCENARIO_LABELS[scenario_id]}",
                 f"- DRL avg_defender_return: {drl['avg_defender_return']['mean']:.3f}",
                 f"- Baseline avg_defender_return: {baseline['avg_defender_return']['mean']:.3f}",
+                f"- DRL avg_defender_control_per_cost: {drl['avg_defender_control_per_cost']['mean']:.3f}",
+                f"- Baseline avg_defender_control_per_cost: {baseline['avg_defender_control_per_cost']['mean']:.3f}",
                 f"- DRL attacker_success_rate: {drl['attacker_success_rate']['mean']:.2%}",
                 f"- Baseline attacker_success_rate: {baseline['attacker_success_rate']['mean']:.2%}",
                 f"- DRL false/missed: {drl['avg_false_response_rate']['mean']:.3f} / {drl['avg_missed_response_rate']['mean']:.3f}",
@@ -474,7 +516,7 @@ def write_eswa_review_report(
     for diagnostic in sorted(drl_run_diagnostics, key=lambda item: (item["scenario_id"], item["seed"])):
         lines.extend(
             [
-                f"- {diagnostic['experiment_id']}: best_checkpoint_episode={diagnostic['best_checkpoint_episode']}, final_validation_score={diagnostic['final_validation_score']:.3f}, last_eval_rising={diagnostic['last_eval_rising']}",
+                f"- {diagnostic['experiment_id']}: strategy={diagnostic['selection_strategy']}, best_checkpoint_episode={diagnostic['best_checkpoint_episode']}, final_validation_score={diagnostic['final_validation_score']:.3f}, feasible_under_baseline={diagnostic['selection_feasible_under_baseline']}, last_eval_rising={diagnostic['last_eval_rising']}",
             ]
         )
 

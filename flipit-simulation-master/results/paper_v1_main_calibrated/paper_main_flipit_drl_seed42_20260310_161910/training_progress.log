@@ -1,0 +1,16 @@
+[2026-03-10T16:19:12.316345] status=running completed=0/900 metric=constrained_operational best_episode=None best_score=None
+[2026-03-10T16:19:19.417912] status=running completed=1/900 metric=constrained_operational best_episode=0 best_score=-49.28194444444444
+[2026-03-10T16:20:07.296537] status=running completed=51/900 metric=constrained_operational best_episode=50 best_score=74.54583333333333
+[2026-03-10T16:20:59.280609] status=running completed=101/900 metric=constrained_operational best_episode=100 best_score=95.61666666666667
+[2026-03-10T16:21:50.070834] status=running completed=151/900 metric=constrained_operational best_episode=100 best_score=95.61666666666667
+[2026-03-10T16:22:43.095422] status=running completed=201/900 metric=constrained_operational best_episode=200 best_score=136.33055555555555
+[2026-03-10T16:23:33.733238] status=running completed=251/900 metric=constrained_operational best_episode=200 best_score=136.33055555555555
+[2026-03-10T16:24:22.212049] status=running completed=301/900 metric=constrained_operational best_episode=200 best_score=136.33055555555555
+[2026-03-10T16:25:10.394458] status=running completed=351/900 metric=constrained_operational best_episode=200 best_score=136.33055555555555
+[2026-03-10T16:25:58.654462] status=running completed=401/900 metric=constrained_operational best_episode=200 best_score=136.33055555555555
+[2026-03-10T16:26:46.632787] status=running completed=451/900 metric=constrained_operational best_episode=200 best_score=136.33055555555555
+[2026-03-10T16:27:35.536976] status=running completed=501/900 metric=constrained_operational best_episode=200 best_score=136.33055555555555
+[2026-03-10T16:28:24.318153] status=running completed=551/900 metric=constrained_operational best_episode=200 best_score=136.33055555555555
+[2026-03-10T16:29:12.664833] status=running completed=601/900 metric=constrained_operational best_episode=200 best_score=136.33055555555555
+[2026-03-10T16:29:12.665751] status=stopped_early completed=601/900 metric=constrained_operational best_episode=200 best_score=136.33055555555555
+[2026-03-10T16:29:56.063114] status=completed_early_stopping completed=601/900 metric=constrained_operational best_episode=600 best_score=145.14444444444445

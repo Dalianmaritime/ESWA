@@ -100,11 +100,26 @@ policies:
 drl:
   obs_dim: 17
   action_dim: 7
-  training_episodes: 800
+  training_episodes: 1200
   evaluation_frequency: 50
   evaluation_episodes: 30
   final_evaluation_episodes: 100
   checkpoint_selection_metric: validation_selection_score
+  checkpoint_selection:
+    strategy: constrained_operational
+    reference_mode: scenario_mean
+    reference_manifest: auto
+    routine_eval_episodes: 60
+    confirmation_eval_episodes: 120
+    candidate_pool_size: 3
+    tolerance:
+      attacker_success_rate: 0.03
+      defender_control_rate: 0.03
+    strict_require_raw_return_advantage: true
+    economic_penalties:
+      false_response_rate: 20.0
+      missed_response_rate: 35.0
+    tiebreaker: defender_control_per_cost
   report_metric: avg_defender_return
   learning_starts: 100
   update_frequency: 1
@@ -118,13 +133,17 @@ drl:
   beta_start: 0.4
   beta_frames: 10000
   target_update_freq: 100
-  training_control_bonus: 2.0
-  training_attacker_control_penalty: 2.0
+  early_stopping:
+    enabled: false
+    min_training_episodes: 400
+    patience_evaluations: 8
+  training_control_bonus: 2.5
+  training_attacker_control_penalty: 2.8
   training_positive_inspection_bonus: 0.8
-  training_successful_response_bonus: 2.5
+  training_successful_response_bonus: 3.0
   training_false_response_penalty: 1.5
-  training_missed_threat_penalty: 2.5
+  training_missed_threat_penalty: 3.2
   training_inspect_cost_weight: 0.25
-  training_respond_cost_weight: 0.35
+  training_respond_cost_weight: 0.3
   training_resource_collapse_penalty: 8.0
   training_opponent_resource_collapse_bonus: 4.0

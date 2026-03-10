@@ -1,0 +1,41 @@
+{
+  "paper_group": "main",
+  "timestamp": "2026-03-10T14:03:15.240595",
+  "seeds": [
+    123
+  ],
+  "resume_missing": false,
+  "results_subdir": "paper_v1_main_calibrated",
+  "runs": [
+    {
+      "experiment_id": "paper_main_flipit_drl_seed123",
+      "scenario_id": "flipit",
+      "method_id": "drl",
+      "seed": 123,
+      "config_path": "E:\\1031\\flipit-simulation-master\\configs\\paper_v1\\main\\main_flipit_drl.yml",
+      "result_dir": "E:\\1031\\flipit-simulation-master\\results\\paper_v1_main_calibrated\\paper_main_flipit_drl_seed123_20260310_140316",
+      "final_performance": {
+        "attacker_success_rate": 0.1,
+        "defender_control_rate": 0.7466666666666667,
+        "attacker_control_rate": 0.25333333333333335,
+        "avg_defender_return": 102.07,
+        "avg_defender_training_return": 52.624,
+        "avg_attacker_return": -65.44,
+        "avg_false_response_rate": 0.026000000000000002,
+        "avg_missed_response_rate": 0.06149999999999999,
+        "avg_inspection_precision": 0.18302449789449085,
+        "avg_episode_length": 60.0,
+        "attacker_resource_collapse_rate": 0.0,
+        "defender_resource_collapse_rate": 0.0,
+        "avg_final_attacker_budget": -0.8000000000000003,
+        "avg_final_defender_budget": 149.79000000000005,
+        "avg_attacker_below_guarantee_steps": 4.25,
+        "avg_defender_below_guarantee_steps": 0.0,
+        "avg_defender_spent_budget": 59.25,
+        "avg_defender_control_per_cost": 0.7978903200169989,
+        "sample_size": 100,
+        "validation_selection_score": 98.475
+      }
+    }
+  ]
+}

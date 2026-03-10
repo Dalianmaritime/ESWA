@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import sys
+import json
+import os
 from pathlib import Path
 
 import torch
@@ -10,7 +12,18 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "gym-flipit-master"))
 sys.path.insert(0, str(ROOT / "flipit-simulation-master"))
 
-from signal_v2_utils import compute_final_performance, generate_summary_markdown, get_metric_value, summarize_episode
+from signal_v2_utils import (
+    build_baseline_reference_targets,
+    compute_checkpoint_selection_metrics,
+    compute_final_performance,
+    confirmation_candidate_sort_key,
+    constrained_candidate_improves,
+    generate_summary_markdown,
+    get_metric_value,
+    routine_candidate_sort_key,
+    should_trigger_early_stopping,
+    summarize_episode,
+)
 from strategies.signal_rainbow_dqn_v2 import SignalRainbowDQNAgentV2, project_distribution
 
 
@@ -97,6 +110,8 @@ def test_compute_final_performance_keeps_training_reward_separate_from_raw_retur
                 "missed_response_rate": 0.05,
                 "inspection_precision": 0.6,
                 "episode_length": 10,
+                "total_defender_action_cost": 3.0,
+                "defender_control_per_cost": 0.8,
             },
             {
                 "attacker_success": True,
@@ -109,11 +124,15 @@ def test_compute_final_performance_keeps_training_reward_separate_from_raw_retur
                 "missed_response_rate": 0.15,
                 "inspection_precision": 0.4,
                 "episode_length": 12,
+                "total_defender_action_cost": 5.0,
+                "defender_control_per_cost": 0.4,
             },
         ]
     )
     assert performance["avg_defender_return"] == -1.0
     assert performance["avg_defender_training_return"] == 3.0
+    assert performance["avg_defender_spent_budget"] == 4.0
+    assert performance["avg_defender_control_per_cost"] == pytest.approx(0.6)
     assert performance["validation_selection_score"] == pytest.approx(-1.0 - 50.0 * 0.1 - 20.0 * 0.15)
 
 
@@ -178,3 +197,194 @@ def test_valid_action_mask_blocks_unaffordable_inspect_and_respond_actions():
     assert mask[0, 0].item() is True
     assert mask[0, 1].item() is True
     assert mask[0, 4].item() is False
+
+
+def test_constrained_selection_prefers_security_feasible_candidate():
+    reference_targets = {
+        "attacker_success_rate": 0.18,
+        "defender_control_rate": 0.67,
+        "avg_defender_return": 40.0,
+    }
+    higher_raw_but_less_secure = {
+        "episode": 600,
+        "performance": {
+            "attacker_success_rate": 0.27,
+            "defender_control_rate": 0.61,
+            "avg_defender_return": 70.0,
+            "avg_false_response_rate": 0.02,
+            "avg_missed_response_rate": 0.04,
+            "avg_defender_control_per_cost": 0.50,
+        },
+    }
+    safer_candidate = {
+        "episode": 300,
+        "performance": {
+            "attacker_success_rate": 0.20,
+            "defender_control_rate": 0.65,
+            "avg_defender_return": 54.0,
+            "avg_false_response_rate": 0.04,
+            "avg_missed_response_rate": 0.05,
+            "avg_defender_control_per_cost": 0.62,
+        },
+    }
+    for candidate in (higher_raw_but_less_secure, safer_candidate):
+        candidate["selection_metrics"] = compute_checkpoint_selection_metrics(
+            candidate["performance"],
+            reference_targets,
+            attacker_success_tolerance=0.03,
+            defender_control_tolerance=0.03,
+        )
+
+    ranked = sorted([higher_raw_but_less_secure, safer_candidate], key=routine_candidate_sort_key)
+    assert ranked[0]["episode"] == 300
+    assert ranked[0]["selection_metrics"]["selection_feasible_under_tolerance"] is True
+
+
+def test_confirmation_selection_falls_back_to_minimum_security_deficit():
+    reference_targets = {
+        "attacker_success_rate": 0.18,
+        "defender_control_rate": 0.67,
+        "avg_defender_return": 40.0,
+    }
+    candidate_a = {
+        "episode": 200,
+        "performance": {
+            "attacker_success_rate": 0.22,
+            "defender_control_rate": 0.61,
+            "avg_defender_return": 60.0,
+            "avg_false_response_rate": 0.02,
+            "avg_missed_response_rate": 0.03,
+            "avg_defender_control_per_cost": 0.55,
+        },
+    }
+    candidate_b = {
+        "episode": 350,
+        "performance": {
+            "attacker_success_rate": 0.20,
+            "defender_control_rate": 0.63,
+            "avg_defender_return": 55.0,
+            "avg_false_response_rate": 0.03,
+            "avg_missed_response_rate": 0.04,
+            "avg_defender_control_per_cost": 0.58,
+        },
+    }
+    for candidate in (candidate_a, candidate_b):
+        candidate["selection_metrics"] = compute_checkpoint_selection_metrics(candidate["performance"], reference_targets)
+        assert candidate["selection_metrics"]["selection_feasible_under_baseline"] is False
+
+    ranked = sorted([candidate_a, candidate_b], key=confirmation_candidate_sort_key)
+    assert ranked[0]["episode"] == 350
+    assert ranked[0]["selection_metrics"]["security_deficit"] < ranked[1]["selection_metrics"]["security_deficit"]
+
+
+def test_constrained_candidate_improves_tracks_security_first_improvement():
+    reference_targets = {
+        "attacker_success_rate": 0.18,
+        "defender_control_rate": 0.67,
+        "avg_defender_return": 40.0,
+    }
+    current_best = {
+        "episode": 600,
+        "performance": {
+            "attacker_success_rate": 0.27,
+            "defender_control_rate": 0.61,
+            "avg_defender_return": 70.0,
+            "avg_false_response_rate": 0.02,
+            "avg_missed_response_rate": 0.04,
+            "avg_defender_control_per_cost": 0.50,
+        },
+    }
+    safer_candidate = {
+        "episode": 300,
+        "performance": {
+            "attacker_success_rate": 0.20,
+            "defender_control_rate": 0.65,
+            "avg_defender_return": 54.0,
+            "avg_false_response_rate": 0.04,
+            "avg_missed_response_rate": 0.05,
+            "avg_defender_control_per_cost": 0.62,
+        },
+    }
+    for candidate in (current_best, safer_candidate):
+        candidate["selection_metrics"] = compute_checkpoint_selection_metrics(
+            candidate["performance"],
+            reference_targets,
+            attacker_success_tolerance=0.03,
+            defender_control_tolerance=0.03,
+        )
+
+    assert constrained_candidate_improves(safer_candidate, current_best) is True
+    assert constrained_candidate_improves(current_best, safer_candidate) is False
+
+
+def test_should_trigger_early_stopping_requires_minimum_training_and_patience():
+    assert should_trigger_early_stopping(
+        enabled=False,
+        current_episode=499,
+        min_training_episodes=200,
+        evaluations_since_improvement=8,
+        patience_evaluations=6,
+    ) is False
+    assert should_trigger_early_stopping(
+        enabled=True,
+        current_episode=149,
+        min_training_episodes=200,
+        evaluations_since_improvement=6,
+        patience_evaluations=6,
+    ) is False
+    assert should_trigger_early_stopping(
+        enabled=True,
+        current_episode=249,
+        min_training_episodes=200,
+        evaluations_since_improvement=5,
+        patience_evaluations=6,
+    ) is False
+    assert should_trigger_early_stopping(
+        enabled=True,
+        current_episode=249,
+        min_training_episodes=200,
+        evaluations_since_improvement=6,
+        patience_evaluations=6,
+    ) is True
+
+
+def test_build_baseline_reference_targets_aggregates_latest_baseline_runs(tmp_path: Path):
+    results_root = tmp_path / "results"
+    results_root.mkdir()
+    payloads = [
+        ("paper_main_flipit_baseline_seed42_a", "flipit", 42, 0.16, 0.68, 41.6),
+        ("paper_main_flipit_baseline_seed42_b", "flipit", 42, 0.18, 0.60, 10.0),
+        ("paper_main_flipit_baseline_seed123", "flipit", 123, 0.19, 0.67, 36.9),
+        ("paper_main_cheat_baseline_seed42", "cheat", 42, 0.27, 0.58, -5.0),
+    ]
+    for name, scenario_id, seed, attacker_success, defender_control, raw_return in payloads:
+        run_dir = results_root / name
+        run_dir.mkdir()
+        (run_dir / "complete_training_results.json").write_text(
+            json.dumps(
+                {
+                    "experiment_info": {
+                        "scenario_id": scenario_id,
+                        "method_id": "baseline",
+                        "random_seed": seed,
+                    },
+                    "final_performance": {
+                        "attacker_success_rate": attacker_success,
+                        "defender_control_rate": defender_control,
+                        "avg_defender_return": raw_return,
+                    },
+                }
+            ),
+            encoding="utf-8",
+        )
+        timestamp = 100 if name.endswith("_a") else 200 if name.endswith("_b") else 300
+        os.utime(run_dir, (timestamp, timestamp))
+        os.utime(run_dir / "complete_training_results.json", (timestamp, timestamp))
+
+    reference_payload = build_baseline_reference_targets(results_root, scenarios=["flipit"])
+    flipit = reference_payload["scenarios"]["flipit"]
+    assert flipit["num_runs"] == 2
+    assert flipit["seeds"] == [42, 123]
+    assert flipit["attacker_success_rate"] == pytest.approx((0.18 + 0.19) / 2.0)
+    assert flipit["defender_control_rate"] == pytest.approx((0.60 + 0.67) / 2.0)
+    assert flipit["avg_defender_return"] == pytest.approx((10.0 + 36.9) / 2.0)

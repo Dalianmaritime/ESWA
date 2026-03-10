@@ -301,3 +301,16 @@ def test_termination_info_reports_budget_collapse_metadata(deterministic_config)
     assert info["termination_reason"] == "defender_resource_collapse"
     assert "attacker_below_guarantee_streak" in info
     assert "defender_below_guarantee_streak" in info
+
+
+def test_environment_reports_action_costs_and_cumulative_defender_spend(deterministic_config):
+    env = MaritimeCheatAttentionEnv(deterministic_config)
+    _, _ = env.reset(seed=7)
+    _, _, _, _, info = env.step((0, 4))
+    assert info["attacker_action_cost"] == pytest.approx(0.0)
+    assert info["defender_action_cost"] == pytest.approx(
+        deterministic_config["costs_and_rewards"]["defender_respond_cost_by_zone"]["outer"]
+    )
+    assert info["episode_metrics_snapshot"]["total_defender_action_cost"] == pytest.approx(
+        deterministic_config["costs_and_rewards"]["defender_respond_cost_by_zone"]["outer"]
+    )

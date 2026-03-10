@@ -6,7 +6,7 @@ import json
 import random
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, Iterable, List
+from typing import Any, Dict, Iterable, List, Tuple
 
 import numpy as np
 import torch
@@ -19,6 +19,215 @@ def compute_validation_selection_score(
     avg_false_response_rate: float,
 ) -> float:
     return float(avg_defender_return - 50.0 * avg_missed_response_rate - 20.0 * avg_false_response_rate)
+
+
+def compute_economic_score(
+    performance: Dict[str, Any],
+    false_response_penalty: float = 20.0,
+    missed_response_penalty: float = 35.0,
+) -> float:
+    return float(
+        performance["avg_defender_return"]
+        - false_response_penalty * performance["avg_false_response_rate"]
+        - missed_response_penalty * performance["avg_missed_response_rate"]
+    )
+
+
+def compute_security_deficit(performance: Dict[str, Any], reference_targets: Dict[str, float]) -> float:
+    attacker_gap = max(0.0, float(performance["attacker_success_rate"]) - float(reference_targets["attacker_success_rate"]))
+    defender_gap = max(0.0, float(reference_targets["defender_control_rate"]) - float(performance["defender_control_rate"]))
+    return float(attacker_gap + defender_gap)
+
+
+def compute_checkpoint_selection_metrics(
+    performance: Dict[str, Any],
+    reference_targets: Dict[str, float],
+    attacker_success_tolerance: float = 0.03,
+    defender_control_tolerance: float = 0.03,
+    false_response_penalty: float = 20.0,
+    missed_response_penalty: float = 35.0,
+    strict_require_raw_return_advantage: bool = True,
+) -> Dict[str, Any]:
+    performance_attacker_success = float(performance["attacker_success_rate"])
+    performance_defender_control = float(performance["defender_control_rate"])
+    performance_raw_return = float(performance["avg_defender_return"])
+    reference_attacker_success = float(reference_targets["attacker_success_rate"])
+    reference_defender_control = float(reference_targets["defender_control_rate"])
+    reference_raw_return = float(reference_targets["avg_defender_return"])
+
+    attacker_success_with_tolerance = performance_attacker_success <= reference_attacker_success + attacker_success_tolerance
+    defender_control_with_tolerance = performance_defender_control >= reference_defender_control - defender_control_tolerance
+    attacker_success_under_baseline = performance_attacker_success <= reference_attacker_success
+    defender_control_over_baseline = performance_defender_control >= reference_defender_control
+    raw_return_over_baseline = performance_raw_return > reference_raw_return if strict_require_raw_return_advantage else True
+
+    return {
+        "security_pass_count": int(attacker_success_with_tolerance) + int(defender_control_with_tolerance),
+        "security_deficit": compute_security_deficit(performance, reference_targets),
+        "economic_score": compute_economic_score(
+            performance,
+            false_response_penalty=false_response_penalty,
+            missed_response_penalty=missed_response_penalty,
+        ),
+        "selection_feasible_under_tolerance": bool(attacker_success_with_tolerance and defender_control_with_tolerance),
+        "selection_feasible_under_baseline": bool(
+            attacker_success_under_baseline and defender_control_over_baseline and raw_return_over_baseline
+        ),
+        "security_margin_vs_baseline": {
+            "attacker_success_rate": float(reference_attacker_success - performance_attacker_success),
+            "defender_control_rate": float(performance_defender_control - reference_defender_control),
+        },
+        "economic_margin_vs_baseline": float(performance_raw_return - reference_raw_return),
+        "raw_return_over_baseline": bool(raw_return_over_baseline),
+    }
+
+
+def routine_candidate_sort_key(candidate: Dict[str, Any]) -> Tuple[float, ...]:
+    selection_metrics = candidate["selection_metrics"]
+    performance = candidate["performance"]
+    return (
+        -float(selection_metrics["security_pass_count"]),
+        float(selection_metrics["security_deficit"]),
+        -float(performance["avg_defender_return"]),
+        -float(performance.get("avg_defender_control_per_cost", 0.0)),
+        float(performance["avg_missed_response_rate"]),
+        float(performance["avg_false_response_rate"]),
+        float(candidate.get("episode", 0)),
+    )
+
+
+def confirmation_candidate_sort_key(candidate: Dict[str, Any]) -> Tuple[float, ...]:
+    selection_metrics = candidate["selection_metrics"]
+    performance = candidate["performance"]
+    return (
+        0.0 if selection_metrics["selection_feasible_under_baseline"] else 1.0,
+        float(selection_metrics["security_deficit"]),
+        -float(performance["avg_defender_return"]),
+        -float(performance.get("avg_defender_control_per_cost", 0.0)),
+        float(performance["avg_missed_response_rate"]),
+        float(performance["avg_false_response_rate"]),
+        float(candidate.get("episode", 0)),
+    )
+
+
+def constrained_candidate_improves(
+    candidate: Dict[str, Any],
+    current_best_candidate: Dict[str, Any] | None,
+) -> bool:
+    if current_best_candidate is None:
+        return True
+    return routine_candidate_sort_key(candidate) < routine_candidate_sort_key(current_best_candidate)
+
+
+def should_trigger_early_stopping(
+    enabled: bool,
+    current_episode: int,
+    min_training_episodes: int,
+    evaluations_since_improvement: int,
+    patience_evaluations: int,
+) -> bool:
+    if not enabled or patience_evaluations <= 0:
+        return False
+    completed_episodes = int(current_episode) + 1
+    if completed_episodes < int(min_training_episodes):
+        return False
+    return int(evaluations_since_improvement) >= int(patience_evaluations)
+
+
+def _load_complete_result_from_dir(result_dir: Path) -> Dict[str, Any]:
+    with open(result_dir / "complete_training_results.json", "r", encoding="utf-8") as handle:
+        return json.load(handle)
+
+
+def build_baseline_reference_targets(results_root: Path, scenarios: Iterable[str] | None = None) -> Dict[str, Any]:
+    scenario_filter = {str(item) for item in scenarios} if scenarios is not None else None
+    latest_runs: Dict[Tuple[str, int], Dict[str, Any]] = {}
+    if not results_root.exists():
+        raise FileNotFoundError(f"Results root does not exist: {results_root}")
+
+    for result_dir in results_root.iterdir():
+        if not result_dir.is_dir():
+            continue
+        result_path = result_dir / "complete_training_results.json"
+        if not result_path.exists():
+            continue
+        try:
+            complete_results = _load_complete_result_from_dir(result_dir)
+        except (OSError, json.JSONDecodeError, KeyError):
+            continue
+
+        experiment_info = complete_results.get("experiment_info", {})
+        if str(experiment_info.get("method_id")) != "baseline":
+            continue
+
+        scenario_id = str(experiment_info.get("scenario_id", ""))
+        random_seed = experiment_info.get("random_seed")
+        final_performance = complete_results.get("final_performance")
+        if not scenario_id or random_seed is None or final_performance is None:
+            continue
+        if scenario_filter is not None and scenario_id not in scenario_filter:
+            continue
+
+        key = (scenario_id, int(random_seed))
+        candidate = {
+            "scenario_id": scenario_id,
+            "seed": int(random_seed),
+            "result_dir": str(result_dir.resolve()),
+            "final_performance": final_performance,
+            "_sort_key": result_dir.stat().st_mtime,
+        }
+        existing = latest_runs.get(key)
+        if existing is None or candidate["_sort_key"] > existing["_sort_key"]:
+            latest_runs[key] = candidate
+
+    grouped: Dict[str, List[Dict[str, Any]]] = {}
+    for candidate in latest_runs.values():
+        grouped.setdefault(candidate["scenario_id"], []).append(candidate)
+
+    if scenario_filter is not None:
+        missing = sorted(scenario_filter.difference(grouped.keys()))
+        if missing:
+            raise FileNotFoundError(
+                f"Missing baseline references for scenarios {missing} under {results_root}"
+            )
+
+    scenarios_payload = {}
+    for scenario_id, run_entries in grouped.items():
+        performances = [entry["final_performance"] for entry in run_entries]
+        scenarios_payload[scenario_id] = {
+            "num_runs": len(run_entries),
+            "seeds": sorted(entry["seed"] for entry in run_entries),
+            "source_result_dirs": [entry["result_dir"] for entry in sorted(run_entries, key=lambda item: item["seed"])],
+            "attacker_success_rate": float(np.mean([item["attacker_success_rate"] for item in performances])),
+            "defender_control_rate": float(np.mean([item["defender_control_rate"] for item in performances])),
+            "avg_defender_return": float(np.mean([item["avg_defender_return"] for item in performances])),
+        }
+
+    return {
+        "generated_at": datetime.now().isoformat(),
+        "results_root": str(results_root.resolve()),
+        "scenarios": scenarios_payload,
+    }
+
+
+def write_baseline_reference_targets(results_root: Path, scenarios: Iterable[str] | None = None) -> Path:
+    payload = build_baseline_reference_targets(results_root, scenarios=scenarios)
+    results_root.mkdir(parents=True, exist_ok=True)
+    output_path = results_root / "baseline_reference_targets.json"
+    save_json(output_path, payload)
+    return output_path
+
+
+def load_baseline_reference_targets(results_root: Path, scenario_id: str) -> Dict[str, Any]:
+    reference_path = results_root / "baseline_reference_targets.json"
+    if not reference_path.exists():
+        write_baseline_reference_targets(results_root, scenarios=[scenario_id])
+    with open(reference_path, "r", encoding="utf-8") as handle:
+        payload = json.load(handle)
+    scenario_payload = payload.get("scenarios", {}).get(str(scenario_id))
+    if scenario_payload is None:
+        raise FileNotFoundError(f"No baseline reference targets found for scenario '{scenario_id}' in {reference_path}")
+    return scenario_payload
 
 
 def load_config(config_path: str) -> Dict[str, Any]:
@@ -70,6 +279,8 @@ def make_step_record(step_index: int, info: Dict[str, Any]) -> Dict[str, Any]:
         "response_success": bool(info["response_success"]),
         "attacker_budget_remaining": float(info["attacker_budget_remaining"]),
         "defender_budget_remaining": float(info["defender_budget_remaining"]),
+        "attacker_action_cost": float(info.get("attacker_action_cost", 0.0)),
+        "defender_action_cost": float(info.get("defender_action_cost", 0.0)),
         "attacker_base_income_applied": float(info.get("attacker_base_income_applied", 0.0)),
         "defender_base_income_applied": float(info.get("defender_base_income_applied", 0.0)),
         "attacker_control_bonus_applied": float(info.get("attacker_control_bonus_applied", 0.0)),
@@ -103,6 +314,8 @@ def summarize_episode(
     missed_responses = int(metrics.get("missed_responses", 0))
     attacker_below_guarantee_steps = int(metrics.get("attacker_below_guarantee_steps", 0))
     defender_below_guarantee_steps = int(metrics.get("defender_below_guarantee_steps", 0))
+    total_attacker_action_cost = float(metrics.get("total_attacker_action_cost", 0.0))
+    total_defender_action_cost = float(metrics.get("total_defender_action_cost", 0.0))
 
     if steps == 0:
         attacker_control_rate = 0.0
@@ -116,6 +329,7 @@ def summarize_episode(
         missed_response_rate = missed_responses / steps
 
     inspection_precision = positive_inspections / inspect_actions if inspect_actions else 0.0
+    defender_control_per_cost = defender_control_steps / max(total_defender_action_cost, 1.0)
     winner = last_info.get("winner") or (
         "attacker"
         if attacker_control_steps > defender_control_steps
@@ -132,6 +346,9 @@ def summarize_episode(
         "defender_training_return": float(
             defender_return if defender_training_return is None else defender_training_return
         ),
+        "total_attacker_action_cost": total_attacker_action_cost,
+        "total_defender_action_cost": total_defender_action_cost,
+        "defender_control_per_cost": float(defender_control_per_cost),
         "attacker_control_rate": attacker_control_rate,
         "defender_control_rate": defender_control_rate,
         "false_response_rate": false_response_rate,
@@ -171,6 +388,8 @@ def compute_final_performance(episodes: Iterable[Dict[str, Any]]) -> Dict[str, A
             "avg_final_defender_budget": 0.0,
             "avg_attacker_below_guarantee_steps": 0.0,
             "avg_defender_below_guarantee_steps": 0.0,
+            "avg_defender_spent_budget": 0.0,
+            "avg_defender_control_per_cost": 0.0,
             "validation_selection_score": 0.0,
             "sample_size": 0,
         }
@@ -202,6 +421,10 @@ def compute_final_performance(episodes: Iterable[Dict[str, Any]]) -> Dict[str, A
         "avg_defender_below_guarantee_steps": float(
             np.mean([episode.get("defender_below_guarantee_steps", 0.0) for episode in episode_list])
         ),
+        "avg_defender_spent_budget": float(np.mean([episode.get("total_defender_action_cost", 0.0) for episode in episode_list])),
+        "avg_defender_control_per_cost": float(
+            np.mean([episode.get("defender_control_per_cost", 0.0) for episode in episode_list])
+        ),
         "sample_size": int(sample_size),
     }
     performance["validation_selection_score"] = compute_validation_selection_score(
@@ -228,12 +451,15 @@ def generate_summary_markdown(results: Dict[str, Any]) -> str:
     perf = results["final_performance"]
     metric_conventions = results.get("metric_conventions", {})
     checkpoint_selection = results.get("checkpoint_selection", {})
+    early_stopping = results.get("early_stopping", {})
     attacker_resource_collapse_rate = float(perf.get("attacker_resource_collapse_rate", 0.0))
     defender_resource_collapse_rate = float(perf.get("defender_resource_collapse_rate", 0.0))
     avg_final_attacker_budget = float(perf.get("avg_final_attacker_budget", 0.0))
     avg_final_defender_budget = float(perf.get("avg_final_defender_budget", 0.0))
     avg_attacker_below_guarantee_steps = float(perf.get("avg_attacker_below_guarantee_steps", 0.0))
     avg_defender_below_guarantee_steps = float(perf.get("avg_defender_below_guarantee_steps", 0.0))
+    avg_defender_spent_budget = float(perf.get("avg_defender_spent_budget", 0.0))
+    avg_defender_control_per_cost = float(perf.get("avg_defender_control_per_cost", 0.0))
 
     lines = [
         "# Maritime Cheat-FlipIt V2 Experiment Summary",
@@ -257,6 +483,14 @@ def generate_summary_markdown(results: Dict[str, Any]) -> str:
                 f"- Best checkpoint episode: {checkpoint_selection.get('best_episode', 'n/a')}",
             ]
         )
+    if early_stopping:
+        lines.extend(
+            [
+                f"- Early stopping enabled: {bool(early_stopping.get('enabled', False))}",
+                f"- Early stopping triggered: {bool(early_stopping.get('triggered', False))}",
+                f"- Completed training episodes: {int(early_stopping.get('completed_training_episodes', 0))}",
+            ]
+        )
 
     lines.extend(
         [
@@ -277,6 +511,8 @@ def generate_summary_markdown(results: Dict[str, Any]) -> str:
             f"- Avg final defender budget: {avg_final_defender_budget:.3f}",
             f"- Avg attacker below-guarantee steps: {avg_attacker_below_guarantee_steps:.3f}",
             f"- Avg defender below-guarantee steps: {avg_defender_below_guarantee_steps:.3f}",
+            f"- Avg defender spent budget: {avg_defender_spent_budget:.3f}",
+            f"- Avg defender control per cost: {avg_defender_control_per_cost:.3f}",
             "",
             "## Training Diagnostics",
             f"- Avg defender training return: {perf['avg_defender_training_return']:.3f}",

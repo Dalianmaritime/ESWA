@@ -18,14 +18,20 @@ sys.path.insert(0, str(SCRIPT_DIR.parent / "gym-flipit-master"))
 
 from gym_flipit.envs.maritime_cheat_attention_env import MaritimeCheatAttentionEnv
 from signal_v2_utils import (
+    compute_checkpoint_selection_metrics,
     compute_final_performance,
+    confirmation_candidate_sort_key,
+    constrained_candidate_improves,
     generate_summary_markdown,
     get_metric_value,
+    load_baseline_reference_targets,
     load_config,
     make_step_record,
+    routine_candidate_sort_key,
     save_json,
     seed_everything,
     setup_results_directory,
+    should_trigger_early_stopping,
     summarize_episode,
 )
 from strategies.signal_cheat_greedy_attacker_v2 import SignalCheatGreedyAttackerV2
@@ -68,7 +74,53 @@ class SignalDRLTrainingExperimentV2:
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.training_metric = "defender_training_return"
         self.report_metric = str(self.config["drl"].get("report_metric", "avg_defender_return"))
-        self.checkpoint_metric = str(self.config["drl"].get("checkpoint_selection_metric", "avg_defender_training_return"))
+        self.checkpoint_selection_config = dict(self.config["drl"].get("checkpoint_selection", {}))
+        self.checkpoint_strategy = str(self.checkpoint_selection_config.get("strategy", "single_metric"))
+        early_stopping_config = dict(self.config["drl"].get("early_stopping", {}))
+        self.early_stopping_enabled = bool(early_stopping_config.get("enabled", False))
+        self.early_stopping_min_training_episodes = int(early_stopping_config.get("min_training_episodes", 0))
+        self.early_stopping_patience_evaluations = int(early_stopping_config.get("patience_evaluations", 0))
+        if self.checkpoint_strategy == "constrained_operational":
+            self.checkpoint_metric = "constrained_operational"
+            self.results_root = self.results_dir.parent
+            self.reference_targets = load_baseline_reference_targets(
+                self.results_root,
+                scenario_id=str(self.config["experiment"]["scenario_id"]),
+            )
+            self.routine_eval_episodes = int(
+                self.checkpoint_selection_config.get("routine_eval_episodes", self.config["drl"]["evaluation_episodes"])
+            )
+            self.confirmation_eval_episodes = int(
+                self.checkpoint_selection_config.get(
+                    "confirmation_eval_episodes",
+                    max(self.routine_eval_episodes, int(self.config["drl"]["final_evaluation_episodes"])),
+                )
+            )
+            self.candidate_pool_size = int(self.checkpoint_selection_config.get("candidate_pool_size", 3))
+            tolerance_config = dict(self.checkpoint_selection_config.get("tolerance", {}))
+            self.attacker_success_tolerance = float(tolerance_config.get("attacker_success_rate", 0.03))
+            self.defender_control_tolerance = float(tolerance_config.get("defender_control_rate", 0.03))
+            penalty_config = dict(self.checkpoint_selection_config.get("economic_penalties", {}))
+            self.selection_false_response_penalty = float(penalty_config.get("false_response_rate", 20.0))
+            self.selection_missed_response_penalty = float(penalty_config.get("missed_response_rate", 35.0))
+            self.strict_require_raw_return_advantage = bool(
+                self.checkpoint_selection_config.get("strict_require_raw_return_advantage", True)
+            )
+            self.checkpoint_candidates_dir = self.results_dir / "checkpoint_candidates"
+            self.checkpoint_candidates_dir.mkdir(exist_ok=True)
+        else:
+            self.checkpoint_metric = str(self.config["drl"].get("checkpoint_selection_metric", "avg_defender_training_return"))
+            self.results_root = self.results_dir.parent
+            self.reference_targets = None
+            self.routine_eval_episodes = int(self.config["drl"]["evaluation_episodes"])
+            self.confirmation_eval_episodes = int(self.config["drl"]["final_evaluation_episodes"])
+            self.candidate_pool_size = 1
+            self.attacker_success_tolerance = 0.0
+            self.defender_control_tolerance = 0.0
+            self.selection_false_response_penalty = 20.0
+            self.selection_missed_response_penalty = 35.0
+            self.strict_require_raw_return_advantage = True
+            self.checkpoint_candidates_dir = self.results_dir / "checkpoint_candidates"
         self.progress_json_path = self.results_dir / "training_progress.json"
         self.progress_log_path = self.results_dir / "training_progress.log"
 
@@ -191,6 +243,77 @@ class SignalDRLTrainingExperimentV2:
             )
         return results
 
+    def _build_selection_metrics(self, performance: Dict[str, Any]) -> Dict[str, Any]:
+        if self.reference_targets is None:
+            return {}
+        return compute_checkpoint_selection_metrics(
+            performance,
+            self.reference_targets,
+            attacker_success_tolerance=self.attacker_success_tolerance,
+            defender_control_tolerance=self.defender_control_tolerance,
+            false_response_penalty=self.selection_false_response_penalty,
+            missed_response_penalty=self.selection_missed_response_penalty,
+            strict_require_raw_return_advantage=self.strict_require_raw_return_advantage,
+        )
+
+    def _save_candidate_checkpoint(
+        self,
+        defender: SignalRainbowDQNAgentV2,
+        episode_index: int,
+    ) -> Path:
+        checkpoint_path = self.checkpoint_candidates_dir / f"episode_{episode_index:04d}.pth"
+        defender.save(str(checkpoint_path))
+        return checkpoint_path
+
+    def _routine_candidate_record(
+        self,
+        episode_index: int,
+        performance: Dict[str, Any],
+        checkpoint_path: Path,
+        num_episodes: int,
+    ) -> Dict[str, Any]:
+        return {
+            "episode": int(episode_index),
+            "performance": dict(performance),
+            "selection_metrics": self._build_selection_metrics(performance),
+            "checkpoint_path": str(checkpoint_path),
+            "num_episodes": int(num_episodes),
+        }
+
+    def _confirm_candidate_checkpoints(
+        self,
+        env: MaritimeCheatAttentionEnv,
+        attacker: SignalCheatGreedyAttackerV2,
+        defender: SignalRainbowDQNAgentV2,
+        routine_candidates: List[Dict[str, Any]],
+    ) -> List[Dict[str, Any]]:
+        confirmation_results: List[Dict[str, Any]] = []
+        for candidate in routine_candidates:
+            defender.load(candidate["checkpoint_path"])
+            evaluation_results = self._evaluate(
+                env=env,
+                attacker=attacker,
+                defender=defender,
+                num_episodes=self.confirmation_eval_episodes,
+                seed_offset=300000 + int(candidate["episode"]) * self.confirmation_eval_episodes,
+                store_trace=False,
+            )
+            confirmation_performance = compute_final_performance(evaluation_results)
+            selection_metrics = self._build_selection_metrics(confirmation_performance)
+            confirmation_results.append(
+                {
+                    "episode": int(candidate["episode"]),
+                    "checkpoint_path": str(candidate["checkpoint_path"]),
+                    "routine_performance": dict(candidate["performance"]),
+                    "routine_selection_metrics": dict(candidate["selection_metrics"]),
+                    "performance": confirmation_performance,
+                    "selection_metrics": selection_metrics,
+                    "num_episodes": int(self.confirmation_eval_episodes),
+                }
+            )
+        confirmation_results.sort(key=confirmation_candidate_sort_key)
+        return confirmation_results
+
     def _write_progress(
         self,
         status: str,
@@ -236,13 +359,25 @@ class SignalDRLTrainingExperimentV2:
         best_score = float("-inf")
         best_episode = -1
         best_performance: Dict[str, Any] | None = None
+        best_selection_metrics: Dict[str, Any] | None = None
+        best_routine_candidate: Dict[str, Any] | None = None
+        candidate_checkpoints: List[Dict[str, Any]] = []
+        confirmation_results: List[Dict[str, Any]] = []
+        selection_mode = "single_metric"
+        selected_checkpoint_reason = "metric_maximization"
+        early_stopping_triggered = False
+        early_stopping_trigger_episode: int | None = None
+        early_stopping_reason: str | None = None
+        evaluations_since_improvement = 0
+        last_improvement_episode: int | None = None
+        completed_training_episodes = 0
         best_model_dir = self.results_dir / "best_model"
         best_model_dir.mkdir(exist_ok=True)
         best_model_path = best_model_dir / "best_defender.pth"
 
         train_episodes = int(self.config["drl"]["training_episodes"])
         eval_frequency = max(1, int(self.config["drl"]["evaluation_frequency"]))
-        eval_episodes = int(self.config["drl"]["evaluation_episodes"])
+        eval_episodes = int(self.routine_eval_episodes)
         started_at = time.time()
         self._write_progress(
             status="running",
@@ -264,6 +399,7 @@ class SignalDRLTrainingExperimentV2:
                 store_trace=False,
             )
             self.training_history.append(training_episode)
+            completed_training_episodes = episode_index + 1
 
             if episode_index % eval_frequency == 0 or episode_index == train_episodes - 1:
                 evaluation_results = self._evaluate(
@@ -275,21 +411,64 @@ class SignalDRLTrainingExperimentV2:
                     store_trace=False,
                 )
                 performance = compute_final_performance(evaluation_results)
-                checkpoint_score = get_metric_value(performance, self.checkpoint_metric)
-                self.evaluation_history.append(
-                    {
-                        "episode": episode_index,
-                        "performance": performance,
-                        "checkpoint_metric": self.checkpoint_metric,
-                        "checkpoint_score": checkpoint_score,
-                        "num_episodes": eval_episodes,
-                    }
-                )
-                if checkpoint_score > best_score:
-                    best_score = checkpoint_score
-                    best_episode = episode_index
-                    best_performance = dict(performance)
-                    defender.save(str(best_model_path))
+                if self.checkpoint_strategy == "constrained_operational":
+                    checkpoint_path = self._save_candidate_checkpoint(defender, episode_index)
+                    candidate = self._routine_candidate_record(
+                        episode_index=episode_index,
+                        performance=performance,
+                        checkpoint_path=checkpoint_path,
+                        num_episodes=eval_episodes,
+                    )
+                    improved = constrained_candidate_improves(candidate, best_routine_candidate)
+                    candidate_checkpoints.append(candidate)
+                    candidate_checkpoints = sorted(candidate_checkpoints, key=routine_candidate_sort_key)[: self.candidate_pool_size]
+                    best_candidate = candidate_checkpoints[0]
+                    if improved:
+                        best_routine_candidate = {
+                            "episode": int(best_candidate["episode"]),
+                            "performance": dict(best_candidate["performance"]),
+                            "selection_metrics": dict(best_candidate["selection_metrics"]),
+                        }
+                        evaluations_since_improvement = 0
+                        last_improvement_episode = int(best_candidate["episode"])
+                    else:
+                        evaluations_since_improvement += 1
+                    best_episode = int(best_candidate["episode"])
+                    best_performance = dict(best_candidate["performance"])
+                    best_selection_metrics = dict(best_candidate["selection_metrics"])
+                    best_score = float(best_selection_metrics["economic_score"])
+                    self.evaluation_history.append(
+                        {
+                            "episode": episode_index,
+                            "performance": performance,
+                            "checkpoint_metric": self.checkpoint_metric,
+                            "checkpoint_score": best_score,
+                            "num_episodes": eval_episodes,
+                            "selection_metrics": dict(candidate["selection_metrics"]),
+                            "checkpoint_path": str(checkpoint_path),
+                        }
+                    )
+                else:
+                    checkpoint_score = get_metric_value(performance, self.checkpoint_metric)
+                    improved = checkpoint_score > best_score
+                    self.evaluation_history.append(
+                        {
+                            "episode": episode_index,
+                            "performance": performance,
+                            "checkpoint_metric": self.checkpoint_metric,
+                            "checkpoint_score": checkpoint_score,
+                            "num_episodes": eval_episodes,
+                        }
+                    )
+                    if improved:
+                        best_score = checkpoint_score
+                        best_episode = episode_index
+                        best_performance = dict(performance)
+                        defender.save(str(best_model_path))
+                        evaluations_since_improvement = 0
+                        last_improvement_episode = int(episode_index)
+                    else:
+                        evaluations_since_improvement += 1
                 self._write_progress(
                     status="running",
                     current_episode=episode_index,
@@ -299,8 +478,57 @@ class SignalDRLTrainingExperimentV2:
                     best_score=best_score,
                     last_performance=performance,
                 )
+                if should_trigger_early_stopping(
+                    enabled=self.early_stopping_enabled,
+                    current_episode=episode_index,
+                    min_training_episodes=self.early_stopping_min_training_episodes,
+                    evaluations_since_improvement=evaluations_since_improvement,
+                    patience_evaluations=self.early_stopping_patience_evaluations,
+                ):
+                    early_stopping_triggered = True
+                    early_stopping_trigger_episode = int(episode_index)
+                    early_stopping_reason = (
+                        "No better checkpoint candidate was found within the configured early-stopping patience."
+                    )
+                    self._write_progress(
+                        status="stopped_early",
+                        current_episode=episode_index,
+                        total_episodes=train_episodes,
+                        started_at=started_at,
+                        best_episode=best_episode,
+                        best_score=best_score,
+                        last_performance=performance,
+                    )
+                    break
 
-        if best_model_path.exists():
+        if self.checkpoint_strategy == "constrained_operational":
+            confirmation_results = self._confirm_candidate_checkpoints(
+                env=env,
+                attacker=attacker,
+                defender=defender,
+                routine_candidates=candidate_checkpoints,
+            )
+            selected_candidate = confirmation_results[0]
+            best_episode = int(selected_candidate["episode"])
+            best_performance = dict(selected_candidate["performance"])
+            best_selection_metrics = dict(selected_candidate["selection_metrics"])
+            best_score = float(best_selection_metrics["economic_score"])
+            selection_mode = (
+                "feasible_dominance"
+                if best_selection_metrics.get("selection_feasible_under_baseline")
+                else "fallback_min_security_deficit"
+            )
+            if selection_mode == "feasible_dominance":
+                selected_checkpoint_reason = (
+                    "Selected the checkpoint that satisfied baseline superiority and maximized raw return with control-per-cost tie-breaking."
+                )
+            else:
+                selected_checkpoint_reason = (
+                    "No checkpoint satisfied all baseline superiority constraints, so the checkpoint with minimum security deficit was selected."
+                )
+            defender.load(selected_candidate["checkpoint_path"])
+            defender.save(str(best_model_path))
+        elif best_model_path.exists():
             defender.load(str(best_model_path))
 
         final_evaluation_details = self._evaluate(
@@ -331,10 +559,28 @@ class SignalDRLTrainingExperimentV2:
             },
             "checkpoint_selection": {
                 "metric": self.checkpoint_metric,
+                "strategy": self.checkpoint_strategy,
+                "reference_targets": self.reference_targets,
                 "best_score": best_score if best_episode >= 0 else None,
                 "best_episode": best_episode if best_episode >= 0 else None,
                 "best_performance": best_performance,
+                "best_selection_metrics": best_selection_metrics,
                 "best_model_path": str(best_model_path) if best_model_path.exists() else None,
+                "candidate_checkpoints": candidate_checkpoints,
+                "confirmation_results": confirmation_results,
+                "selected_checkpoint_reason": selected_checkpoint_reason,
+                "selection_mode": selection_mode,
+            },
+            "early_stopping": {
+                "enabled": self.early_stopping_enabled,
+                "min_training_episodes": self.early_stopping_min_training_episodes,
+                "patience_evaluations": self.early_stopping_patience_evaluations,
+                "triggered": early_stopping_triggered,
+                "trigger_episode": early_stopping_trigger_episode,
+                "reason": early_stopping_reason,
+                "completed_training_episodes": completed_training_episodes,
+                "evaluations_since_improvement": evaluations_since_improvement,
+                "last_improvement_episode": last_improvement_episode,
             },
             "config_snapshot": self.config,
             "training_history": self.training_history,
@@ -347,8 +593,8 @@ class SignalDRLTrainingExperimentV2:
         save_json(self.results_dir / "training_history.json", self.training_history)
         save_json(self.results_dir / "evaluation_history.json", self.evaluation_history)
         self._write_progress(
-            status="completed",
-            current_episode=train_episodes - 1,
+            status="completed_early_stopping" if early_stopping_triggered else "completed",
+            current_episode=max(0, completed_training_episodes - 1),
             total_episodes=train_episodes,
             started_at=started_at,
             best_episode=best_episode,

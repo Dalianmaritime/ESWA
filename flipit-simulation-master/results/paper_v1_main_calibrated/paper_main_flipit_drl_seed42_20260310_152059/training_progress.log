@@ -1,0 +1,13 @@
+[2026-03-10T15:21:00.879130] status=running completed=0/700 metric=constrained_operational best_episode=None best_score=None
+[2026-03-10T15:21:06.932599] status=running completed=1/700 metric=constrained_operational best_episode=0 best_score=-49.28194444444444
+[2026-03-10T15:21:55.438341] status=running completed=51/700 metric=constrained_operational best_episode=50 best_score=5.776388888888889
+[2026-03-10T15:22:43.187410] status=running completed=101/700 metric=constrained_operational best_episode=50 best_score=5.776388888888889
+[2026-03-10T15:23:31.209455] status=running completed=151/700 metric=constrained_operational best_episode=150 best_score=59.580555555555556
+[2026-03-10T15:24:21.396678] status=running completed=201/700 metric=constrained_operational best_episode=150 best_score=59.580555555555556
+[2026-03-10T15:25:12.626297] status=running completed=251/700 metric=constrained_operational best_episode=150 best_score=59.580555555555556
+[2026-03-10T15:26:02.569790] status=running completed=301/700 metric=constrained_operational best_episode=150 best_score=59.580555555555556
+[2026-03-10T15:26:52.285321] status=running completed=351/700 metric=constrained_operational best_episode=150 best_score=59.580555555555556
+[2026-03-10T15:27:43.134804] status=running completed=401/700 metric=constrained_operational best_episode=150 best_score=59.580555555555556
+[2026-03-10T15:28:33.332291] status=running completed=451/700 metric=constrained_operational best_episode=150 best_score=59.580555555555556
+[2026-03-10T15:28:33.333091] status=stopped_early completed=451/700 metric=constrained_operational best_episode=150 best_score=59.580555555555556
+[2026-03-10T15:29:18.695467] status=completed_early_stopping completed=451/700 metric=constrained_operational best_episode=150 best_score=47.87847222222222

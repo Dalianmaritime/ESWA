@@ -286,6 +286,8 @@ class MaritimeCheatAttentionEnv(gym.Env):
             "positive_inspections": 0,
             "false_responses": 0,
             "missed_responses": 0,
+            "total_attacker_action_cost": 0.0,
+            "total_defender_action_cost": 0.0,
             "attacker_below_guarantee_steps": 0,
             "defender_below_guarantee_steps": 0,
             "attacker_budget_collapse": False,
@@ -400,6 +402,8 @@ class MaritimeCheatAttentionEnv(gym.Env):
             + defender_base_income_applied
             + defender_control_bonus_applied
         )
+        self.metrics["total_attacker_action_cost"] += float(attacker_cost)
+        self.metrics["total_defender_action_cost"] += float(defender_cost)
 
         if self.true_controller == "attacker":
             self.metrics["attacker_control_steps"] += 1
@@ -485,6 +489,8 @@ class MaritimeCheatAttentionEnv(gym.Env):
             "zone_beliefs": self._zone_belief_dict(),
             "attacker_budget_remaining": float(self.attacker_budget),
             "defender_budget_remaining": float(self.defender_budget),
+            "attacker_action_cost": float(attacker_cost),
+            "defender_action_cost": float(defender_cost),
             "attacker_base_income_applied": float(attacker_base_income_applied),
             "defender_base_income_applied": float(defender_base_income_applied),
             "attacker_control_bonus_applied": float(attacker_control_bonus_applied),
@@ -800,6 +806,8 @@ class MaritimeCheatAttentionEnv(gym.Env):
             "positive_inspections": self.metrics["positive_inspections"],
             "false_responses": self.metrics["false_responses"],
             "missed_responses": self.metrics["missed_responses"],
+            "total_attacker_action_cost": float(self.metrics["total_attacker_action_cost"]),
+            "total_defender_action_cost": float(self.metrics["total_defender_action_cost"]),
             "attacker_below_guarantee_steps": self.metrics["attacker_below_guarantee_steps"],
             "defender_below_guarantee_steps": self.metrics["defender_below_guarantee_steps"],
             "attacker_budget_collapse": self.metrics["attacker_budget_collapse"],

@@ -1,0 +1,524 @@
+{
+  "manifest_path": "E:\\1031\\flipit-simulation-master\\results\\paper_v1_main_calibrated\\paper_main_manifest_20260310_161058.json",
+  "pilot_assessment": {
+    "overall_pass": false,
+    "scenario_checks": {
+      "cheat": {
+        "available": true,
+        "passes": true,
+        "reasons": []
+      },
+      "flipit": {
+        "available": true,
+        "passes": false,
+        "reasons": [
+          "DRL attacker success rate is higher than baseline"
+        ]
+      }
+    }
+  },
+  "debug_recommendation": {
+    "case": "C",
+    "action": "extend_training_then_retune_shaping",
+    "summary": "Constrained checkpoint selection is active, but operational superiority is still not consistent enough across scenarios.",
+    "recommended_training_episodes": 1200,
+    "recommended_evaluation_frequency": 100,
+    "follow_up_reward_tuning": {
+      "training_missed_threat_penalty": "increase slightly",
+      "training_false_response_penalty": "increase slightly",
+      "training_positive_inspection_bonus": "decrease slightly"
+    }
+  },
+  "drl_run_diagnostics": [
+    {
+      "experiment_id": "paper_main_cheat_drl_seed42",
+      "scenario_id": "cheat",
+      "seed": 42,
+      "selection_strategy": "constrained_operational",
+      "best_checkpoint_episode": 300,
+      "training_episodes": 1200,
+      "completed_training_episodes": 1200,
+      "checkpoint_selected_last_episode": false,
+      "last_three_raw_returns": [
+        69.7,
+        83.33333333333333,
+        76.01666666666667
+      ],
+      "last_eval_rising": false,
+      "final_validation_score": 111.13576622483917,
+      "selection_feasible_under_baseline": true,
+      "security_margin_vs_baseline": {
+        "attacker_success_rate": 0.1916666666666667,
+        "defender_control_rate": 0.23073636597004998
+      },
+      "economic_margin_vs_baseline": 124.12833333333333,
+      "early_stopping_triggered": false,
+      "early_stopping_trigger_episode": null
+    },
+    {
+      "experiment_id": "paper_main_cheat_drl_seed123",
+      "scenario_id": "cheat",
+      "seed": 123,
+      "selection_strategy": "constrained_operational",
+      "best_checkpoint_episode": 800,
+      "training_episodes": 1200,
+      "completed_training_episodes": 1200,
+      "checkpoint_selected_last_episode": false,
+      "last_three_raw_returns": [
+        67.96666666666667,
+        84.15,
+        57.65
+      ],
+      "last_eval_rising": false,
+      "final_validation_score": 73.32659706959706,
+      "selection_feasible_under_baseline": true,
+      "security_margin_vs_baseline": {
+        "attacker_success_rate": 0.10000000000000003,
+        "defender_control_rate": 0.15167143612826628
+      },
+      "economic_margin_vs_baseline": 95.895,
+      "early_stopping_triggered": false,
+      "early_stopping_trigger_episode": null
+    },
+    {
+      "experiment_id": "paper_main_flipit_drl_seed42",
+      "scenario_id": "flipit",
+      "seed": 42,
+      "selection_strategy": "constrained_operational",
+      "best_checkpoint_episode": 150,
+      "training_episodes": 700,
+      "completed_training_episodes": 451,
+      "checkpoint_selected_last_episode": false,
+      "last_three_raw_returns": [
+        58.233333333333334,
+        58.21666666666667,
+        51.5
+      ],
+      "last_eval_rising": false,
+      "final_validation_score": 49.43666666666667,
+      "selection_feasible_under_baseline": false,
+      "security_margin_vs_baseline": {
+        "attacker_success_rate": -0.10000000000000003,
+        "defender_control_rate": -0.02801322463768119
+      },
+      "economic_margin_vs_baseline": 10.996666666666663,
+      "early_stopping_triggered": true,
+      "early_stopping_trigger_episode": 450
+    },
+    {
+      "experiment_id": "paper_main_flipit_drl_seed123",
+      "scenario_id": "flipit",
+      "seed": 123,
+      "selection_strategy": "constrained_operational",
+      "best_checkpoint_episode": 100,
+      "training_episodes": 1200,
+      "completed_training_episodes": 1200,
+      "checkpoint_selected_last_episode": false,
+      "last_three_raw_returns": [
+        54.93333333333333,
+        60.2,
+        59.11666666666667
+      ],
+      "last_eval_rising": false,
+      "final_validation_score": 98.475,
+      "selection_feasible_under_baseline": true,
+      "security_margin_vs_baseline": {
+        "attacker_success_rate": 0.09166666666666666,
+        "defender_control_rate": 0.07407010869565211
+      },
+      "economic_margin_vs_baseline": 63.004999999999995,
+      "early_stopping_triggered": false,
+      "early_stopping_trigger_episode": null
+    }
+  ],
+  "grouped_summary": {
+    "cheat_baseline": {
+      "num_seeds": 2,
+      "seeds": [
+        42,
+        123
+      ],
+      "defender_control_rate": {
+        "mean": 0.571134498977428,
+        "std": 0.01632423802847209,
+        "min": 0.559591519569792,
+        "max": 0.5826774783850639
+      },
+      "attacker_success_rate": {
+        "mean": 0.275,
+        "std": 0.007071067811865481,
+        "min": 0.27,
+        "max": 0.28
+      },
+      "avg_defender_return": {
+        "mean": -12.895,
+        "std": 10.62781492123381,
+        "min": -20.41,
+        "max": -5.38
+      },
+      "avg_defender_training_return": {
+        "mean": -35.80075000000001,
+        "std": 7.299816855579315,
+        "min": -40.9625,
+        "max": -30.63900000000001
+      },
+      "avg_defender_spent_budget": {
+        "mean": 91.275,
+        "std": 2.9062088706767097,
+        "min": 89.22,
+        "max": 93.33
+      },
+      "avg_defender_control_per_cost": {
+        "mean": 0.38947714943363076,
+        "std": 0.01885883073546507,
+        "min": 0.3761419423353341,
+        "max": 0.4028123565319274
+      },
+      "avg_false_response_rate": {
+        "mean": 0.19584131600055965,
+        "std": 0.008708208816328094,
+        "min": 0.18968368249454556,
+        "max": 0.2019989495065737
+      },
+      "avg_missed_response_rate": {
+        "mean": 0.1268847777245308,
+        "std": 0.0029164723072835274,
+        "min": 0.12482252037890784,
+        "max": 0.12894703507015376
+      },
+      "avg_inspection_precision": {
+        "mean": 0.2739821327357914,
+        "std": 0.01043310190658904,
+        "min": 0.266604815628832,
+        "max": 0.2813594498427508
+      },
+      "attacker_resource_collapse_rate": {
+        "mean": 0.19,
+        "std": 0.028284271247461888,
+        "min": 0.17,
+        "max": 0.21
+      },
+      "defender_resource_collapse_rate": {
+        "mean": 0.015,
+        "std": 0.007071067811865475,
+        "min": 0.01,
+        "max": 0.02
+      },
+      "avg_final_attacker_budget": {
+        "mean": -0.24749999999999567,
+        "std": 0.047376154339498114,
+        "min": -0.28099999999999525,
+        "max": -0.21399999999999605
+      },
+      "avg_final_defender_budget": {
+        "mean": 83.62600000000005,
+        "std": 6.434671708797579,
+        "min": 79.07600000000005,
+        "max": 88.17600000000004
+      },
+      "avg_attacker_below_guarantee_steps": {
+        "mean": 1.85,
+        "std": 0.09899494936611658,
+        "min": 1.78,
+        "max": 1.92
+      },
+      "avg_defender_below_guarantee_steps": {
+        "mean": 0.03,
+        "std": 0.01414213562373095,
+        "min": 0.02,
+        "max": 0.04
+      }
+    },
+    "flipit_baseline": {
+      "num_seeds": 2,
+      "seeds": [
+        42,
+        123
+      ],
+      "defender_control_rate": {
+        "mean": 0.6767632246376811,
+        "std": 0.00230501438780266,
+        "min": 0.6751333333333334,
+        "max": 0.678393115942029
+      },
+      "attacker_success_rate": {
+        "mean": 0.175,
+        "std": 0.021213203435596427,
+        "min": 0.16,
+        "max": 0.19
+      },
+      "avg_defender_return": {
+        "mean": 39.295,
+        "std": 3.316330803764906,
+        "min": 36.95,
+        "max": 41.64
+      },
+      "avg_defender_training_return": {
+        "mean": -3.0107500000000034,
+        "std": 1.5665950737187961,
+        "min": -4.118500000000004,
+        "max": -1.9030000000000036
+      },
+      "avg_defender_spent_budget": {
+        "mean": 79.345,
+        "std": 2.269812767608823,
+        "min": 77.74,
+        "max": 80.95
+      },
+      "avg_defender_control_per_cost": {
+        "mean": 0.5862134090326376,
+        "std": 0.002235617546333682,
+        "min": 0.5846325887054854,
+        "max": 0.5877942293597898
+      },
+      "avg_false_response_rate": {
+        "mean": 0.15815199275362318,
+        "std": 0.002636022344792915,
+        "min": 0.15628804347826086,
+        "max": 0.16001594202898553
+      },
+      "avg_missed_response_rate": {
+        "mean": 0.10696630434782609,
+        "std": 0.0003704624657955823,
+        "min": 0.10670434782608694,
+        "max": 0.10722826086956523
+      },
+      "avg_inspection_precision": {
+        "mean": 0.20441537703483456,
+        "std": 0.005239124647376571,
+        "min": 0.200710756469193,
+        "max": 0.20811999760047611
+      },
+      "attacker_resource_collapse_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "defender_resource_collapse_rate": {
+        "mean": 0.02,
+        "std": 0.0,
+        "min": 0.02,
+        "max": 0.02
+      },
+      "avg_final_attacker_budget": {
+        "mean": -0.36949999999999916,
+        "std": 0.11242997820866135,
+        "min": -0.4489999999999994,
+        "max": -0.289999999999999
+      },
+      "avg_final_defender_budget": {
+        "mean": 119.04800000000003,
+        "std": 2.486187442651905,
+        "min": 117.29000000000002,
+        "max": 120.80600000000003
+      },
+      "avg_attacker_below_guarantee_steps": {
+        "mean": 3.215,
+        "std": 0.1626345596729059,
+        "min": 3.1,
+        "max": 3.33
+      },
+      "avg_defender_below_guarantee_steps": {
+        "mean": 0.04,
+        "std": 0.0,
+        "min": 0.04,
+        "max": 0.04
+      }
+    },
+    "cheat_drl": {
+      "num_seeds": 2,
+      "seeds": [
+        42,
+        123
+      ],
+      "defender_control_rate": {
+        "mean": 0.749354360640846,
+        "std": 0.07923042700031133,
+        "min": 0.6933299884326202,
+        "max": 0.8053787328490719
+      },
+      "attacker_success_rate": {
+        "mean": 0.155,
+        "std": 0.09192388155425119,
+        "min": 0.09,
+        "max": 0.22
+      },
+      "avg_defender_return": {
+        "mean": 93.55,
+        "std": 26.84177341384135,
+        "min": 74.57,
+        "max": 112.53
+      },
+      "avg_defender_training_return": {
+        "mean": 55.39325,
+        "std": 24.231488731091208,
+        "min": 38.259,
+        "max": 72.5275
+      },
+      "avg_defender_spent_budget": {
+        "mean": 74.97999999999999,
+        "std": 6.774082963767124,
+        "min": 70.19,
+        "max": 79.77
+      },
+      "avg_defender_control_per_cost": {
+        "mean": 0.6127516906677724,
+        "std": 0.11169902889547513,
+        "min": 0.5337685498838298,
+        "max": 0.691734831451715
+      },
+      "avg_false_response_rate": {
+        "mean": 0.026301168616929632,
+        "std": 0.009960264509684416,
+        "min": 0.01925819803972008,
+        "max": 0.033344139194139186
+      },
+      "avg_missed_response_rate": {
+        "mean": 0.015855899608865708,
+        "std": 0.006117176066681834,
+        "min": 0.01153040293040293,
+        "max": 0.020181396287328485
+      },
+      "avg_inspection_precision": {
+        "mean": 0.1760188254920307,
+        "std": 0.06041191064584769,
+        "min": 0.13330115380991603,
+        "max": 0.2187364971741454
+      },
+      "attacker_resource_collapse_rate": {
+        "mean": 0.085,
+        "std": 0.021213203435596427,
+        "min": 0.07,
+        "max": 0.1
+      },
+      "defender_resource_collapse_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "avg_final_attacker_budget": {
+        "mean": -0.44349999999999734,
+        "std": 0.18031222920256904,
+        "min": -0.570999999999997,
+        "max": -0.3159999999999978
+      },
+      "avg_final_defender_budget": {
+        "mean": 129.44000000000005,
+        "std": 19.288458777206635,
+        "min": 115.80100000000004,
+        "max": 143.07900000000004
+      },
+      "avg_attacker_below_guarantee_steps": {
+        "mean": 3.335,
+        "std": 0.40305086527633227,
+        "min": 3.05,
+        "max": 3.62
+      },
+      "avg_defender_below_guarantee_steps": {
+        "mean": 0.01,
+        "std": 0.01414213562373095,
+        "min": 0.0,
+        "max": 0.02
+      }
+    },
+    "flipit_drl": {
+      "num_seeds": 2,
+      "seeds": [
+        42,
+        123
+      ],
+      "defender_control_rate": {
+        "mean": 0.6995,
+        "std": 0.06670373969193101,
+        "min": 0.6523333333333333,
+        "max": 0.7466666666666667
+      },
+      "attacker_success_rate": {
+        "mean": 0.195,
+        "std": 0.13435028842544403,
+        "min": 0.1,
+        "max": 0.29
+      },
+      "avg_defender_return": {
+        "mean": 77.16,
+        "std": 35.22805983871379,
+        "min": 52.25,
+        "max": 102.07
+      },
+      "avg_defender_training_return": {
+        "mean": 33.973749999999995,
+        "std": 26.375436491648824,
+        "min": 15.323499999999992,
+        "max": 52.624
+      },
+      "avg_defender_spent_budget": {
+        "mean": 74.34,
+        "std": 21.34048265621001,
+        "min": 59.25,
+        "max": 89.43
+      },
+      "avg_defender_control_per_cost": {
+        "mean": 0.6128533639000483,
+        "std": 0.2616817728808267,
+        "min": 0.42781640778309776,
+        "max": 0.7978903200169989
+      },
+      "avg_false_response_rate": {
+        "mean": 0.04166666666666667,
+        "std": 0.022156012477178487,
+        "min": 0.026000000000000002,
+        "max": 0.05733333333333333
+      },
+      "avg_missed_response_rate": {
+        "mean": 0.04741666666666666,
+        "std": 0.019916841003421084,
+        "min": 0.03333333333333333,
+        "max": 0.06149999999999999
+      },
+      "avg_inspection_precision": {
+        "mean": 0.21049964238944718,
+        "std": 0.038855721972927706,
+        "min": 0.18302449789449085,
+        "max": 0.2379747868844035
+      },
+      "attacker_resource_collapse_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "defender_resource_collapse_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "avg_final_attacker_budget": {
+        "mean": -1.053999999999999,
+        "std": 0.3592102448427644,
+        "min": -1.3079999999999978,
+        "max": -0.8000000000000003
+      },
+      "avg_final_defender_budget": {
+        "mean": 128.19100000000006,
+        "std": 30.545598733696476,
+        "min": 106.59200000000006,
+        "max": 149.79000000000005
+      },
+      "avg_attacker_below_guarantee_steps": {
+        "mean": 4.359999999999999,
+        "std": 0.15556349186104027,
+        "min": 4.25,
+        "max": 4.47
+      },
+      "avg_defender_below_guarantee_steps": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    }
+  }
+}
