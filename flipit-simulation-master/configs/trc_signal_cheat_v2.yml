@@ -100,7 +100,7 @@ drl:
   evaluation_frequency: 30
   evaluation_episodes: 12
   final_evaluation_episodes: 30
-  checkpoint_selection_metric: avg_defender_training_return
+  checkpoint_selection_metric: validation_selection_score
   report_metric: avg_defender_return
   learning_starts: 100
   update_frequency: 1

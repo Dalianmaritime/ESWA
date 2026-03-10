@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import time
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -68,6 +69,8 @@ class SignalDRLTrainingExperimentV2:
         self.training_metric = "defender_training_return"
         self.report_metric = str(self.config["drl"].get("report_metric", "avg_defender_return"))
         self.checkpoint_metric = str(self.config["drl"].get("checkpoint_selection_metric", "avg_defender_training_return"))
+        self.progress_json_path = self.results_dir / "training_progress.json"
+        self.progress_log_path = self.results_dir / "training_progress.log"
 
         self.training_history: List[Dict[str, Any]] = []
         self.evaluation_history: List[Dict[str, Any]] = []
@@ -188,6 +191,44 @@ class SignalDRLTrainingExperimentV2:
             )
         return results
 
+    def _write_progress(
+        self,
+        status: str,
+        current_episode: int,
+        total_episodes: int,
+        started_at: float,
+        best_episode: int,
+        best_score: float,
+        last_performance: Dict[str, Any] | None = None,
+    ):
+        completed = max(0, min(current_episode + 1, total_episodes))
+        elapsed_seconds = max(0.0, time.time() - started_at)
+        progress_fraction = completed / max(total_episodes, 1)
+        eta_seconds = (elapsed_seconds / progress_fraction - elapsed_seconds) if progress_fraction > 0 else None
+        payload = {
+            "experiment_id": self.config["experiment"]["experiment_id"],
+            "status": status,
+            "checkpoint_metric": self.checkpoint_metric,
+            "current_episode": int(current_episode),
+            "completed_episodes": int(completed),
+            "total_episodes": int(total_episodes),
+            "progress_fraction": float(progress_fraction),
+            "elapsed_seconds": float(elapsed_seconds),
+            "eta_seconds": None if eta_seconds is None else float(max(0.0, eta_seconds)),
+            "best_episode": None if best_episode < 0 else int(best_episode),
+            "best_score": None if best_episode < 0 else float(best_score),
+            "last_performance": last_performance,
+            "updated_at": datetime.now().isoformat(),
+        }
+        save_json(self.progress_json_path, payload)
+        summary = (
+            f"[{payload['updated_at']}] status={status} completed={completed}/{total_episodes} "
+            f"metric={self.checkpoint_metric} best_episode={payload['best_episode']} best_score={payload['best_score']}"
+        )
+        with open(self.progress_log_path, "a", encoding="utf-8") as handle:
+            handle.write(summary + "\n")
+        print(summary, flush=True)
+
     def run(self) -> Dict[str, Any]:
         env = self._build_environment()
         attacker = self._build_attacker()
@@ -202,6 +243,16 @@ class SignalDRLTrainingExperimentV2:
         train_episodes = int(self.config["drl"]["training_episodes"])
         eval_frequency = max(1, int(self.config["drl"]["evaluation_frequency"]))
         eval_episodes = int(self.config["drl"]["evaluation_episodes"])
+        started_at = time.time()
+        self._write_progress(
+            status="running",
+            current_episode=-1,
+            total_episodes=train_episodes,
+            started_at=started_at,
+            best_episode=best_episode,
+            best_score=best_score,
+            last_performance=None,
+        )
 
         for episode_index in range(train_episodes):
             training_episode = self._run_episode(
@@ -239,6 +290,15 @@ class SignalDRLTrainingExperimentV2:
                     best_episode = episode_index
                     best_performance = dict(performance)
                     defender.save(str(best_model_path))
+                self._write_progress(
+                    status="running",
+                    current_episode=episode_index,
+                    total_episodes=train_episodes,
+                    started_at=started_at,
+                    best_episode=best_episode,
+                    best_score=best_score,
+                    last_performance=performance,
+                )
 
         if best_model_path.exists():
             defender.load(str(best_model_path))
@@ -286,6 +346,15 @@ class SignalDRLTrainingExperimentV2:
         save_json(self.results_dir / "complete_training_results.json", complete_results)
         save_json(self.results_dir / "training_history.json", self.training_history)
         save_json(self.results_dir / "evaluation_history.json", self.evaluation_history)
+        self._write_progress(
+            status="completed",
+            current_episode=train_episodes - 1,
+            total_episodes=train_episodes,
+            started_at=started_at,
+            best_episode=best_episode,
+            best_score=best_score,
+            last_performance=final_performance,
+        )
         with open(self.results_dir / "training_summary.md", "w", encoding="utf-8") as handle:
             handle.write(generate_summary_markdown(complete_results))
         return complete_results

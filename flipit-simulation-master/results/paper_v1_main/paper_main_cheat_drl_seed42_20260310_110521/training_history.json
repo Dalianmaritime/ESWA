@@ -1,0 +1,59 @@
+[
+  {
+    "episode_index": 0,
+    "winner": "attacker",
+    "attacker_success": true,
+    "attacker_return": 15.699999999999992,
+    "defender_return": -68.0,
+    "defender_training_return": -108.20000000000006,
+    "attacker_control_rate": 0.9666666666666667,
+    "defender_control_rate": 0.03333333333333333,
+    "false_response_rate": 0.0,
+    "missed_response_rate": 0.06666666666666667,
+    "inspection_precision": 0.6,
+    "episode_length": 60,
+    "termination_reason": "max_steps",
+    "attacker_resource_collapse": false,
+    "defender_resource_collapse": false,
+    "final_attacker_budget": 3.300000000000005,
+    "final_defender_budget": 50.600000000000165,
+    "attacker_below_guarantee_steps": 0,
+    "defender_below_guarantee_steps": 0,
+    "episode_metrics_snapshot": {
+      "tick": 60,
+      "attacker_control_steps": 58,
+      "defender_control_steps": 2,
+      "cheat_actions": 21,
+      "takeover_attempts": 26,
+      "takeover_successes": 10,
+      "response_successes": 0,
+      "inspect_actions": 60,
+      "positive_inspections": 36,
+      "false_responses": 0,
+      "missed_responses": 4,
+      "attacker_below_guarantee_steps": 0,
+      "defender_below_guarantee_steps": 0,
+      "attacker_budget_collapse": false,
+      "defender_budget_collapse": false,
+      "inspection_precision": 0.6,
+      "signal_counts": {
+        "outer": 2,
+        "lane": 22,
+        "core": 6
+      },
+      "respond_counts": {
+        "outer": 0,
+        "lane": 0,
+        "core": 0
+      },
+      "inspect_counts": {
+        "outer": 0,
+        "lane": 60,
+        "core": 0
+      }
+    },
+    "step_records": [],
+    "mean_training_loss": 0.0,
+    "training": true
+  }
+]

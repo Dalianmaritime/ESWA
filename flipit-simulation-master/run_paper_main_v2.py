@@ -80,6 +80,12 @@ def write_manifest(manifest: Dict[str, Any], results_root: Path) -> Path:
     return manifest_path
 
 
+def write_batch_progress(results_root: Path, payload: Dict[str, Any]):
+    results_root.mkdir(parents=True, exist_ok=True)
+    progress_path = results_root / "paper_main_progress_latest.json"
+    progress_path.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
+
+
 def load_complete_result(result_dir: Path) -> Dict[str, Any]:
     with open(result_dir / "complete_training_results.json", "r", encoding="utf-8") as handle:
         return json.load(handle)
@@ -147,7 +153,7 @@ def run_single_experiment(entry: Dict[str, Any], args: argparse.Namespace, seed:
             evaluation_frequency=args.evaluation_frequency,
             random_seed=seed,
             experiment_id=experiment_id,
-            results_subdir="paper_v1_main",
+            results_subdir=str(args.results_subdir),
         )
     else:
         experiment = TraditionalExperimentV2(
@@ -155,7 +161,7 @@ def run_single_experiment(entry: Dict[str, Any], args: argparse.Namespace, seed:
             episodes=args.final_evaluation_episodes,
             random_seed=seed,
             experiment_id=experiment_id,
-            results_subdir="paper_v1_main",
+            results_subdir=str(args.results_subdir),
         )
 
     results = experiment.run()
@@ -224,6 +230,7 @@ def main():
     results_root = build_results_root(args.results_subdir)
     completed_runs = find_completed_runs(results_root) if args.resume_missing else {}
     total_runs = len(args.seeds) * len(selected_entries)
+    batch_started_at = time.time()
     manifest = {
         "paper_group": "main",
         "timestamp": datetime.now().isoformat(),
@@ -234,11 +241,47 @@ def main():
     }
     completed_count = 0
     run_durations: List[float] = []
+    write_batch_progress(
+        results_root,
+        {
+            "status": "running",
+            "results_subdir": str(args.results_subdir),
+            "completed_runs": 0,
+            "total_runs": total_runs,
+            "current_run": None,
+            "elapsed_seconds": 0.0,
+            "eta_seconds": None,
+            "updated_at": datetime.now().isoformat(),
+        },
+    )
     for seed in args.seeds:
         for entry in selected_entries:
             print(
                 f"[PROGRESS] {render_progress_bar(completed_count, total_runs)} next={entry['scenario_id']}/{entry['method_id']}/seed{seed}",
                 flush=True,
+            )
+            current_experiment_id = build_experiment_id(entry["scenario_id"], entry["method_id"], int(seed))
+            average_duration = sum(run_durations) / len(run_durations) if run_durations else 0.0
+            remaining_runs = total_runs - completed_count
+            eta_seconds = average_duration * remaining_runs if run_durations else None
+            write_batch_progress(
+                results_root,
+                {
+                    "status": "running",
+                    "results_subdir": str(args.results_subdir),
+                    "completed_runs": completed_count,
+                    "total_runs": total_runs,
+                    "current_run": {
+                        "experiment_id": current_experiment_id,
+                        "scenario_id": entry["scenario_id"],
+                        "method_id": entry["method_id"],
+                        "seed": int(seed),
+                        "result_dir_glob": str(results_root / f"{current_experiment_id}_*"),
+                    },
+                    "elapsed_seconds": float(time.time() - batch_started_at),
+                    "eta_seconds": None if eta_seconds is None else float(max(0.0, eta_seconds)),
+                    "updated_at": datetime.now().isoformat(),
+                },
             )
             start_time = time.time()
             if args.resume_missing:
@@ -255,6 +298,19 @@ def main():
             average_duration = sum(run_durations) / len(run_durations) if run_durations else 0.0
             remaining_runs = total_runs - completed_count
             eta_seconds = average_duration * remaining_runs
+            write_batch_progress(
+                results_root,
+                {
+                    "status": "running" if completed_count < total_runs else "completed",
+                    "results_subdir": str(args.results_subdir),
+                    "completed_runs": completed_count,
+                    "total_runs": total_runs,
+                    "current_run": None,
+                    "elapsed_seconds": float(time.time() - batch_started_at),
+                    "eta_seconds": float(max(0.0, eta_seconds)),
+                    "updated_at": datetime.now().isoformat(),
+                },
+            )
             print(
                 f"[PROGRESS] {render_progress_bar(completed_count, total_runs)} elapsed={format_duration(elapsed)} eta={format_duration(eta_seconds)}",
                 flush=True,

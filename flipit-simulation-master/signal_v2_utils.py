@@ -13,6 +13,14 @@ import torch
 import yaml
 
 
+def compute_validation_selection_score(
+    avg_defender_return: float,
+    avg_missed_response_rate: float,
+    avg_false_response_rate: float,
+) -> float:
+    return float(avg_defender_return - 50.0 * avg_missed_response_rate - 20.0 * avg_false_response_rate)
+
+
 def load_config(config_path: str) -> Dict[str, Any]:
     with open(config_path, "r", encoding="utf-8") as handle:
         return yaml.safe_load(handle)
@@ -163,10 +171,11 @@ def compute_final_performance(episodes: Iterable[Dict[str, Any]]) -> Dict[str, A
             "avg_final_defender_budget": 0.0,
             "avg_attacker_below_guarantee_steps": 0.0,
             "avg_defender_below_guarantee_steps": 0.0,
+            "validation_selection_score": 0.0,
             "sample_size": 0,
         }
 
-    return {
+    performance = {
         "attacker_success_rate": float(np.mean([episode["attacker_success"] for episode in episode_list])),
         "defender_control_rate": float(np.mean([episode["defender_control_rate"] for episode in episode_list])),
         "attacker_control_rate": float(np.mean([episode["attacker_control_rate"] for episode in episode_list])),
@@ -195,6 +204,12 @@ def compute_final_performance(episodes: Iterable[Dict[str, Any]]) -> Dict[str, A
         ),
         "sample_size": int(sample_size),
     }
+    performance["validation_selection_score"] = compute_validation_selection_score(
+        performance["avg_defender_return"],
+        performance["avg_missed_response_rate"],
+        performance["avg_false_response_rate"],
+    )
+    return performance
 
 
 def get_metric_value(metrics: Dict[str, Any], metric_name: str) -> float:

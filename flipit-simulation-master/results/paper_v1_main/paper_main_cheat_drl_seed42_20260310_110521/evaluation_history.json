@@ -1,0 +1,28 @@
+[
+  {
+    "episode": 0,
+    "performance": {
+      "attacker_success_rate": 0.0,
+      "defender_control_rate": 1.0,
+      "attacker_control_rate": 0.0,
+      "avg_defender_return": 38.0,
+      "avg_defender_training_return": 22.3,
+      "avg_attacker_return": -66.6,
+      "avg_false_response_rate": 0.0,
+      "avg_missed_response_rate": 0.0,
+      "avg_inspection_precision": 0.1,
+      "avg_episode_length": 10.0,
+      "attacker_resource_collapse_rate": 1.0,
+      "defender_resource_collapse_rate": 0.0,
+      "avg_final_attacker_budget": -4.599999999999997,
+      "avg_final_defender_budget": 59.0,
+      "avg_attacker_below_guarantee_steps": 2.0,
+      "avg_defender_below_guarantee_steps": 0.0,
+      "sample_size": 1,
+      "validation_selection_score": 38.0
+    },
+    "checkpoint_metric": "validation_selection_score",
+    "checkpoint_score": 38.0,
+    "num_episodes": 1
+  }
+]

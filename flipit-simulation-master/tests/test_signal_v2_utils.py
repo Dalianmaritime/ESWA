@@ -114,6 +114,7 @@ def test_compute_final_performance_keeps_training_reward_separate_from_raw_retur
     )
     assert performance["avg_defender_return"] == -1.0
     assert performance["avg_defender_training_return"] == 3.0
+    assert performance["validation_selection_score"] == pytest.approx(-1.0 - 50.0 * 0.1 - 20.0 * 0.15)
 
 
 def test_get_metric_value_returns_requested_metric_and_rejects_missing_metric():
