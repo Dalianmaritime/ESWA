@@ -81,6 +81,7 @@ class SignalDRLTrainingExperimentV2:
             allow_cheat=attacker_cfg["allow_cheat"],
             cheat_cost=self.config["costs_and_rewards"]["attacker_cheat_cost"],
             takeover_cost_by_zone=self.config["costs_and_rewards"]["attacker_takeover_cost_by_zone"],
+            action_floor=self.config["resources"]["attacker_action_floor"],
             takeover_trigger_belief=attacker_cfg["takeover_trigger_belief"],
             exploit_false_response=attacker_cfg["exploit_false_response"],
         )
@@ -103,6 +104,7 @@ class SignalDRLTrainingExperimentV2:
             defender_initial_budget=self.config["resources"]["defender_initial_budget"],
             defender_inspect_cost=self.config["costs_and_rewards"]["defender_inspect_cost"],
             defender_respond_cost_by_zone=self.config["costs_and_rewards"]["defender_respond_cost_by_zone"],
+            defender_action_floor=self.config["resources"]["defender_action_floor"],
             device=str(self.device),
         )
 

@@ -7,6 +7,7 @@ import argparse
 import json
 import subprocess
 import sys
+import time
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
@@ -15,7 +16,7 @@ from run_traditional_experiment_v2 import TraditionalExperimentV2
 from run_trc_full_training_v2 import SignalDRLTrainingExperimentV2
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-RESULTS_ROOT = SCRIPT_DIR / "results" / "paper_v1_main"
+DEFAULT_RESULTS_SUBDIR = "paper_v1_main"
 
 EXPERIMENT_MATRIX = [
     {
@@ -49,11 +50,30 @@ def build_experiment_id(scenario_id: str, method_id: str, seed: int) -> str:
     return f"paper_main_{scenario_id}_{method_id}_seed{seed}"
 
 
-def write_manifest(manifest: Dict[str, Any]) -> Path:
-    RESULTS_ROOT.mkdir(parents=True, exist_ok=True)
+def build_results_root(results_subdir: str) -> Path:
+    return SCRIPT_DIR / "results" / str(results_subdir)
+
+
+def render_progress_bar(completed: int, total: int, width: int = 24) -> str:
+    total = max(total, 1)
+    filled = int(width * completed / total)
+    return "[" + "#" * filled + "-" * (width - filled) + f"] {completed}/{total}"
+
+
+def format_duration(seconds: float) -> str:
+    seconds = max(0, int(round(seconds)))
+    minutes, seconds = divmod(seconds, 60)
+    hours, minutes = divmod(minutes, 60)
+    if hours:
+        return f"{hours}h {minutes:02d}m {seconds:02d}s"
+    return f"{minutes}m {seconds:02d}s"
+
+
+def write_manifest(manifest: Dict[str, Any], results_root: Path) -> Path:
+    results_root.mkdir(parents=True, exist_ok=True)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    manifest_path = RESULTS_ROOT / f"paper_main_manifest_{timestamp}.json"
-    latest_path = RESULTS_ROOT / "paper_main_manifest_latest.json"
+    manifest_path = results_root / f"paper_main_manifest_{timestamp}.json"
+    latest_path = results_root / "paper_main_manifest_latest.json"
     payload = json.dumps(manifest, indent=2, ensure_ascii=False)
     manifest_path.write_text(payload, encoding="utf-8")
     latest_path.write_text(payload, encoding="utf-8")
@@ -155,12 +175,14 @@ def run_single_experiment(entry: Dict[str, Any], args: argparse.Namespace, seed:
     }
 
 
-def maybe_run_analysis(manifest_path: Path):
+def maybe_run_analysis(manifest_path: Path, results_root: Path):
     command = [
         sys.executable,
         str(SCRIPT_DIR / "analysis" / "analyze_paper_main_v2.py"),
         "--manifest",
         str(manifest_path),
+        "--results-root",
+        str(results_root),
     ]
     subprocess.run(command, cwd=SCRIPT_DIR, check=True)
 
@@ -188,6 +210,7 @@ def main():
     parser.add_argument("--evaluation-frequency", type=int, default=None)
     parser.add_argument("--resume-missing", action="store_true")
     parser.add_argument("--skip-analysis", action="store_true")
+    parser.add_argument("--results-subdir", default=DEFAULT_RESULTS_SUBDIR)
     args = parser.parse_args()
 
     selected_entries = [
@@ -198,22 +221,49 @@ def main():
     if not selected_entries:
         raise SystemExit("No experiments selected. Check --scenarios and --methods.")
 
-    completed_runs = find_completed_runs(RESULTS_ROOT) if args.resume_missing else {}
+    results_root = build_results_root(args.results_subdir)
+    completed_runs = find_completed_runs(results_root) if args.resume_missing else {}
+    total_runs = len(args.seeds) * len(selected_entries)
     manifest = {
         "paper_group": "main",
         "timestamp": datetime.now().isoformat(),
         "seeds": [int(seed) for seed in args.seeds],
         "resume_missing": bool(args.resume_missing),
+        "results_subdir": str(args.results_subdir),
         "runs": [],
     }
+    completed_count = 0
+    run_durations: List[float] = []
     for seed in args.seeds:
         for entry in selected_entries:
-            manifest["runs"].append(collect_run(entry, args, int(seed), completed_runs))
+            print(
+                f"[PROGRESS] {render_progress_bar(completed_count, total_runs)} next={entry['scenario_id']}/{entry['method_id']}/seed{seed}",
+                flush=True,
+            )
+            start_time = time.time()
+            if args.resume_missing:
+                run_key = (entry["scenario_id"], entry["method_id"], int(seed))
+                reused = run_key in completed_runs
+            else:
+                reused = False
+            run_payload = collect_run(entry, args, int(seed), completed_runs)
+            manifest["runs"].append(run_payload)
+            elapsed = time.time() - start_time
+            if not reused:
+                run_durations.append(elapsed)
+            completed_count += 1
+            average_duration = sum(run_durations) / len(run_durations) if run_durations else 0.0
+            remaining_runs = total_runs - completed_count
+            eta_seconds = average_duration * remaining_runs
+            print(
+                f"[PROGRESS] {render_progress_bar(completed_count, total_runs)} elapsed={format_duration(elapsed)} eta={format_duration(eta_seconds)}",
+                flush=True,
+            )
 
-    manifest_path = write_manifest(manifest)
+    manifest_path = write_manifest(manifest, results_root)
     print(f"[INFO] Manifest written to {manifest_path}", flush=True)
     if not args.skip_analysis:
-        maybe_run_analysis(manifest_path)
+        maybe_run_analysis(manifest_path, results_root)
 
 
 if __name__ == "__main__":

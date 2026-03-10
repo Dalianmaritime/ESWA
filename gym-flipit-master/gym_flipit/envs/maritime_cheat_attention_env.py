@@ -127,8 +127,15 @@ class MaritimeCheatAttentionEnv(gym.Env):
 
         self.attacker_initial_budget = float(self.config["resources"]["attacker_initial_budget"])
         self.defender_initial_budget = float(self.config["resources"]["defender_initial_budget"])
-        self.attacker_income_per_step = float(self.config["resources"]["attacker_income_per_step"])
-        self.defender_income_per_step = float(self.config["resources"]["defender_income_per_step"])
+        self.attacker_base_income_per_step = float(self.config["resources"]["attacker_base_income_per_step"])
+        self.defender_base_income_per_step = float(self.config["resources"]["defender_base_income_per_step"])
+        self.attacker_control_bonus_per_step = float(self.config["resources"]["attacker_control_bonus_per_step"])
+        self.defender_control_bonus_per_step = float(self.config["resources"]["defender_control_bonus_per_step"])
+        self.attacker_action_floor = float(self.config["resources"]["attacker_action_floor"])
+        self.defender_action_floor = float(self.config["resources"]["defender_action_floor"])
+        self.attacker_guarantee_line = float(self.config["resources"]["attacker_guarantee_line"])
+        self.defender_guarantee_line = float(self.config["resources"]["defender_guarantee_line"])
+        self.guarantee_breach_patience = int(self.config["resources"]["guarantee_breach_patience"])
 
         self.attacker_cheat_cost = float(self.config["costs_and_rewards"]["attacker_cheat_cost"])
         self.attacker_takeover_cost_by_zone = {
@@ -144,6 +151,18 @@ class MaritimeCheatAttentionEnv(gym.Env):
         self.attacker_control_reward = float(self.config["costs_and_rewards"]["attacker_control_reward"])
         self.false_response_penalty = float(self.config["costs_and_rewards"]["false_response_penalty"])
         self.missed_threat_penalty = float(self.config["costs_and_rewards"]["missed_threat_penalty"])
+        self.attacker_resource_collapse_penalty = float(
+            self.config["costs_and_rewards"]["attacker_resource_collapse_penalty"]
+        )
+        self.defender_resource_collapse_penalty = float(
+            self.config["costs_and_rewards"]["defender_resource_collapse_penalty"]
+        )
+        self.attacker_resource_collapse_bonus = float(
+            self.config["costs_and_rewards"]["attacker_resource_collapse_bonus"]
+        )
+        self.defender_resource_collapse_bonus = float(
+            self.config["costs_and_rewards"]["defender_resource_collapse_bonus"]
+        )
 
         self.cheat_emit_prob = _clamp_probability(self.config["signal_model"]["cheat_emit_prob"])
         self.takeover_detect_prob_by_zone = {
@@ -192,11 +211,15 @@ class MaritimeCheatAttentionEnv(gym.Env):
         self.training_missed_threat_penalty = float(drl_config.get("training_missed_threat_penalty", 2.5))
         self.training_inspect_cost_weight = float(drl_config.get("training_inspect_cost_weight", 0.25))
         self.training_respond_cost_weight = float(drl_config.get("training_respond_cost_weight", 0.35))
+        self.training_resource_collapse_penalty = float(drl_config.get("training_resource_collapse_penalty", 8.0))
+        self.training_opponent_resource_collapse_bonus = float(
+            drl_config.get("training_opponent_resource_collapse_bonus", 4.0)
+        )
 
         self.action_space = spaces.Discrete(7)
         self.attacker_action_space = spaces.Discrete(7)
         observation_low = np.array(
-            [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0],
+            [-1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0],
             dtype=np.float32,
         )
         observation_high = np.array(
@@ -242,6 +265,8 @@ class MaritimeCheatAttentionEnv(gym.Env):
         self.last_deception_zone = None
         self.attacker_budget = self.attacker_initial_budget
         self.defender_budget = self.defender_initial_budget
+        self.attacker_below_guarantee_streak = 0
+        self.defender_below_guarantee_streak = 0
 
         self.mu_breach = self.breach_prior
         self.zone_beliefs = self.uniform_zone_prior.copy()
@@ -261,6 +286,10 @@ class MaritimeCheatAttentionEnv(gym.Env):
             "positive_inspections": 0,
             "false_responses": 0,
             "missed_responses": 0,
+            "attacker_below_guarantee_steps": 0,
+            "defender_below_guarantee_steps": 0,
+            "attacker_budget_collapse": False,
+            "defender_budget_collapse": False,
             "signal_counts": {zone: 0 for zone in ZONES},
             "respond_counts": {zone: 0 for zone in ZONES},
             "inspect_counts": {zone: 0 for zone in ZONES},
@@ -281,10 +310,10 @@ class MaritimeCheatAttentionEnv(gym.Env):
         attacker_cost = self._attacker_action_cost(attacker_action)
         defender_cost = self._defender_action_cost(defender_action)
 
-        if attacker_cost > self.attacker_budget:
+        if self.attacker_budget - attacker_cost < self.attacker_action_floor:
             attacker_action = 0
             attacker_cost = 0.0
-        if defender_cost > self.defender_budget:
+        if self.defender_budget - defender_cost < self.defender_action_floor:
             defender_action = 0
             defender_cost = 0.0
 
@@ -354,8 +383,23 @@ class MaritimeCheatAttentionEnv(gym.Env):
         if inspection_result != "none":
             self._update_beliefs_from_inspection(defender_zone, inspection_result == "positive")
 
-        self.attacker_budget = max(0.0, self.attacker_budget - attacker_cost + self.attacker_income_per_step)
-        self.defender_budget = max(0.0, self.defender_budget - defender_cost + self.defender_income_per_step)
+        attacker_base_income_applied = self.attacker_base_income_per_step
+        defender_base_income_applied = self.defender_base_income_per_step
+        attacker_control_bonus_applied = self.attacker_control_bonus_per_step if self.true_controller == "attacker" else 0.0
+        defender_control_bonus_applied = self.defender_control_bonus_per_step if self.true_controller == "defender" else 0.0
+
+        self.attacker_budget = (
+            self.attacker_budget
+            - attacker_cost
+            + attacker_base_income_applied
+            + attacker_control_bonus_applied
+        )
+        self.defender_budget = (
+            self.defender_budget
+            - defender_cost
+            + defender_base_income_applied
+            + defender_control_bonus_applied
+        )
 
         if self.true_controller == "attacker":
             self.metrics["attacker_control_steps"] += 1
@@ -390,16 +434,46 @@ class MaritimeCheatAttentionEnv(gym.Env):
         if missed_response:
             training_reward -= self.training_missed_threat_penalty
 
+        attacker_budget_collapse = self._update_guarantee_streak("attacker")
+        defender_budget_collapse = self._update_guarantee_streak("defender")
+
         terminated = False
-        truncated = self.tick >= self.max_steps
+        truncated = False
         winner = None
-        if truncated:
-            if self.metrics["attacker_control_steps"] > self.metrics["defender_control_steps"]:
-                winner = "attacker"
-            elif self.metrics["attacker_control_steps"] < self.metrics["defender_control_steps"]:
+        termination_reason = None
+
+        if attacker_budget_collapse or defender_budget_collapse:
+            terminated = True
+            self.metrics["attacker_budget_collapse"] = attacker_budget_collapse
+            self.metrics["defender_budget_collapse"] = defender_budget_collapse
+            if attacker_budget_collapse and defender_budget_collapse:
+                termination_reason = "both_resource_collapse"
+                winner = self._winner_from_control_steps()
+                attacker_reward -= self.attacker_resource_collapse_penalty
+                defender_reward -= self.defender_resource_collapse_penalty
+                if winner == "attacker":
+                    attacker_reward += self.attacker_resource_collapse_bonus
+                    training_reward -= self.training_resource_collapse_penalty
+                elif winner == "defender":
+                    defender_reward += self.defender_resource_collapse_bonus
+                    training_reward += self.training_opponent_resource_collapse_bonus
+            elif attacker_budget_collapse:
+                termination_reason = "attacker_resource_collapse"
                 winner = "defender"
+                attacker_reward -= self.attacker_resource_collapse_penalty
+                defender_reward += self.defender_resource_collapse_bonus
+                training_reward += self.training_opponent_resource_collapse_bonus
             else:
-                winner = "draw"
+                termination_reason = "defender_resource_collapse"
+                winner = "attacker"
+                defender_reward -= self.defender_resource_collapse_penalty
+                attacker_reward += self.attacker_resource_collapse_bonus
+                training_reward -= self.training_resource_collapse_penalty
+        else:
+            truncated = self.tick >= self.max_steps
+            if truncated:
+                termination_reason = "max_steps"
+                winner = self._winner_from_control_steps()
 
         info = {
             "mode": self.mode,
@@ -411,6 +485,14 @@ class MaritimeCheatAttentionEnv(gym.Env):
             "zone_beliefs": self._zone_belief_dict(),
             "attacker_budget_remaining": float(self.attacker_budget),
             "defender_budget_remaining": float(self.defender_budget),
+            "attacker_base_income_applied": float(attacker_base_income_applied),
+            "defender_base_income_applied": float(defender_base_income_applied),
+            "attacker_control_bonus_applied": float(attacker_control_bonus_applied),
+            "defender_control_bonus_applied": float(defender_control_bonus_applied),
+            "attacker_below_guarantee_streak": int(self.attacker_below_guarantee_streak),
+            "defender_below_guarantee_streak": int(self.defender_below_guarantee_streak),
+            "attacker_budget_collapse": bool(attacker_budget_collapse),
+            "defender_budget_collapse": bool(defender_budget_collapse),
             "focus_zone": self.focus_zone,
             "active_threat_zone": self.active_threat_zone,
             "last_deception_zone": self.last_deception_zone,
@@ -430,6 +512,7 @@ class MaritimeCheatAttentionEnv(gym.Env):
             "defender_action_id": defender_action,
             "tick": self.tick,
             "winner": winner,
+            "termination_reason": termination_reason,
         }
         return self._get_observation(), float(training_reward), terminated, truncated, info
 
@@ -448,6 +531,8 @@ class MaritimeCheatAttentionEnv(gym.Env):
             "zone_beliefs": self._zone_belief_dict(),
             "attacker_budget_remaining": float(self.attacker_budget),
             "defender_budget_remaining": float(self.defender_budget),
+            "attacker_below_guarantee_streak": int(self.attacker_below_guarantee_streak),
+            "defender_below_guarantee_streak": int(self.defender_below_guarantee_streak),
             "focus_zone": self.focus_zone,
             "active_threat_zone": self.active_threat_zone,
             "last_deception_zone": self.last_deception_zone,
@@ -672,6 +757,31 @@ class MaritimeCheatAttentionEnv(gym.Env):
     def _zone_belief_dict(self) -> Dict[str, float]:
         return {zone: float(self.zone_beliefs[index]) for index, zone in enumerate(ZONES)}
 
+    def _winner_from_control_steps(self) -> str:
+        if self.metrics["attacker_control_steps"] > self.metrics["defender_control_steps"]:
+            return "attacker"
+        if self.metrics["attacker_control_steps"] < self.metrics["defender_control_steps"]:
+            return "defender"
+        return "draw"
+
+    def _update_guarantee_streak(self, player: str) -> bool:
+        if player == "attacker":
+            below = self.attacker_budget < self.attacker_guarantee_line
+            if below:
+                self.attacker_below_guarantee_streak += 1
+                self.metrics["attacker_below_guarantee_steps"] += 1
+            else:
+                self.attacker_below_guarantee_streak = 0
+            return self.attacker_below_guarantee_streak >= self.guarantee_breach_patience
+
+        below = self.defender_budget < self.defender_guarantee_line
+        if below:
+            self.defender_below_guarantee_streak += 1
+            self.metrics["defender_below_guarantee_steps"] += 1
+        else:
+            self.defender_below_guarantee_streak = 0
+        return self.defender_below_guarantee_streak >= self.guarantee_breach_patience
+
     def _episode_metrics_snapshot(self) -> Dict[str, Any]:
         inspection_precision = (
             self.metrics["positive_inspections"] / self.metrics["inspect_actions"]
@@ -690,6 +800,10 @@ class MaritimeCheatAttentionEnv(gym.Env):
             "positive_inspections": self.metrics["positive_inspections"],
             "false_responses": self.metrics["false_responses"],
             "missed_responses": self.metrics["missed_responses"],
+            "attacker_below_guarantee_steps": self.metrics["attacker_below_guarantee_steps"],
+            "defender_below_guarantee_steps": self.metrics["defender_below_guarantee_steps"],
+            "attacker_budget_collapse": self.metrics["attacker_budget_collapse"],
+            "defender_budget_collapse": self.metrics["defender_budget_collapse"],
             "inspection_precision": inspection_precision,
             "signal_counts": copy.deepcopy(self.metrics["signal_counts"]),
             "respond_counts": copy.deepcopy(self.metrics["respond_counts"]),
@@ -705,8 +819,8 @@ class MaritimeCheatAttentionEnv(gym.Env):
 
         obs = np.array(
             [
-                min(self.defender_budget / max(self.defender_initial_budget, 1.0), 2.0),
-                min(self.attacker_budget / max(self.attacker_initial_budget, 1.0), 2.0),
+                float(np.clip(self.defender_budget / max(self.defender_initial_budget, 1.0), -1.0, 2.0)),
+                float(np.clip(self.attacker_budget / max(self.attacker_initial_budget, 1.0), -1.0, 2.0)),
                 float(self.mu_breach),
                 float(self.zone_beliefs[0]),
                 float(self.zone_beliefs[1]),

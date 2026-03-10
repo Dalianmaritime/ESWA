@@ -62,6 +62,15 @@ def make_step_record(step_index: int, info: Dict[str, Any]) -> Dict[str, Any]:
         "response_success": bool(info["response_success"]),
         "attacker_budget_remaining": float(info["attacker_budget_remaining"]),
         "defender_budget_remaining": float(info["defender_budget_remaining"]),
+        "attacker_base_income_applied": float(info.get("attacker_base_income_applied", 0.0)),
+        "defender_base_income_applied": float(info.get("defender_base_income_applied", 0.0)),
+        "attacker_control_bonus_applied": float(info.get("attacker_control_bonus_applied", 0.0)),
+        "defender_control_bonus_applied": float(info.get("defender_control_bonus_applied", 0.0)),
+        "attacker_below_guarantee_streak": int(info.get("attacker_below_guarantee_streak", 0)),
+        "defender_below_guarantee_streak": int(info.get("defender_below_guarantee_streak", 0)),
+        "attacker_budget_collapse": bool(info.get("attacker_budget_collapse", False)),
+        "defender_budget_collapse": bool(info.get("defender_budget_collapse", False)),
+        "termination_reason": info.get("termination_reason"),
         "attacker_reward": float(info.get("attacker_reward", 0.0)),
         "defender_reward": float(info.get("defender_reward", 0.0)),
         "training_reward": float(info.get("training_reward", 0.0)),
@@ -84,6 +93,8 @@ def summarize_episode(
     positive_inspections = int(metrics.get("positive_inspections", 0))
     false_responses = int(metrics.get("false_responses", 0))
     missed_responses = int(metrics.get("missed_responses", 0))
+    attacker_below_guarantee_steps = int(metrics.get("attacker_below_guarantee_steps", 0))
+    defender_below_guarantee_steps = int(metrics.get("defender_below_guarantee_steps", 0))
 
     if steps == 0:
         attacker_control_rate = 0.0
@@ -119,6 +130,13 @@ def summarize_episode(
         "missed_response_rate": missed_response_rate,
         "inspection_precision": inspection_precision,
         "episode_length": int(steps),
+        "termination_reason": last_info.get("termination_reason"),
+        "attacker_resource_collapse": bool(last_info.get("attacker_budget_collapse", False)),
+        "defender_resource_collapse": bool(last_info.get("defender_budget_collapse", False)),
+        "final_attacker_budget": float(last_info.get("attacker_budget_remaining", 0.0)),
+        "final_defender_budget": float(last_info.get("defender_budget_remaining", 0.0)),
+        "attacker_below_guarantee_steps": attacker_below_guarantee_steps,
+        "defender_below_guarantee_steps": defender_below_guarantee_steps,
         "episode_metrics_snapshot": metrics,
         "step_records": step_records,
     }
@@ -139,6 +157,12 @@ def compute_final_performance(episodes: Iterable[Dict[str, Any]]) -> Dict[str, A
             "avg_missed_response_rate": 0.0,
             "avg_inspection_precision": 0.0,
             "avg_episode_length": 0.0,
+            "attacker_resource_collapse_rate": 0.0,
+            "defender_resource_collapse_rate": 0.0,
+            "avg_final_attacker_budget": 0.0,
+            "avg_final_defender_budget": 0.0,
+            "avg_attacker_below_guarantee_steps": 0.0,
+            "avg_defender_below_guarantee_steps": 0.0,
             "sample_size": 0,
         }
 
@@ -155,6 +179,20 @@ def compute_final_performance(episodes: Iterable[Dict[str, Any]]) -> Dict[str, A
         "avg_missed_response_rate": float(np.mean([episode["missed_response_rate"] for episode in episode_list])),
         "avg_inspection_precision": float(np.mean([episode["inspection_precision"] for episode in episode_list])),
         "avg_episode_length": float(np.mean([episode["episode_length"] for episode in episode_list])),
+        "attacker_resource_collapse_rate": float(
+            np.mean([episode.get("attacker_resource_collapse", False) for episode in episode_list])
+        ),
+        "defender_resource_collapse_rate": float(
+            np.mean([episode.get("defender_resource_collapse", False) for episode in episode_list])
+        ),
+        "avg_final_attacker_budget": float(np.mean([episode.get("final_attacker_budget", 0.0) for episode in episode_list])),
+        "avg_final_defender_budget": float(np.mean([episode.get("final_defender_budget", 0.0) for episode in episode_list])),
+        "avg_attacker_below_guarantee_steps": float(
+            np.mean([episode.get("attacker_below_guarantee_steps", 0.0) for episode in episode_list])
+        ),
+        "avg_defender_below_guarantee_steps": float(
+            np.mean([episode.get("defender_below_guarantee_steps", 0.0) for episode in episode_list])
+        ),
         "sample_size": int(sample_size),
     }
 
@@ -175,6 +213,12 @@ def generate_summary_markdown(results: Dict[str, Any]) -> str:
     perf = results["final_performance"]
     metric_conventions = results.get("metric_conventions", {})
     checkpoint_selection = results.get("checkpoint_selection", {})
+    attacker_resource_collapse_rate = float(perf.get("attacker_resource_collapse_rate", 0.0))
+    defender_resource_collapse_rate = float(perf.get("defender_resource_collapse_rate", 0.0))
+    avg_final_attacker_budget = float(perf.get("avg_final_attacker_budget", 0.0))
+    avg_final_defender_budget = float(perf.get("avg_final_defender_budget", 0.0))
+    avg_attacker_below_guarantee_steps = float(perf.get("avg_attacker_below_guarantee_steps", 0.0))
+    avg_defender_below_guarantee_steps = float(perf.get("avg_defender_below_guarantee_steps", 0.0))
 
     lines = [
         "# Maritime Cheat-FlipIt V2 Experiment Summary",
@@ -212,6 +256,12 @@ def generate_summary_markdown(results: Dict[str, Any]) -> str:
             f"- Avg missed response rate: {perf['avg_missed_response_rate']:.3f}",
             f"- Avg inspection precision: {perf['avg_inspection_precision']:.3f}",
             f"- Avg episode length: {perf['avg_episode_length']:.2f}",
+            f"- Attacker resource collapse rate: {attacker_resource_collapse_rate:.2%}",
+            f"- Defender resource collapse rate: {defender_resource_collapse_rate:.2%}",
+            f"- Avg final attacker budget: {avg_final_attacker_budget:.3f}",
+            f"- Avg final defender budget: {avg_final_defender_budget:.3f}",
+            f"- Avg attacker below-guarantee steps: {avg_attacker_below_guarantee_steps:.3f}",
+            f"- Avg defender below-guarantee steps: {avg_defender_below_guarantee_steps:.3f}",
             "",
             "## Training Diagnostics",
             f"- Avg defender training return: {perf['avg_defender_training_return']:.3f}",

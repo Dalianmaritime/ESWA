@@ -1,0 +1,77 @@
+[
+  {
+    "episode": 0,
+    "performance": {
+      "attacker_success_rate": 0.5,
+      "defender_control_rate": 0.5166666666666667,
+      "attacker_control_rate": 0.48333333333333334,
+      "avg_defender_return": -11.5,
+      "avg_defender_training_return": -44.42500000000003,
+      "avg_attacker_return": -11.75,
+      "avg_false_response_rate": 0.0,
+      "avg_missed_response_rate": 0.025,
+      "avg_inspection_precision": 0.27045454545454545,
+      "avg_episode_length": 35.5,
+      "attacker_resource_collapse_rate": 0.5,
+      "defender_resource_collapse_rate": 0.0,
+      "avg_final_attacker_budget": -0.25,
+      "avg_final_defender_budget": 50.05000000000008,
+      "avg_attacker_below_guarantee_steps": 3.5,
+      "avg_defender_below_guarantee_steps": 0.0,
+      "sample_size": 2
+    },
+    "checkpoint_metric": "avg_defender_training_return",
+    "checkpoint_score": -44.42500000000003,
+    "num_episodes": 2
+  },
+  {
+    "episode": 2,
+    "performance": {
+      "attacker_success_rate": 1.0,
+      "defender_control_rate": 0.04112903225806452,
+      "attacker_control_rate": 0.9588709677419355,
+      "avg_defender_return": -113.0,
+      "avg_defender_training_return": -118.35000000000002,
+      "avg_attacker_return": 25.75,
+      "avg_false_response_rate": 0.17956989247311828,
+      "avg_missed_response_rate": 0.048924731182795694,
+      "avg_inspection_precision": 0.36572890025575444,
+      "avg_episode_length": 45.5,
+      "attacker_resource_collapse_rate": 0.0,
+      "defender_resource_collapse_rate": 0.5,
+      "avg_final_attacker_budget": 4.25,
+      "avg_final_defender_budget": -0.8000000000000235,
+      "avg_attacker_below_guarantee_steps": 1.5,
+      "avg_defender_below_guarantee_steps": 1.0,
+      "sample_size": 2
+    },
+    "checkpoint_metric": "avg_defender_training_return",
+    "checkpoint_score": -118.35000000000002,
+    "num_episodes": 2
+  },
+  {
+    "episode": 4,
+    "performance": {
+      "attacker_success_rate": 0.5,
+      "defender_control_rate": 0.525,
+      "attacker_control_rate": 0.475,
+      "avg_defender_return": 6.0,
+      "avg_defender_training_return": -56.5,
+      "avg_attacker_return": -13.0,
+      "avg_false_response_rate": 0.0,
+      "avg_missed_response_rate": 0.08333333333333333,
+      "avg_inspection_precision": 0.0,
+      "avg_episode_length": 34.0,
+      "attacker_resource_collapse_rate": 0.5,
+      "defender_resource_collapse_rate": 0.0,
+      "avg_final_attacker_budget": -2.0,
+      "avg_final_defender_budget": 81.45000000000007,
+      "avg_attacker_below_guarantee_steps": 3.0,
+      "avg_defender_below_guarantee_steps": 0.0,
+      "sample_size": 2
+    },
+    "checkpoint_metric": "avg_defender_training_return",
+    "checkpoint_score": -56.5,
+    "num_episodes": 2
+  }
+]

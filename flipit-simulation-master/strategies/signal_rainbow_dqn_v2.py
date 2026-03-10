@@ -206,6 +206,7 @@ class SignalRainbowDQNAgentV2:
         defender_initial_budget: float = 100.0,
         defender_inspect_cost: float = 1.0,
         defender_respond_cost_by_zone: Dict[str, float] | None = None,
+        defender_action_floor: float = -6.0,
         device: str = "cpu",
     ):
         self.obs_dim = int(obs_dim)
@@ -221,6 +222,7 @@ class SignalRainbowDQNAgentV2:
         self.device = torch.device(device)
         self.defender_initial_budget = float(defender_initial_budget)
         self.defender_inspect_cost = float(defender_inspect_cost)
+        self.defender_action_floor = float(defender_action_floor)
         respond_costs = defender_respond_cost_by_zone or {"outer": 4.0, "lane": 5.0, "core": 6.0}
         self.defender_respond_costs = [
             float(respond_costs["outer"]),
@@ -319,10 +321,10 @@ class SignalRainbowDQNAgentV2:
         budgets = observations[:, OBS_INDEX["defender_budget_ratio"]] * self.defender_initial_budget
         batch_size = observations.shape[0]
         mask = torch.ones((batch_size, self.action_dim), dtype=torch.bool, device=observations.device)
-        inspect_valid = budgets >= self.defender_inspect_cost
+        inspect_valid = budgets - self.defender_inspect_cost >= self.defender_action_floor
         mask[:, 1:4] = inspect_valid.unsqueeze(1).repeat(1, 3)
         for action_index, cost in enumerate(self.defender_respond_costs, start=4):
-            mask[:, action_index] = budgets >= cost
+            mask[:, action_index] = budgets - cost >= self.defender_action_floor
         return mask
 
     def save(self, path: str):

@@ -168,11 +168,12 @@ def test_valid_action_mask_blocks_unaffordable_inspect_and_respond_actions():
         defender_initial_budget=120.0,
         defender_inspect_cost=1.0,
         defender_respond_cost_by_zone={"outer": 4.0, "lane": 5.0, "core": 6.0},
+        defender_action_floor=-6.0,
     )
     observation = torch.zeros((1, 17), dtype=torch.float32)
-    observation[0, 0] = 0.0
+    observation[0, 0] = -2.5 / 120.0
     mask = agent._valid_action_mask(observation)
     assert mask.shape == (1, 7)
     assert mask[0, 0].item() is True
-    assert mask[0, 1].item() is False
+    assert mask[0, 1].item() is True
     assert mask[0, 4].item() is False

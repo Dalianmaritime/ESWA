@@ -235,6 +235,12 @@ def write_summary(output_dir: Path, selected_dirs: Dict[str, Path], results: Dic
                 f"- avg_defender_training_return: {perf['avg_defender_training_return']:.3f}",
                 f"- avg_false_response_rate: {perf['avg_false_response_rate']:.3f}",
                 f"- avg_missed_response_rate: {perf['avg_missed_response_rate']:.3f}",
+                f"- attacker_resource_collapse_rate: {perf.get('attacker_resource_collapse_rate', 0.0):.2%}",
+                f"- defender_resource_collapse_rate: {perf.get('defender_resource_collapse_rate', 0.0):.2%}",
+                f"- avg_final_attacker_budget: {perf.get('avg_final_attacker_budget', 0.0):.3f}",
+                f"- avg_final_defender_budget: {perf.get('avg_final_defender_budget', 0.0):.3f}",
+                f"- avg_attacker_below_guarantee_steps: {perf.get('avg_attacker_below_guarantee_steps', 0.0):.3f}",
+                f"- avg_defender_below_guarantee_steps: {perf.get('avg_defender_below_guarantee_steps', 0.0):.3f}",
             ]
         )
         if checkpoint_selection:

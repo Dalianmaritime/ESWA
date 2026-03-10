@@ -1,0 +1,38 @@
+{
+  "paper_group": "main",
+  "timestamp": "2026-03-10T10:01:46.907422",
+  "seeds": [
+    42
+  ],
+  "resume_missing": false,
+  "results_subdir": "progress_smoke",
+  "runs": [
+    {
+      "experiment_id": "paper_main_cheat_baseline_seed42",
+      "scenario_id": "cheat",
+      "method_id": "baseline",
+      "seed": 42,
+      "config_path": "E:\\1031\\flipit-simulation-master\\configs\\paper_v1\\main\\main_cheat_baseline.yml",
+      "result_dir": "E:\\1031\\flipit-simulation-master\\results\\paper_v1_main\\paper_main_cheat_baseline_seed42_20260310_100147",
+      "final_performance": {
+        "attacker_success_rate": 0.5,
+        "defender_control_rate": 0.55,
+        "attacker_control_rate": 0.44999999999999996,
+        "avg_defender_return": 21.5,
+        "avg_defender_training_return": -25.825000000000014,
+        "avg_attacker_return": -41.44999999999998,
+        "avg_false_response_rate": 0.1,
+        "avg_missed_response_rate": 0.125,
+        "avg_inspection_precision": 0.20833333333333334,
+        "avg_episode_length": 60.0,
+        "attacker_resource_collapse_rate": 0.0,
+        "defender_resource_collapse_rate": 0.0,
+        "avg_final_attacker_budget": 1.9500000000000042,
+        "avg_final_defender_budget": 113.40000000000003,
+        "avg_attacker_below_guarantee_steps": 1.5,
+        "avg_defender_below_guarantee_steps": 0.0,
+        "sample_size": 2
+      }
+    }
+  ]
+}

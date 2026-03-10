@@ -23,6 +23,12 @@ KEY_METRICS = [
     "avg_false_response_rate",
     "avg_missed_response_rate",
     "avg_inspection_precision",
+    "attacker_resource_collapse_rate",
+    "defender_resource_collapse_rate",
+    "avg_final_attacker_budget",
+    "avg_final_defender_budget",
+    "avg_attacker_below_guarantee_steps",
+    "avg_defender_below_guarantee_steps",
 ]
 SCENARIO_ORDER = ["cheat", "flipit"]
 METHOD_ORDER = ["drl", "baseline"]
@@ -61,7 +67,7 @@ def aggregate_runs(run_entries: Iterable[Dict[str, Any]]) -> Dict[Tuple[str, str
 def summarize_group(runs: List[Dict[str, Any]]) -> Dict[str, Any]:
     summary: Dict[str, Any] = {"num_seeds": len(runs), "seeds": sorted(run["seed"] for run in runs)}
     for metric in KEY_METRICS:
-        values = np.asarray([run["final_performance"][metric] for run in runs], dtype=float)
+        values = np.asarray([run["final_performance"].get(metric, 0.0) for run in runs], dtype=float)
         summary[metric] = {
             "mean": float(values.mean()),
             "std": float(values.std(ddof=1)) if values.size > 1 else 0.0,
@@ -359,6 +365,12 @@ def write_summary_markdown(
                     f"- avg_false_response_rate: {group['avg_false_response_rate']['mean']:.3f} +- {group['avg_false_response_rate']['std']:.3f}",
                     f"- avg_missed_response_rate: {group['avg_missed_response_rate']['mean']:.3f} +- {group['avg_missed_response_rate']['std']:.3f}",
                     f"- avg_inspection_precision: {group['avg_inspection_precision']['mean']:.3f} +- {group['avg_inspection_precision']['std']:.3f}",
+                    f"- attacker_resource_collapse_rate: {group['attacker_resource_collapse_rate']['mean']:.2%} +- {group['attacker_resource_collapse_rate']['std']:.3f}",
+                    f"- defender_resource_collapse_rate: {group['defender_resource_collapse_rate']['mean']:.2%} +- {group['defender_resource_collapse_rate']['std']:.3f}",
+                    f"- avg_final_attacker_budget: {group['avg_final_attacker_budget']['mean']:.3f} +- {group['avg_final_attacker_budget']['std']:.3f}",
+                    f"- avg_final_defender_budget: {group['avg_final_defender_budget']['mean']:.3f} +- {group['avg_final_defender_budget']['std']:.3f}",
+                    f"- avg_attacker_below_guarantee_steps: {group['avg_attacker_below_guarantee_steps']['mean']:.3f} +- {group['avg_attacker_below_guarantee_steps']['std']:.3f}",
+                    f"- avg_defender_below_guarantee_steps: {group['avg_defender_below_guarantee_steps']['mean']:.3f} +- {group['avg_defender_below_guarantee_steps']['std']:.3f}",
                     "",
                 ]
             )
@@ -422,6 +434,8 @@ def write_eswa_review_report(
                 f"- Baseline attacker_success_rate: {baseline['attacker_success_rate']['mean']:.2%}",
                 f"- DRL false/missed: {drl['avg_false_response_rate']['mean']:.3f} / {drl['avg_missed_response_rate']['mean']:.3f}",
                 f"- Baseline false/missed: {baseline['avg_false_response_rate']['mean']:.3f} / {baseline['avg_missed_response_rate']['mean']:.3f}",
+                f"- DRL collapse rates (A/D): {drl['attacker_resource_collapse_rate']['mean']:.2%} / {drl['defender_resource_collapse_rate']['mean']:.2%}",
+                f"- Baseline collapse rates (A/D): {baseline['attacker_resource_collapse_rate']['mean']:.2%} / {baseline['defender_resource_collapse_rate']['mean']:.2%}",
                 "",
             ]
         )

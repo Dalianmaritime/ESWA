@@ -56,7 +56,7 @@ transition_model:
 costs_and_rewards:
   defender_control_reward: 4.0
   attacker_control_reward: 4.0
-  attacker_cheat_cost: 1.5
+  attacker_cheat_cost: 0.8
   attacker_takeover_cost_by_zone:
     outer: 6.0
     lane: 7.5
@@ -68,12 +68,23 @@ costs_and_rewards:
     core: 6.0
   false_response_penalty: 2.0
   missed_threat_penalty: 4.0
+  attacker_resource_collapse_penalty: 20.0
+  defender_resource_collapse_penalty: 20.0
+  attacker_resource_collapse_bonus: 8.0
+  defender_resource_collapse_bonus: 8.0
 
 resources:
-  attacker_initial_budget: 100.0
-  defender_initial_budget: 120.0
-  attacker_income_per_step: 3.0
-  defender_income_per_step: 3.5
+  attacker_initial_budget: 32.0
+  defender_initial_budget: 34.0
+  attacker_base_income_per_step: 1.0
+  defender_base_income_per_step: 1.2
+  attacker_control_bonus_per_step: 2.2
+  defender_control_bonus_per_step: 2.3
+  attacker_action_floor: -6.0
+  defender_action_floor: -6.0
+  attacker_guarantee_line: -4.0
+  defender_guarantee_line: -4.0
+  guarantee_breach_patience: 2
 
 policies:
   belief_signal_sensitivity: 0.65
@@ -115,3 +126,5 @@ drl:
   training_missed_threat_penalty: 2.5
   training_inspect_cost_weight: 0.25
   training_respond_cost_weight: 0.35
+  training_resource_collapse_penalty: 8.0
+  training_opponent_resource_collapse_bonus: 4.0

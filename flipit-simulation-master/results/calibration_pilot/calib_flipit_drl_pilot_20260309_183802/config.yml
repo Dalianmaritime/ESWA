@@ -1,0 +1,119 @@
+experiment:
+  experiment_id: calib_flipit_drl_pilot
+  experiment_type: drl
+  scenario: maritime_platform_control
+  random_seed: 42
+  results_subdir: calibration_pilot
+environment:
+  env_id: MaritimeCheatAttention-v0
+  max_steps: 60
+  breach_prior: 0.08
+zones:
+- outer
+- lane
+- core
+signal_model:
+  mode: flipit
+  cheat_emit_prob: 0.0
+  takeover_detect_prob_by_zone:
+    outer: 0.4
+    lane: 0.5
+    core: 0.62
+  background_noise_by_zone:
+    outer: 0.005
+    lane: 0.005
+    core: 0.002
+  inspection_accuracy_by_zone:
+    outer: 0.82
+    lane: 0.88
+    core: 0.92
+transition_model:
+  base_takeover_success_by_zone:
+    outer: 0.42
+    lane: 0.36
+    core: 0.3
+  respond_block_multiplier_same_zone:
+    outer: 0.18
+    lane: 0.14
+    core: 0.12
+  inspect_block_multiplier_same_zone:
+    outer: 0.62
+    lane: 0.56
+    core: 0.5
+  off_zone_vulnerability_multiplier: 1.1
+  recapture_success_by_zone:
+    outer: 0.72
+    lane: 0.78
+    core: 0.84
+costs_and_rewards:
+  defender_control_reward: 4.0
+  attacker_control_reward: 4.0
+  attacker_cheat_cost: 1.5
+  attacker_takeover_cost_by_zone:
+    outer: 6.0
+    lane: 7.5
+    core: 9.0
+  defender_inspect_cost: 1.0
+  defender_respond_cost_by_zone:
+    outer: 4.0
+    lane: 5.0
+    core: 6.0
+  false_response_penalty: 2.0
+  missed_threat_penalty: 4.0
+  attacker_resource_collapse_penalty: 20.0
+  defender_resource_collapse_penalty: 20.0
+  attacker_resource_collapse_bonus: 8.0
+  defender_resource_collapse_bonus: 8.0
+resources:
+  attacker_initial_budget: 32.0
+  defender_initial_budget: 34.0
+  attacker_base_income_per_step: 1.0
+  defender_base_income_per_step: 1.2
+  attacker_control_bonus_per_step: 2.2
+  defender_control_bonus_per_step: 2.3
+  attacker_action_floor: -6.0
+  defender_action_floor: -6.0
+  attacker_guarantee_line: -4.0
+  defender_guarantee_line: -4.0
+  guarantee_breach_patience: 2
+policies:
+  belief_signal_sensitivity: 0.65
+  belief_decay: 0.92
+  attacker:
+    allow_cheat: false
+    takeover_trigger_belief: 0.42
+    exploit_false_response: true
+  defender:
+    inspect_threshold: 0.22
+    respond_threshold: 0.58
+drl:
+  obs_dim: 17
+  action_dim: 7
+  training_episodes: 80
+  evaluation_frequency: 20
+  evaluation_episodes: 8
+  final_evaluation_episodes: 20
+  checkpoint_selection_metric: avg_defender_training_return
+  report_metric: avg_defender_return
+  learning_starts: 100
+  update_frequency: 1
+  batch_size: 64
+  memory_size: 20000
+  lr: 0.0002
+  gamma: 0.99
+  v_min: -30.0
+  v_max: 30.0
+  atom_size: 51
+  beta_start: 0.4
+  beta_frames: 10000
+  target_update_freq: 100
+  training_control_bonus: 2.0
+  training_attacker_control_penalty: 2.0
+  training_positive_inspection_bonus: 0.8
+  training_successful_response_bonus: 2.5
+  training_false_response_penalty: 1.5
+  training_missed_threat_penalty: 2.5
+  training_inspect_cost_weight: 0.25
+  training_respond_cost_weight: 0.35
+  training_resource_collapse_penalty: 8.0
+  training_opponent_resource_collapse_bonus: 4.0
