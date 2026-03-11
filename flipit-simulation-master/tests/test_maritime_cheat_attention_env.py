@@ -113,6 +113,16 @@ def test_environment_returns_training_reward_while_preserving_raw_defender_rewar
     assert info["false_response"] is True
 
 
+def test_disable_reward_shaping_uses_raw_defender_reward_for_training(deterministic_config):
+    config = copy.deepcopy(deterministic_config)
+    config["variant_controls"] = {"disable_reward_shaping": True}
+    env = MaritimeCheatAttentionEnv(config)
+    _, _ = env.reset(seed=7)
+    _, reward, _, _, info = env.step((1, 4))
+    assert reward == pytest.approx(info["defender_reward"])
+    assert info["training_reward"] == pytest.approx(info["defender_reward"])
+
+
 def test_flipit_mode_disables_cheat():
     config = copy.deepcopy(load_base_config())
     config["signal_model"]["mode"] = "flipit"
@@ -210,6 +220,22 @@ def test_consecutive_below_guarantee_steps_trigger_resource_collapse(determinist
     assert info["termination_reason"] == "defender_resource_collapse"
 
 
+def test_disable_resource_sustainability_removes_income_and_overdraft_path(deterministic_config):
+    config = copy.deepcopy(deterministic_config)
+    config["variant_controls"] = {"disable_resource_sustainability": True}
+    env = MaritimeCheatAttentionEnv(config)
+    _, _ = env.reset(seed=7)
+    env.defender_budget = 0.5
+    _, _, terminated, truncated, info = env.step((0, 4))
+    assert terminated is False
+    assert truncated is False
+    assert info["defender_action_label"] == "hold"
+    assert info["defender_base_income_applied"] == pytest.approx(0.0)
+    assert info["defender_control_bonus_applied"] == pytest.approx(0.0)
+    assert info["defender_budget_remaining"] == pytest.approx(0.5)
+    assert info["defender_below_guarantee_streak"] == 0
+
+
 def test_guarantee_streak_resets_after_budget_recovery(deterministic_config):
     config = copy.deepcopy(deterministic_config)
     config["resources"]["defender_base_income_per_step"] = 0.0
@@ -243,6 +269,22 @@ def test_dqn_mask_uses_action_floor_instead_of_cash_coverage():
     assert mask[4] is False
     assert mask[5] is False
     assert mask[6] is False
+
+
+def test_dqn_can_disable_action_mask_for_ablation():
+    agent = SignalRainbowDQNAgentV2(
+        obs_dim=17,
+        action_dim=7,
+        defender_initial_budget=28.0,
+        defender_inspect_cost=1.0,
+        defender_respond_cost_by_zone={"outer": 4.0, "lane": 5.0, "core": 6.0},
+        defender_action_floor=-6.0,
+        use_action_mask=False,
+    )
+    observation = torch.zeros((1, 17), dtype=torch.float32)
+    observation[0, 0] = -2.5 / 28.0
+    mask = agent._valid_action_mask(observation)[0].tolist()
+    assert mask == [True] * 7
 
 
 def test_attacker_strategy_allows_feasible_overdraft_actions():

@@ -12,6 +12,53 @@ import numpy as np
 import torch
 import yaml
 
+from gym_flipit.envs.maritime_cheat_attention_env import OBS_INDEX, ZONES
+
+
+DEFAULT_VARIANT_CONTROLS = {
+    "disable_resource_sustainability": False,
+    "disable_reward_shaping": False,
+    "disable_action_mask": False,
+    "disable_signal_features": False,
+}
+
+
+def get_variant_controls(config: Dict[str, Any]) -> Dict[str, bool]:
+    controls = dict(DEFAULT_VARIANT_CONTROLS)
+    for key, value in dict(config.get("variant_controls", {})).items():
+        if key in controls:
+            controls[key] = bool(value)
+    return controls
+
+
+def ablate_signal_features(observation: np.ndarray) -> np.ndarray:
+    sanitized = np.asarray(observation, dtype=np.float32).copy()
+    sanitized[OBS_INDEX["mu_breach"]] = 0.0
+    for zone in ZONES:
+        sanitized[OBS_INDEX[f"nu_{zone}"]] = 1.0 / len(ZONES)
+
+    sanitized[OBS_INDEX["signal_is_null"]] = 1.0
+    for zone in ZONES:
+        sanitized[OBS_INDEX[f"signal_is_{zone}"]] = 0.0
+
+    sanitized[OBS_INDEX["last_inspect_none"]] = 1.0
+    for zone in ZONES:
+        sanitized[OBS_INDEX[f"last_inspect_{zone}"]] = 0.0
+    sanitized[OBS_INDEX["last_inspect_result"]] = 0.0
+    return sanitized
+
+
+def build_experiment_tags(config: Dict[str, Any]) -> Dict[str, Any]:
+    experiment_config = dict(config.get("experiment", {}))
+    return {
+        "paper_group": experiment_config.get("paper_group"),
+        "variant_id": experiment_config.get("variant_id"),
+        "variant_label": experiment_config.get("variant_label"),
+        "robustness_family": experiment_config.get("robustness_family"),
+        "robustness_level": experiment_config.get("robustness_level"),
+        "variant_controls": get_variant_controls(config),
+    }
+
 
 def compute_validation_selection_score(
     avg_defender_return: float,
@@ -214,6 +261,19 @@ def write_baseline_reference_targets(results_root: Path, scenarios: Iterable[str
     payload = build_baseline_reference_targets(results_root, scenarios=scenarios)
     results_root.mkdir(parents=True, exist_ok=True)
     output_path = results_root / "baseline_reference_targets.json"
+    save_json(output_path, payload)
+    return output_path
+
+
+def write_baseline_reference_targets_from_source(
+    source_results_root: Path,
+    destination_results_root: Path,
+    scenarios: Iterable[str] | None = None,
+) -> Path:
+    payload = build_baseline_reference_targets(source_results_root, scenarios=scenarios)
+    payload["copied_to_results_root"] = str(destination_results_root.resolve())
+    destination_results_root.mkdir(parents=True, exist_ok=True)
+    output_path = destination_results_root / "baseline_reference_targets.json"
     save_json(output_path, payload)
     return output_path
 

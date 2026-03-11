@@ -1,0 +1,109 @@
+{
+  "manifest_path": "E:\\1031\\flipit-simulation-master\\results\\paper_v1_ablation_smoke\\paper_ablation_manifest_20260311_115812.json",
+  "delta_vs_full": {
+    "full": {
+      "avg_defender_return": 0.0,
+      "attacker_success_rate": 0.0,
+      "defender_control_rate": 0.0,
+      "avg_defender_control_per_cost": 0.0
+    }
+  },
+  "grouped_summary": {
+    "cheat_full": {
+      "num_seeds": 1,
+      "seeds": [
+        42
+      ],
+      "defender_control_rate": {
+        "mean": 0.1349206349206349,
+        "std": 0.0,
+        "min": 0.1349206349206349,
+        "max": 0.1349206349206349
+      },
+      "attacker_success_rate": {
+        "mean": 1.0,
+        "std": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "avg_defender_return": {
+        "mean": -131.5,
+        "std": 0.0,
+        "min": -131.5,
+        "max": -131.5
+      },
+      "avg_defender_training_return": {
+        "mean": -111.125,
+        "std": 0.0,
+        "min": -111.125,
+        "max": -111.125
+      },
+      "avg_defender_spent_budget": {
+        "mean": 67.5,
+        "std": 0.0,
+        "min": 67.5,
+        "max": 67.5
+      },
+      "avg_defender_control_per_cost": {
+        "mean": 0.036561264822134384,
+        "std": 0.0,
+        "min": 0.036561264822134384,
+        "max": 0.036561264822134384
+      },
+      "avg_false_response_rate": {
+        "mean": 0.7738095238095238,
+        "std": 0.0,
+        "min": 0.7738095238095238,
+        "max": 0.7738095238095238
+      },
+      "avg_missed_response_rate": {
+        "mean": 0.3055555555555556,
+        "std": 0.0,
+        "min": 0.3055555555555556,
+        "max": 0.3055555555555556
+      },
+      "avg_inspection_precision": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "attacker_resource_collapse_rate": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "defender_resource_collapse_rate": {
+        "mean": 1.0,
+        "std": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "avg_final_attacker_budget": {
+        "mean": 1.4500000000000028,
+        "std": 0.0,
+        "min": 1.4500000000000028,
+        "max": 1.4500000000000028
+      },
+      "avg_final_defender_budget": {
+        "mean": -4.350000000000005,
+        "std": 0.0,
+        "min": -4.350000000000005,
+        "max": -4.350000000000005
+      },
+      "avg_attacker_below_guarantee_steps": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "avg_defender_below_guarantee_steps": {
+        "mean": 2.0,
+        "std": 0.0,
+        "min": 2.0,
+        "max": 2.0
+      }
+    }
+  }
+}

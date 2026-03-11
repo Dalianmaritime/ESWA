@@ -18,12 +18,15 @@ sys.path.insert(0, str(SCRIPT_DIR.parent / "gym-flipit-master"))
 
 from gym_flipit.envs.maritime_cheat_attention_env import MaritimeCheatAttentionEnv
 from signal_v2_utils import (
+    ablate_signal_features,
+    build_experiment_tags,
     compute_checkpoint_selection_metrics,
     compute_final_performance,
     confirmation_candidate_sort_key,
     constrained_candidate_improves,
     generate_summary_markdown,
     get_metric_value,
+    get_variant_controls,
     load_baseline_reference_targets,
     load_config,
     make_step_record,
@@ -46,6 +49,8 @@ class SignalDRLTrainingExperimentV2:
         evaluation_episodes: int | None = None,
         final_evaluation_episodes: int | None = None,
         evaluation_frequency: int | None = None,
+        routine_eval_episodes: int | None = None,
+        confirmation_eval_episodes: int | None = None,
         random_seed: int | None = None,
         experiment_id: str | None = None,
         results_subdir: str | None = None,
@@ -59,6 +64,7 @@ class SignalDRLTrainingExperimentV2:
         if results_subdir is not None:
             self.config["experiment"]["results_subdir"] = str(results_subdir)
         seed_everything(int(self.config["experiment"]["random_seed"]))
+        self.variant_controls = get_variant_controls(self.config)
 
         drl = self.config["drl"]
         if training_episodes is not None:
@@ -69,10 +75,15 @@ class SignalDRLTrainingExperimentV2:
             drl["final_evaluation_episodes"] = int(final_evaluation_episodes)
         if evaluation_frequency is not None:
             drl["evaluation_frequency"] = int(evaluation_frequency)
+        checkpoint_selection = drl.setdefault("checkpoint_selection", {})
+        if routine_eval_episodes is not None:
+            checkpoint_selection["routine_eval_episodes"] = int(routine_eval_episodes)
+        if confirmation_eval_episodes is not None:
+            checkpoint_selection["confirmation_eval_episodes"] = int(confirmation_eval_episodes)
 
         self.results_dir = setup_results_directory(SCRIPT_DIR, self.config_path, self.config)
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        self.training_metric = "defender_training_return"
+        self.training_metric = "defender_return" if self.variant_controls["disable_reward_shaping"] else "defender_training_return"
         self.report_metric = str(self.config["drl"].get("report_metric", "avg_defender_return"))
         self.checkpoint_selection_config = dict(self.config["drl"].get("checkpoint_selection", {}))
         self.checkpoint_strategy = str(self.checkpoint_selection_config.get("strategy", "single_metric"))
@@ -160,8 +171,14 @@ class SignalDRLTrainingExperimentV2:
             defender_inspect_cost=self.config["costs_and_rewards"]["defender_inspect_cost"],
             defender_respond_cost_by_zone=self.config["costs_and_rewards"]["defender_respond_cost_by_zone"],
             defender_action_floor=self.config["resources"]["defender_action_floor"],
+            use_action_mask=not self.variant_controls["disable_action_mask"],
             device=str(self.device),
         )
+
+    def _prepare_observation(self, observation: np.ndarray) -> np.ndarray:
+        if self.variant_controls["disable_signal_features"]:
+            return ablate_signal_features(observation)
+        return np.asarray(observation, dtype=np.float32)
 
     def _run_episode(
         self,
@@ -172,7 +189,8 @@ class SignalDRLTrainingExperimentV2:
         training: bool,
         store_trace: bool,
     ) -> Dict[str, Any]:
-        observation, _ = env.reset(seed=int(self.config["experiment"]["random_seed"]) + episode_index)
+        raw_observation, _ = env.reset(seed=int(self.config["experiment"]["random_seed"]) + episode_index)
+        observation = self._prepare_observation(raw_observation)
         done = False
         step = 0
         attacker_return = 0.0
@@ -186,7 +204,8 @@ class SignalDRLTrainingExperimentV2:
             step += 1
             attacker_action = attacker.select_action(env.get_public_state())
             defender_action = defender.select_action(observation, training=training)
-            next_observation, reward, terminated, truncated, info = env.step((attacker_action, defender_action))
+            raw_next_observation, reward, terminated, truncated, info = env.step((attacker_action, defender_action))
+            next_observation = self._prepare_observation(raw_next_observation)
             done = bool(terminated or truncated)
             attacker_return += float(info["attacker_reward"])
             defender_return += float(info["defender_reward"])
@@ -552,9 +571,14 @@ class SignalDRLTrainingExperimentV2:
                 "config_path": self.config_path,
                 "timestamp": datetime.now().isoformat(),
                 "device": str(self.device),
+                **build_experiment_tags(self.config),
             },
             "metric_conventions": {
-                "training_metric": "defender_training_return (shaped reward used for optimization)",
+                "training_metric": (
+                    "defender_return (raw reward used for optimization)"
+                    if self.variant_controls["disable_reward_shaping"]
+                    else "defender_training_return (shaped reward used for optimization)"
+                ),
                 "report_metric": f"{self.report_metric} (raw utility used for reporting)",
             },
             "checkpoint_selection": {
@@ -613,6 +637,8 @@ def main():
     parser.add_argument("--evaluation-episodes", type=int, default=None)
     parser.add_argument("--final-evaluation-episodes", type=int, default=None)
     parser.add_argument("--evaluation-frequency", type=int, default=None)
+    parser.add_argument("--routine-eval-episodes", type=int, default=None)
+    parser.add_argument("--confirmation-eval-episodes", type=int, default=None)
     parser.add_argument("--random-seed", type=int, default=None)
     parser.add_argument("--experiment-id", default=None)
     parser.add_argument("--results-subdir", default=None)
@@ -624,6 +650,8 @@ def main():
         evaluation_episodes=args.evaluation_episodes,
         final_evaluation_episodes=args.final_evaluation_episodes,
         evaluation_frequency=args.evaluation_frequency,
+        routine_eval_episodes=args.routine_eval_episodes,
+        confirmation_eval_episodes=args.confirmation_eval_episodes,
         random_seed=args.random_seed,
         experiment_id=args.experiment_id,
         results_subdir=args.results_subdir,

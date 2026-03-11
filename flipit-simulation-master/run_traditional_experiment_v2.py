@@ -9,13 +9,18 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List
 
+import numpy as np
+
 SCRIPT_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(SCRIPT_DIR.parent / "gym-flipit-master"))
 
 from gym_flipit.envs.maritime_cheat_attention_env import MaritimeCheatAttentionEnv
 from signal_v2_utils import (
+    ablate_signal_features,
+    build_experiment_tags,
     compute_final_performance,
     generate_summary_markdown,
+    get_variant_controls,
     load_config,
     make_step_record,
     save_json,
@@ -47,6 +52,7 @@ class TraditionalExperimentV2:
         if results_subdir is not None:
             self.config["experiment"]["results_subdir"] = str(results_subdir)
         seed_everything(int(self.config["experiment"]["random_seed"]))
+        self.variant_controls = get_variant_controls(self.config)
         self.results_dir = setup_results_directory(SCRIPT_DIR, self.config_path, self.config)
 
     def _build_environment(self) -> MaritimeCheatAttentionEnv:
@@ -70,6 +76,11 @@ class TraditionalExperimentV2:
             respond_threshold=defender_cfg["respond_threshold"],
         )
 
+    def _prepare_observation(self, observation) -> np.ndarray:
+        if self.variant_controls["disable_signal_features"]:
+            return ablate_signal_features(observation)
+        return np.asarray(observation, dtype=np.float32)
+
     def run(self) -> Dict[str, Any]:
         env = self._build_environment()
         attacker = self._build_attacker()
@@ -84,7 +95,8 @@ class TraditionalExperimentV2:
 
         details: List[Dict[str, Any]] = []
         for episode_index in range(episode_count):
-            observation, _ = env.reset(seed=int(self.config["experiment"]["random_seed"]) + episode_index)
+            raw_observation, _ = env.reset(seed=int(self.config["experiment"]["random_seed"]) + episode_index)
+            observation = self._prepare_observation(raw_observation)
             done = False
             step_index = 0
             attacker_return = 0.0
@@ -97,7 +109,8 @@ class TraditionalExperimentV2:
                 step_index += 1
                 attacker_action = attacker.select_action(env.get_public_state())
                 defender_action = defender.select_action(observation, training=False)
-                observation, reward, terminated, truncated, info = env.step((attacker_action, defender_action))
+                raw_next_observation, reward, terminated, truncated, info = env.step((attacker_action, defender_action))
+                observation = self._prepare_observation(raw_next_observation)
                 done = bool(terminated or truncated)
                 attacker_return += float(info["attacker_reward"])
                 defender_return += float(info["defender_reward"])
@@ -127,6 +140,7 @@ class TraditionalExperimentV2:
                 "config_path": self.config_path,
                 "timestamp": datetime.now().isoformat(),
                 "device": "baseline",
+                **build_experiment_tags(self.config),
             },
             "metric_conventions": {
                 "training_metric": "defender_training_return (shaped reward, recorded for comparison only)",

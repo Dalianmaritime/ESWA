@@ -1,0 +1,5 @@
+[2026-03-11T11:58:08.902677] status=running completed=0/4 metric=constrained_operational best_episode=None best_score=None
+[2026-03-11T11:58:09.486466] status=running completed=1/4 metric=constrained_operational best_episode=0 best_score=-16.166666666666668
+[2026-03-11T11:58:11.237009] status=running completed=3/4 metric=constrained_operational best_episode=0 best_score=-16.166666666666668
+[2026-03-11T11:58:12.309954] status=running completed=4/4 metric=constrained_operational best_episode=0 best_score=-16.166666666666668
+[2026-03-11T11:58:12.958707] status=completed completed=4/4 metric=constrained_operational best_episode=3 best_score=-165.50735294117646

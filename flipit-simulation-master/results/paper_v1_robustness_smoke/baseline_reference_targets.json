@@ -1,0 +1,23 @@
+{
+  "generated_at": "2026-03-11T12:04:36.452099",
+  "results_root": "E:\\1031\\flipit-simulation-master\\results\\paper_v1_robustness_smoke",
+  "reference_scope": {
+    "scenario_id": "cheat",
+    "robustness_family": "budget_stress",
+    "robustness_level": "nominal"
+  },
+  "scenarios": {
+    "cheat": {
+      "num_runs": 1,
+      "seeds": [
+        42
+      ],
+      "source_result_dirs": [
+        "E:\\1031\\flipit-simulation-master\\results\\paper_v1_robustness_smoke\\paper_robustness_cheat_budget_stress_nominal_baseline_seed42_20260311_120416"
+      ],
+      "attacker_success_rate": 0.5,
+      "defender_control_rate": 0.55,
+      "avg_defender_return": 21.5
+    }
+  }
+}

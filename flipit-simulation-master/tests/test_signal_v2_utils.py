@@ -13,6 +13,8 @@ sys.path.insert(0, str(ROOT / "gym-flipit-master"))
 sys.path.insert(0, str(ROOT / "flipit-simulation-master"))
 
 from signal_v2_utils import (
+    ablate_signal_features,
+    build_experiment_tags,
     build_baseline_reference_targets,
     compute_checkpoint_selection_metrics,
     compute_final_performance,
@@ -20,9 +22,11 @@ from signal_v2_utils import (
     constrained_candidate_improves,
     generate_summary_markdown,
     get_metric_value,
+    get_variant_controls,
     routine_candidate_sort_key,
     should_trigger_early_stopping,
     summarize_episode,
+    write_baseline_reference_targets_from_source,
 )
 from strategies.signal_rainbow_dqn_v2 import SignalRainbowDQNAgentV2, project_distribution
 
@@ -52,6 +56,50 @@ def test_summarize_episode_uses_metrics_tick_when_trace_is_disabled():
     assert summary["defender_control_rate"] == 9 / 12
     assert summary["false_response_rate"] == 1 / 12
     assert summary["missed_response_rate"] == 2 / 12
+
+
+def test_get_variant_controls_defaults_to_current_v2_behavior():
+    controls = get_variant_controls({"experiment": {"experiment_id": "demo"}})
+    assert controls == {
+        "disable_resource_sustainability": False,
+        "disable_reward_shaping": False,
+        "disable_action_mask": False,
+        "disable_signal_features": False,
+    }
+
+
+def test_ablate_signal_features_replaces_signal_and_belief_inputs_with_neutral_values():
+    observation = [0.1] * 17
+    sanitized = ablate_signal_features(observation)
+    assert sanitized[2] == 0.0
+    assert sanitized[3:6].tolist() == pytest.approx([1.0 / 3.0] * 3)
+    assert sanitized[6:10].tolist() == pytest.approx([1.0, 0.0, 0.0, 0.0])
+    assert sanitized[10:14].tolist() == pytest.approx([1.0, 0.0, 0.0, 0.0])
+    assert sanitized[14] == 0.0
+    assert sanitized[15] == pytest.approx(0.1)
+    assert sanitized[16] == pytest.approx(0.1)
+
+
+def test_build_experiment_tags_preserves_variant_and_robustness_metadata():
+    config = {
+        "experiment": {
+            "paper_group": "robustness",
+            "variant_id": "budget_low",
+            "variant_label": "Low defender budget",
+            "robustness_family": "budget_stress",
+            "robustness_level": "low",
+        },
+        "variant_controls": {
+            "disable_action_mask": True,
+        },
+    }
+    tags = build_experiment_tags(config)
+    assert tags["paper_group"] == "robustness"
+    assert tags["variant_id"] == "budget_low"
+    assert tags["variant_label"] == "Low defender budget"
+    assert tags["robustness_family"] == "budget_stress"
+    assert tags["robustness_level"] == "low"
+    assert tags["variant_controls"]["disable_action_mask"] is True
 
 
 def test_distribution_projection_preserves_probability_mass_for_same_bin_case():
@@ -388,3 +436,37 @@ def test_build_baseline_reference_targets_aggregates_latest_baseline_runs(tmp_pa
     assert flipit["attacker_success_rate"] == pytest.approx((0.18 + 0.19) / 2.0)
     assert flipit["defender_control_rate"] == pytest.approx((0.60 + 0.67) / 2.0)
     assert flipit["avg_defender_return"] == pytest.approx((10.0 + 36.9) / 2.0)
+
+
+def test_write_baseline_reference_targets_from_source_copies_payload_to_new_results_root(tmp_path: Path):
+    source_root = tmp_path / "source"
+    source_root.mkdir()
+    run_dir = source_root / "paper_main_cheat_baseline_seed42"
+    run_dir.mkdir()
+    (run_dir / "complete_training_results.json").write_text(
+        json.dumps(
+            {
+                "experiment_info": {
+                    "scenario_id": "cheat",
+                    "method_id": "baseline",
+                    "random_seed": 42,
+                },
+                "final_performance": {
+                    "attacker_success_rate": 0.25,
+                    "defender_control_rate": 0.61,
+                    "avg_defender_return": -8.0,
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+    destination_root = tmp_path / "destination"
+    output_path = write_baseline_reference_targets_from_source(
+        source_results_root=source_root,
+        destination_results_root=destination_root,
+        scenarios=["cheat"],
+    )
+    payload = json.loads(output_path.read_text(encoding="utf-8"))
+    assert payload["results_root"] == str(source_root.resolve())
+    assert payload["copied_to_results_root"] == str(destination_root.resolve())
+    assert payload["scenarios"]["cheat"]["seeds"] == [42]

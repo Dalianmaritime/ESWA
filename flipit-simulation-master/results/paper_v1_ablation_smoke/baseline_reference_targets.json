@@ -1,0 +1,21 @@
+{
+  "generated_at": "2026-03-11T11:59:26.417451",
+  "results_root": "E:\\1031\\flipit-simulation-master\\results\\paper_v1_main_calibrated",
+  "scenarios": {
+    "cheat": {
+      "num_runs": 2,
+      "seeds": [
+        42,
+        123
+      ],
+      "source_result_dirs": [
+        "E:\\1031\\flipit-simulation-master\\results\\paper_v1_main_calibrated\\paper_main_cheat_baseline_seed42_20260310_151939",
+        "E:\\1031\\flipit-simulation-master\\results\\paper_v1_main_calibrated\\paper_main_cheat_baseline_seed123_20260310_151949"
+      ],
+      "attacker_success_rate": 0.275,
+      "defender_control_rate": 0.571134498977428,
+      "avg_defender_return": -12.895
+    }
+  },
+  "copied_to_results_root": "E:\\1031\\flipit-simulation-master\\results\\paper_v1_ablation_smoke"
+}

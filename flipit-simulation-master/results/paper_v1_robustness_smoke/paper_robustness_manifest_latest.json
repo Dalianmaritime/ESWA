@@ -1,0 +1,106 @@
+{
+  "paper_group": "robustness",
+  "timestamp": "2026-03-11T12:04:36.450043",
+  "scenarios": [
+    "cheat"
+  ],
+  "families": [
+    "budget_stress"
+  ],
+  "levels": [
+    "nominal"
+  ],
+  "methods": [
+    "baseline",
+    "drl"
+  ],
+  "seeds": [
+    42
+  ],
+  "resume_missing": true,
+  "results_subdir": "paper_v1_robustness_smoke",
+  "runs": [
+    {
+      "experiment_id": "paper_robustness_cheat_budget_stress_nominal_baseline_seed42",
+      "paper_group": "robustness",
+      "scenario_id": "cheat",
+      "method_id": "baseline",
+      "seed": 42,
+      "variant_id": "budget_stress_nominal",
+      "variant_label": "Budget stress: nominal defender budget",
+      "robustness_family": "budget_stress",
+      "robustness_level": "nominal",
+      "config_path": "E:\\1031\\flipit-simulation-master\\configs\\paper_v1\\robustness\\robustness_cheat_budget_stress_nominal_baseline.yml",
+      "result_dir": "E:\\1031\\flipit-simulation-master\\results\\paper_v1_robustness_smoke\\paper_robustness_cheat_budget_stress_nominal_baseline_seed42_20260311_120416",
+      "final_performance": {
+        "attacker_success_rate": 0.5,
+        "defender_control_rate": 0.55,
+        "attacker_control_rate": 0.44999999999999996,
+        "avg_defender_return": 21.5,
+        "avg_defender_training_return": -25.825000000000014,
+        "avg_attacker_return": -41.44999999999998,
+        "avg_false_response_rate": 0.1,
+        "avg_missed_response_rate": 0.125,
+        "avg_inspection_precision": 0.20833333333333334,
+        "avg_episode_length": 60.0,
+        "attacker_resource_collapse_rate": 0.0,
+        "defender_resource_collapse_rate": 0.0,
+        "avg_final_attacker_budget": 1.9500000000000042,
+        "avg_final_defender_budget": 113.40000000000003,
+        "avg_attacker_below_guarantee_steps": 1.5,
+        "avg_defender_below_guarantee_steps": 0.0,
+        "avg_defender_spent_budget": 68.5,
+        "avg_defender_control_per_cost": 0.5150992234685073,
+        "sample_size": 2,
+        "validation_selection_score": 13.25
+      },
+      "variant_controls": {
+        "disable_resource_sustainability": false,
+        "disable_reward_shaping": false,
+        "disable_action_mask": false,
+        "disable_signal_features": false
+      }
+    },
+    {
+      "experiment_id": "paper_robustness_cheat_budget_stress_nominal_drl_seed42",
+      "paper_group": "robustness",
+      "scenario_id": "cheat",
+      "method_id": "drl",
+      "seed": 42,
+      "variant_id": "budget_stress_nominal",
+      "variant_label": "Budget stress: nominal defender budget",
+      "robustness_family": "budget_stress",
+      "robustness_level": "nominal",
+      "config_path": "E:\\1031\\flipit-simulation-master\\configs\\paper_v1\\robustness\\robustness_cheat_budget_stress_nominal_drl.yml",
+      "result_dir": "E:\\1031\\flipit-simulation-master\\results\\paper_v1_robustness_smoke\\paper_robustness_cheat_budget_stress_nominal_drl_seed42_20260311_120416",
+      "final_performance": {
+        "attacker_success_rate": 1.0,
+        "defender_control_rate": 0.1349206349206349,
+        "attacker_control_rate": 0.8650793650793651,
+        "avg_defender_return": -131.5,
+        "avg_defender_training_return": -111.125,
+        "avg_attacker_return": -11.450000000000001,
+        "avg_false_response_rate": 0.7738095238095238,
+        "avg_missed_response_rate": 0.3055555555555556,
+        "avg_inspection_precision": 0.0,
+        "avg_episode_length": 19.5,
+        "attacker_resource_collapse_rate": 0.0,
+        "defender_resource_collapse_rate": 1.0,
+        "avg_final_attacker_budget": 1.4500000000000028,
+        "avg_final_defender_budget": -4.350000000000005,
+        "avg_attacker_below_guarantee_steps": 0.0,
+        "avg_defender_below_guarantee_steps": 2.0,
+        "avg_defender_spent_budget": 67.5,
+        "avg_defender_control_per_cost": 0.036561264822134384,
+        "sample_size": 2,
+        "validation_selection_score": -162.25396825396825
+      },
+      "variant_controls": {
+        "disable_resource_sustainability": false,
+        "disable_reward_shaping": false,
+        "disable_action_mask": false,
+        "disable_signal_features": false
+      }
+    }
+  ]
+}

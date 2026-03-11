@@ -124,18 +124,51 @@ class MaritimeCheatAttentionEnv(gym.Env):
         self.max_steps = int(self.config["environment"]["max_steps"])
         self.default_seed = int(self.config["experiment"].get("random_seed", 42))
         self.rng = np.random.RandomState(self.default_seed)
+        variant_controls = dict(self.config.get("variant_controls", {}))
+        self.disable_resource_sustainability = bool(variant_controls.get("disable_resource_sustainability", False))
+        self.disable_reward_shaping = bool(variant_controls.get("disable_reward_shaping", False))
 
         self.attacker_initial_budget = float(self.config["resources"]["attacker_initial_budget"])
         self.defender_initial_budget = float(self.config["resources"]["defender_initial_budget"])
-        self.attacker_base_income_per_step = float(self.config["resources"]["attacker_base_income_per_step"])
-        self.defender_base_income_per_step = float(self.config["resources"]["defender_base_income_per_step"])
-        self.attacker_control_bonus_per_step = float(self.config["resources"]["attacker_control_bonus_per_step"])
-        self.defender_control_bonus_per_step = float(self.config["resources"]["defender_control_bonus_per_step"])
-        self.attacker_action_floor = float(self.config["resources"]["attacker_action_floor"])
-        self.defender_action_floor = float(self.config["resources"]["defender_action_floor"])
-        self.attacker_guarantee_line = float(self.config["resources"]["attacker_guarantee_line"])
-        self.defender_guarantee_line = float(self.config["resources"]["defender_guarantee_line"])
-        self.guarantee_breach_patience = int(self.config["resources"]["guarantee_breach_patience"])
+        self.attacker_base_income_per_step = (
+            0.0
+            if self.disable_resource_sustainability
+            else float(self.config["resources"]["attacker_base_income_per_step"])
+        )
+        self.defender_base_income_per_step = (
+            0.0
+            if self.disable_resource_sustainability
+            else float(self.config["resources"]["defender_base_income_per_step"])
+        )
+        self.attacker_control_bonus_per_step = (
+            0.0
+            if self.disable_resource_sustainability
+            else float(self.config["resources"]["attacker_control_bonus_per_step"])
+        )
+        self.defender_control_bonus_per_step = (
+            0.0
+            if self.disable_resource_sustainability
+            else float(self.config["resources"]["defender_control_bonus_per_step"])
+        )
+        self.attacker_action_floor = (
+            0.0 if self.disable_resource_sustainability else float(self.config["resources"]["attacker_action_floor"])
+        )
+        self.defender_action_floor = (
+            0.0 if self.disable_resource_sustainability else float(self.config["resources"]["defender_action_floor"])
+        )
+        self.attacker_guarantee_line = (
+            float("-inf")
+            if self.disable_resource_sustainability
+            else float(self.config["resources"]["attacker_guarantee_line"])
+        )
+        self.defender_guarantee_line = (
+            float("-inf")
+            if self.disable_resource_sustainability
+            else float(self.config["resources"]["defender_guarantee_line"])
+        )
+        self.guarantee_breach_patience = (
+            0 if self.disable_resource_sustainability else int(self.config["resources"]["guarantee_breach_patience"])
+        )
 
         self.attacker_cheat_cost = float(self.config["costs_and_rewards"]["attacker_cheat_cost"])
         self.attacker_takeover_cost_by_zone = {
@@ -420,26 +453,35 @@ class MaritimeCheatAttentionEnv(gym.Env):
         if missed_response:
             defender_reward -= self.missed_threat_penalty
 
-        training_reward = 0.0
-        if self.true_controller == "defender":
-            training_reward += self.training_control_bonus
+        if self.disable_reward_shaping:
+            training_reward = defender_reward
         else:
-            training_reward -= self.training_attacker_control_penalty
-        if is_inspect_action(defender_action):
-            training_reward -= defender_cost * self.training_inspect_cost_weight
-        if is_respond_action(defender_action):
-            training_reward -= defender_cost * self.training_respond_cost_weight
-        if inspection_result == "positive":
-            training_reward += self.training_positive_inspection_bonus
-        if response_success:
-            training_reward += self.training_successful_response_bonus
-        if false_response:
-            training_reward -= self.training_false_response_penalty
-        if missed_response:
-            training_reward -= self.training_missed_threat_penalty
+            training_reward = 0.0
+            if self.true_controller == "defender":
+                training_reward += self.training_control_bonus
+            else:
+                training_reward -= self.training_attacker_control_penalty
+            if is_inspect_action(defender_action):
+                training_reward -= defender_cost * self.training_inspect_cost_weight
+            if is_respond_action(defender_action):
+                training_reward -= defender_cost * self.training_respond_cost_weight
+            if inspection_result == "positive":
+                training_reward += self.training_positive_inspection_bonus
+            if response_success:
+                training_reward += self.training_successful_response_bonus
+            if false_response:
+                training_reward -= self.training_false_response_penalty
+            if missed_response:
+                training_reward -= self.training_missed_threat_penalty
 
-        attacker_budget_collapse = self._update_guarantee_streak("attacker")
-        defender_budget_collapse = self._update_guarantee_streak("defender")
+        if self.disable_resource_sustainability:
+            attacker_budget_collapse = False
+            defender_budget_collapse = False
+            self.attacker_below_guarantee_streak = 0
+            self.defender_below_guarantee_streak = 0
+        else:
+            attacker_budget_collapse = self._update_guarantee_streak("attacker")
+            defender_budget_collapse = self._update_guarantee_streak("defender")
 
         terminated = False
         truncated = False
